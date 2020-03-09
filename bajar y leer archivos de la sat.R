@@ -1,6 +1,6 @@
-#Lynette García Pérez
+#Lynette GarcÃ­a PÃ©rez
 #Febrero 2019
-#Script que sirve para descargar y unir archivos de datos de importación de vehículos de la SAT
+#Script que sirve para descargar y unir archivos de datos de importaciÃ³n de vehÃ­culos de la SAT
 
 #Paquetes necesarios
 #lubridate
@@ -11,9 +11,9 @@ library("lubridate")
 library("stringr")
 
 
-setwd("C:/Users/hecto/Documents/UVG 2020/Miner�a de Datos/Proyecto")
-# Para obtener los links usé la siguiente shiny apps disponible en:https://spannbaueradam.shinyapps.io/r_regex_tester/ con el 
-# código fuente de la página de la SAT y el siguiente patrón: https://portal.sat.gob.gt/portal/descarga/5030/importacion-de-vehiculos/[[:digit:]]{4}/importacion_de_vehiculos_[[:digit:]]{4}_[[:lower:]]+.zip
+setwd("C:/Users/hecto/Documents/UVG 2020/Minería de Datos/Proyecto")
+# Para obtener los links usÃ© la siguiente shiny apps disponible en:https://spannbaueradam.shinyapps.io/r_regex_tester/ con el 
+# cÃ³digo fuente de la pÃ¡gina de la SAT y el siguiente patrÃ³n: https://portal.sat.gob.gt/portal/descarga/5030/importacion-de-vehiculos/[[:digit:]]{4}/importacion_de_vehiculos_[[:digit:]]{4}_[[:lower:]]+.zip
 links<-"https://portal.sat.gob.gt/portal/descarga/5030/importacion-de-vehiculos/42400/importacion_de_vehiculos_2019_diciembre.zip
 
 https://portal.sat.gob.gt/portal/descarga/5030/importacion-de-vehiculos/42011/importacion_de_vehiculos_2019_noviembre.zip
@@ -184,7 +184,7 @@ https://portal.sat.gob.gt/portal/descarga/5030/importacion-de-vehiculos/4876/imp
 
 https://portal.sat.gob.gt/portal/descarga/5030/importacion-de-vehiculos/4871/importacion_de_vehiculos_2012_septiembre.zip
 
-https://portal.sat.gob.gt/portal/descarga/5030/importacion-de-vehiculos/4864/importacion_de_vehiculos_2012_agosto-zip
+https://portal.sat.gob.gt/portal/descarga/5030/importacion-de-vehiculos/4864/importacion_de_vehiculos_2012_agosto.zip
 
 https://portal.sat.gob.gt/portal/descarga/5030/importacion-de-vehiculos/4858/importacion_de_vehiculos_2012_julio.zip
 
@@ -236,6 +236,8 @@ for (vinculo in links) {
 #Extraer primero los archivos .zip y porner el working directory 
 # de R a leer de la carpeta donde est?n los txt
 # PAra leer y unir todo
+
+setwd("C:/Users/hecto/Documents/UVG 2020/Minería de Datos/Proyecto/datos")
 
 listaArchivos<-list.files(getwd())
 head(listaArchivos,30)
