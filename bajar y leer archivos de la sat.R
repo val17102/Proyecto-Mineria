@@ -1,6 +1,4 @@
-#Lynette García Pérez
-#Febrero 2019
-#Script que sirve para descargar y unir archivos de datos de importación de vehículos de la SAT
+#crear carpeta datos en el working directory
 
 #Paquetes necesarios
 #lubridate
@@ -9,9 +7,9 @@
 library("tools")
 library("lubridate")
 library("stringr")
-
-
-setwd("C:/Users/hecto/Documents/UVG 2020/Miner�a de Datos/Proyecto")
+getwd()
+setwd(" ~/Documents/Mineria/Proyecto-Mineria")
+#setwd("C:/Users/hecto/Documents/UVG 2020/Miner?a de Datos/Proyecto")
 # Para obtener los links usé la siguiente shiny apps disponible en:https://spannbaueradam.shinyapps.io/r_regex_tester/ con el 
 # código fuente de la página de la SAT y el siguiente patrón: https://portal.sat.gob.gt/portal/descarga/5030/importacion-de-vehiculos/[[:digit:]]{4}/importacion_de_vehiculos_[[:digit:]]{4}_[[:lower:]]+.zip
 links<-"https://portal.sat.gob.gt/portal/descarga/5030/importacion-de-vehiculos/42400/importacion_de_vehiculos_2019_diciembre.zip
@@ -220,9 +218,6 @@ https://portal.sat.gob.gt/portal/descarga/5030/importacion-de-vehiculos/4823/imp
 
 https://portal.sat.gob.gt/portal/descarga/5030/importacion-de-vehiculos/4817/importacion_de_vehiculos_2011_enero.zip"
 
-
-
-
 links<-str_trim(unlist(strsplit(links,"[[:cntrl:]]")))
 links<-links[links!=""]
 
@@ -230,8 +225,12 @@ for (vinculo in links) {
   if (!file.exists(paste("datos/",basename(vinculo)))){
     download.file(vinculo,paste("datos/",basename(vinculo)))
     Sys.sleep(5)
+  } else {
+    print(Fallo)
   }
 }
+
+#Esperar a que termine
 
 #Extraer primero los archivos .zip y porner el working directory 
 # de R a leer de la carpeta donde est?n los txt
@@ -266,7 +265,7 @@ dataset$Mes<-month(dataset$DatePoliza)
 dataset$Dia<-day(dataset$DatePoliza)
 dataset$DiaSem<-wday(dataset$DatePoliza)
 dataset$DatePoliza<-NULL
-
+dataset
 dataset[dataset$Modelo.del.Vehiculo == 3015,"Modelo.del.Vehiculo"]<-2015
 write.csv(dataset, file="importacionesVehiculosSAT.csv",row.names = F)
 save(dataset, file="importacionesSAT.RData")
