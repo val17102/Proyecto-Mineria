@@ -13,7 +13,7 @@ df <- datos %>%
   summarise(count = n())
 df <- df[order(-df$count),]
 df[1:10,]
-ggplot(df[1:10,], aes(x = Pais.de.Proveniencia, y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.3) + theme_pubclean()
+ggplot(df[1:10,], aes(x = reorder(Pais.de.Proveniencia,count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.3) + theme_pubclean()
 
 #Modelo de Vehiculo
 df <- datos %>%
@@ -28,7 +28,7 @@ df <- datos %>%
   group_by(Marca) %>%
   summarise(count = n())
 df <- df[order(-df$count),]
-ggplot(df[1:10,], aes(x = Marca, y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
+ggplot(df[1:10,], aes(x = reorder(Marca,count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
 
 
 #Linea
@@ -36,7 +36,7 @@ df <- datos %>%
   group_by(Linea) %>%
   summarise(count = n())
 df <- df[order(-df$count),]
-ggplot(df[1:10,], aes(x = Linea, y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
+ggplot(df[1:10,], aes(x = reorder(Linea,count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
 
 
 #Centimetros.Cubicos
@@ -44,7 +44,7 @@ df <- datos %>%
   group_by(Centimetros.Cubicos) %>%
   summarise(count = n())
 df <- df[order(-df$count),]
-ggplot(df[1:10,], aes(x = Centimetros.Cubicos, y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
+ggplot(df[1:10,], aes(x = reorder(Centimetros.Cubicos,count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
 
 #Distintivo
 df <- datos %>%
@@ -52,21 +52,62 @@ df <- datos %>%
   summarise(count = n())
 df <- df[order(-df$count),]
 df
-ggplot(df, aes(x = Distintivo, y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
+ggplot(df, aes(x = reorder(Distintivo,count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
 
 #Tipo de Vehiculo
 df <- datos %>%
   group_by(Tipo.de.Vehiculo) %>%
   summarise(count = n())
 df <- df[order(-df$count),]
-ggplot(df[1:10,], aes(x = Tipo.de.Vehiculo, y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
+ggplot(df[1:10,], aes(x = reorder(Tipo.de.Vehiculo,count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
 
 #Tipo de Combustible
+df <- datos %>%
+  group_by(Tipo.Combustible) %>%
+  summarise(count = n())
+df <- df[order(-df$count),]
+ggplot(df, aes(x = reorder(Tipo.Combustible, count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
 
-#Valor CIF
+#Asientos
+df <- datos %>%
+  group_by(Asientos) %>%
+  summarise(count = n())
+df <- df[order(-df$count),]
+ggplot(df[1:10,], aes(x = reorder(Asientos, count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
+
+#Puertas
+df <- datos %>%
+  group_by(Puertas) %>%
+  summarise(count = n())
+df <- df[order(-df$count),]
+ggplot(df, aes(x = reorder(Puertas, count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
+
+#Tonelaje
+df <- datos %>%
+  group_by(Tonelaje) %>%
+  summarise(count = n())
+df <- df[order(-df$count),]
+ggplot(df[1:10,], aes(x = reorder(Tonelaje, count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
+
+#Valor.CIF
 df <- datos %>%
   group_by(Valor.CIF) %>%
   summarise(count = n())
-df
-hist(datos$Valor.CIF)
+df <- df[order(-df$count),]
+hist(df$Valor.CIF)
+
+#Anio
+df <- datos %>%
+  group_by(Anio) %>%
+  summarise(count = n())
+df <- df[order(-df$count),]
+ggplot(df, aes(x = reorder(Anio, count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
+
+
+#Mes
+df <- datos %>%
+  group_by(Mes) %>%
+  summarise(count = n())
+df <- df[order(-df$count),]
+ggplot(df, aes(x = reorder(Mes, count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
 
