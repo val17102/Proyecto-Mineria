@@ -46,15 +46,15 @@ Para responder la problemática que se presenta, se utilizaran:
 País del que proviene el vehiculo
 
 **Aduana de ingreso (Cualitativa Nominal):**
-Nombre de la aduana en la que ek vehiculo ingreso
+Nombre de la aduana en la que el vehiculo ingreso
 
-**Fecha de la Poliza (Cualitativa Ordinal///):**
-Fecha en la que ek carro es regustrado
+**Fecha de la Poliza (Cualitativa Ordinal):**
+Fecha en la que el carro es registrado
 
 **Partida Arancelaria (Cuantitativa Discreta):**
 Codigo de distincion para saber al grupo de pago de impuestos al que pertenece
 
-**Modelo del Vehiculo (Cualitativa Ordinal///):**
+**Modelo del Vehiculo (Cualitativa Ordinal):**
 Modelo del vehiculo
 
 **Marca (Cualitativa Nominal): **
@@ -85,7 +85,7 @@ Numero de asientos que tiene el vehiculo
 Numero de puertas que tiene el vehiculo
 
 **Tonelaje (Cuantitativa Discreta):**
-////
+Peso del vehiculo
 
 **Valor VIF (Cuantitativa Continua):**
 Costo del vehiculo despues de haber pagado impuestos
