@@ -3,7 +3,8 @@ library(ggpubr)
 library(dplyr)
 
 theme_set(theme_pubr())
-setwd("C:/Users/hecto/Documents/UVG 2020/Minería de Datos/Proyecto repo/Proyecto-Mineria")
+#setwd("C:/Users/hecto/Documents/UVG 2020/Miner?a de Datos/Proyecto repo/Proyecto-Mineria")
+setwd("~/Documents/Mineria/Proyecto-Mineria")
 datos<-read.csv("importacionesVehiculosSAT.csv", stringsAsFactors = FALSE)
 datos<-datos[,-c(2,3,4,11,17)]
 datos<-na.omit(datos)
