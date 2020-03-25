@@ -1,63 +1,168 @@
 ---
-title: "Proyecto 1"
-output: html_notebook
+title: "Proyecto No.1"
+author: "Héctor Valle, Rodrigo Samayoa & Paul Belches"
+date: "23/3/2020"
+output: html_document
 ---
 
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
 
-Descripcion de Variables:
--
+### Descripción de  la situación problemática:
 
-SAT
+Los accidentes de tránsito son la segunda causa de muerte en Guatemala, por detrás de los incidentes que involucran armas de fuego. Diariamente alrededor de 17 accidentes de tránsito deja varios fallecidos según el Instituto Nacional de Ciencias Forenses. A pesar de que los incidentes han disminuido en cantidad durante el plazo 2018 - 2019, la magnitud de los accidentes y la cantidad de muertes solo ha aumentado. En comparación, el año 2019 ha excedido a su predecesor por más de 113 muertes. Las causas varían relacionando a todo tipo de vehiculos, buses de transporte extraurbano, transporte de carga y automóviles livianos. Por lo que se busca determinar el impacto de las crecientes importaciones de vehículos, en este fenómeno. 
 
--Pais de Provinencia (Cualitativa Nominal):
+### Problema científico y Objetivos preliminares. 
+
+Identificar la categoría de vehículo que está involucrada en  mayor cantidad de accidentes de tránsito que  resulte en la muerte de las personas. Tomando en cuenta la proporción que representan tránsito vehicular, para determinar su impacto. 
+
+Identificar las condiciones en que estos accidentes de tránsito ocurren en mayor consistencia.
+
+Identificar las causas principales de de estos accidentes de tránsito.
+
+Determinar si la categoría vehicular con mayor culpabilidad de accidentes, es la que cuenta con mayor crecimiento por importación. 
+
+### Información a utilizar 
+
+Para responder la problemática que se presenta, se utilizaran:
+
+- Base de datos de la importaciones de la SAT
+- Base de datos de defunciones del Ine
+
+#### Descripcion de Variables:
+
+##### **SAT**
+
+**Pais de Provinencia (Cualitativa Nominal):**
 País del que proviene el vehiculo
 
--Aduana de ingreso (Cualitativa Nominal):
+**Aduana de ingreso (Cualitativa Nominal):**
 Nombre de la aduana en la que ek vehiculo ingreso
 
--Fecha de la Poliza (Cualitativa Ordinal///):
+**Fecha de la Poliza (Cualitativa Ordinal///):**
 Fecha en la que ek carro es regustrado
 
--Partida Arancelaria (Cuantitativa Discreta):
+**Partida Arancelaria (Cuantitativa Discreta):**
 Codigo de distincion para saber al grupo de pago de impuestos al que pertenece
 
--Modelo del Vehiculo (Cualitativa Ordinal///):
+**Modelo del Vehiculo (Cualitativa Ordinal///):**
 Modelo del vehiculo
 
--Marca (Cualitativa Nominal): 
+**Marca (Cualitativa Nominal): **
 Marca del vehiculo
 
--Linea (Cualitativa Nominal): 
+**Linea (Cualitativa Nominal):**
 Linea del vehiculo 
 
--Centimetros Cubicos (Cuantitativa Discreta):
+**Centimetros Cubicos (Cuantitativa Discreta): **
 Tamaño del motor
 
--Distintivo (Cualitativa Nominal):
+**Distintivo (Cualitativa Nominal):**
 Distintivo del vehiculo
 
--Tipo de Vehiculo (Cualitativa Nominal):
+**Tipo de Vehiculo (Cualitativa Nominal):**
 Tipo de vehiculo
 
--Tipo de Importador (Cualitativa Nominal):
+**Tipo de Importador (Cualitativa Nominal):**
 Tipo de importador (OCASIONAL o DISTRIBUIDOR)
 
--Tipo Combustible (Cualitativa Nominal):
+**Tipo Combustible (Cualitativa Nominal):**
 Combustible que utiliza el vehiculo
 
--Asientos (Cuantitativa Discreta):
+**Asientos (Cuantitativa Discreta):**
 Numero de asientos que tiene el vehiculo
 
--Puertas (Cuantitativa Discreta):
+**Puertas (Cuantitativa Discreta):**
 Numero de puertas que tiene el vehiculo
 
--Tonelaje (Cuantitativa Discreta):
+**Tonelaje (Cuantitativa Discreta):**
 ////
 
--Valor VIF (Cuantitativa Continua):
+**Valor VIF (Cuantitativa Continua):**
 Costo del vehiculo despues de haber pagado impuestos
 
--Impuesto (Cuantitativa Continua):
+**Impuesto (Cuantitativa Continua):**
 Cantidad de impuestos que se debe pagar
 
-INES
+#### **INE**
+
+La base de datos de defucniones del INE, busca alamcenar toda la información pertienente en relación al deceso de una persona dentro del territorio nacialonal. Registrando la mayor cantidad de datos en relación al suceso. A continuación se presenta una lista de las variables presentes dentro de este set de datos, además de el valor que representan. 
+
+**Depocu (Cualitativa Nominal):**
+Departamento de registro
+
+**Mupocu (Cualitativa Nominal):**
+Municipio de registro
+
+**Mesreg (Cualitativa Nominal):**
+Mes de registro
+
+**Añoreg (Cualitativa Ordinal):**
+Año de registro
+
+**Depocu (Cualitativa Ordinal):**
+Departamento de ocurrencia
+
+**Mupocu (Cualitativa Nominal):**
+Municipio de ocurrencia 
+
+**Sexo (Cualitativa Nominal):**
+Mes de ocurrencia
+
+**Añoocu (Cualitativa Ordinal):**
+Año de ocurrencia
+
+**Edadif (Cualitativa Ordinal):**
+Edad del difunto
+
+**Perdif (Cualitativa Ordinal):**
+Periodo de edad del difunto
+
+**Puedif (Cualitativa Ordinal):**
+Pueblo al que pretenece el difunto
+
+**Ecidif (Cualitativa Nominal):**
+Estado civil del difunto
+
+**Escodif (Cualitativa Nominal):** 
+Ecolaridad del difunto
+
+**Ciuodif (Cualitativa Nominal):**
+Ocupación del difunto
+
+**Pnadif (Cualitativa Nominal):**
+País de nacieminto del equipo
+
+**Dnadif (Cualitativa Nominal):**
+Departamento de nacimiento del difunto
+
+**Mnadif (Cualitativa Nominal):**
+Municipio del nacimiento del difunto
+
+**Nacdif (Cualitativa Nominal):**
+Nacionalidad del difunto
+
+**Predif (Cualitativa Nominal):**
+País de recidencia del difunto
+
+**Dredif (Cualitativa Nominal):**
+Departamento de recidencia del difunto
+
+**Mredif (Cualitativa Nominal):**
+Municipio de recidencia del difunto
+
+**Caudef (Cualitativa Nominal):**
+Causa de defunción
+
+**Asist (Cualitativa Nominal):**
+Asistencia recibida
+
+**Oucr (Cualitativa Nominal):**
+Sitio de ocurrencia
+
+**Cerdef (Cualitativa Nominal):**
+Quien certifica
+
+En el caso de Ine, las variables a utilizar serán, depocu, mupocu, sexo, diaocu, añoreg, mesocu, edadif, ecidif, escodif, dredif, mredif, caudef. Esto en primer lugar, gracias a que son variables que se encuentran presentes en todos los datasets año tras año, del 2011 al 2018. Además en variables como la ocupación del difunto el valor indefinido se encuetra respetidas veces por lo que no permite la extracción de información de manera adecuada. 
+
