@@ -16,6 +16,44 @@ datos<-datos[,-c(2,3,4,11,17)]
 datos<-na.omit(datos)
 ```
 
+```{r setup, include=FALSE}
+library(ggplot2)
+library(dplyr)
+setwd("~/Documents/Mineria/Proyecto-Mineria/")
+datosIne<-read.csv("mortalidadIne2.csv", header=FALSE, stringsAsFactors=FALSE, fileEncoding="latin1")
+```
+
+```{r setup, include=FALSE}
+#names(datosIne)[1] <- "hola"
+names(datosIne)[1] <- "depocu"
+names(datosIne)[2] <- "mupocu"	
+names(datosIne)[3] <- "sexo"
+names(datosIne)[4] <- "diaocu"
+names(datosIne)[5] <- "anoreg"
+names(datosIne)[6] <- "mesocu"
+names(datosIne)[7] <- "edadif"
+names(datosIne)[8] <- "ecidif"
+names(datosIne)[9] <- "escodif"
+names(datosIne)[10] <- "dredif"
+names(datosIne)[11] <- "mredif"
+names(datosIne)[12] <- "caudef"
+```
+
+```{r}
+datosIne <- datosIne[-1,]
+datosIne$caudef <- substr(datosIne$caudef, 1, 1)
+datosIne<-filter(datosIne, caudef == "V")
+```
+
+
+```{r}
+
+datosIne 
+
+#datosIne$caudef > "V00"
+  
+```
+
 
 ### Descripción de  la situación problemática:
 
@@ -176,7 +214,7 @@ Quien certifica
 
 En el caso de Ine, las variables a utilizar serán, depocu, mupocu, sexo, diaocu, añoreg, mesocu, edadif, ecidif, escodif, dredif, mredif, caudef. Esto en primer lugar, gracias a que son variables que se encuentran presentes en todos los datasets año tras año, del 2011 al 2018. Además en variables como la ocupación del difunto el valor indefinido se encuetra respetidas veces por lo que no permite la extracción de información de manera adecuada. 
 
-### **Tablas de frecuencia de variables elegidoas**
+### **Tablas de frecuencia de variables elegidas**
 
 #### **SAT**
 
@@ -323,3 +361,159 @@ df <- df[order(-df$count),]
 ggplot(df, aes(x = reorder(Anio, count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
 
 ```
+#### **Ine**
+
+```{r}
+datosIne 
+```
+
+```{r}
+#Pais departamento
+df <- datosIne %>%
+  group_by(depocu) %>%
+  summarise(count = n())
+df <- df[order(-df$count),]
+df <- df[1:10,]
+df$n <- 1
+for (i in 1:nrow(df)){
+  df[i,]$n <- i
+}
+print(df)
+ggplot(df, aes(x = reorder(n, count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
+```
+
+```{r}
+#Municipio
+df <- datosIne %>%
+  group_by(mupocu) %>%
+  summarise(count = n())
+df <- df[order(-df$count),]
+df <- df[1:20,]
+df$n <- 1
+for (i in 1:nrow(df)){
+  df[i,]$n <- i
+}
+print(df)
+ggplot(df, aes(x = reorder(n, count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
+```
+
+
+```{r}
+#Sexo
+df <- datosIne %>%
+  group_by(sexo) %>%
+  summarise(count = n())
+df <- df[order(-df$count),]
+df$n <- 1
+for (i in 1:nrow(df)){
+  df[i,]$n <- i
+}
+print(df)
+ggplot(df, aes(x = reorder(n, count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
+```
+
+```{r}
+#Día de ocurrencia
+df <- datosIne %>%
+  group_by(diaocu) %>%
+  summarise(count = n())
+df <- df[order(-df$count),]
+df <- df[1:10,]
+print(df)
+ggplot(df, aes(x = reorder(diaocu, count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
+```
+
+```{r}
+#Año de registro
+df <- datosIne %>%
+  group_by(anoreg) %>%
+  summarise(count = n())
+df <- df[order(-df$count),]
+print(df)
+ggplot(df, aes(x = reorder(anoreg, count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
+```
+
+```{r}
+#Mes de ocurrencia
+df <- datosIne %>%
+  group_by(mesocu) %>%
+  summarise(count = n())
+df <- df[order(-df$count),]
+df <- df[1:10,]
+print(df)
+ggplot(df, aes(x = reorder(mesocu, count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
+```
+
+```{r}
+#Edad de difuntos 
+df <- datosIne %>%
+  group_by(edadif) %>%
+  summarise(count = n())
+df <- df[order(-df$count),]
+df <- df[1:10,]
+print(df)
+ggplot(df, aes(x = reorder(edadif, count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
+```
+
+```{r}
+#Estado civil
+df <- datosIne %>%
+  group_by(ecidif) %>%
+  summarise(count = n())
+df <- df[order(-df$count),]
+print(df)
+ggplot(df, aes(x = reorder(ecidif, count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
+
+```
+
+```{r}
+#Escolaridad del difunto
+df <- datosIne %>%
+  group_by(escodif) %>%
+  summarise(count = n())
+df <- df[order(-df$count),]
+print(df)
+ggplot(df, aes(x = reorder(escodif, count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
+
+```
+
+```{r}
+#Departamwnto de residencia del difunto
+df <- datosIne %>%
+  group_by(dredif) %>%
+  summarise(count = n())
+df <- df[order(-df$count),]
+df <- df[1:10,]
+df$n <- 1
+for (i in 1:nrow(df)){
+  df[i,]$n <- i
+}
+print(df)
+ggplot(df, aes(x = reorder(n, count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
+```
+
+```{r}
+#Municipio de residencia del difunto
+df <- datosIne %>%
+  group_by(mredif) %>%
+  summarise(count = n())
+df <- df[order(-df$count),]
+df <- df[1:10,]
+df$n <- 1
+for (i in 1:nrow(df)){
+  df[i,]$n <- i
+}
+print(df)
+ggplot(df, aes(x = reorder(n, count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
+```
+
+
+
+
+
+
+
+
+
+
+

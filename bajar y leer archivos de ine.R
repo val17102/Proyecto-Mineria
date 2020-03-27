@@ -28,7 +28,7 @@ for (link in links){
   for (i in 1:length(names(temp_dataset))){
     names(temp_dataset)[i] <- tolower(names(temp_dataset)[i])
   }
-  print(names(temp_dataset))
+  #print(names(temp_dataset))
   temp_dataset <- select(temp_dataset,depocu,mupocu,sexo,diaocu,añoreg,mesocu,edadif,ecidif,escodif, dredif,mredif,caudef)
   
   dataset <- rbind(dataset, temp_dataset)
@@ -38,20 +38,40 @@ View(dataset)
 #write.csv(dataset, file="mortalidadIne.csv",row.names = F)
 #save(dataset, file="mortalidadIne.RData")
 ## Remover acentos
-for (i in 1:nrow(dataset)){
-  tempVariable <- dataset[i]
-  tempVariable <-iconv(tempVariable, to="ASCII//TRANSLIT")
-  tempVariable <-gsub("`|\\'", "", iconv(tempVariable, to="ASCII//TRANSLIT"))
-  print(tempVariable)
-}
+dataset<-na.omit(dataset)
+#print(nrow(dataset))
+#for (i in 1:nrow(dataset)){
+#  tempVariable <- dataset[9,]
+  #print(tempVariable)
+#  tempVariable$depocu <-iconv(tempVariable$depocu, to="ASCII//TRANSLIT")
+  #print(tempVariable)
+#  dataset[9,] <- tempVariable
+#  print(i)
+#}
+#View(dataset)
+#write.csv(dataset, file="mortalidadIne.csv",row.names = F)
+#save(dataset, file="mortalidadIne.RData")
 #Departamento de ocurrencia
 df <- dataset%>%
   group_by(depocu) %>%
   summarise(count = n())
-df <- df[order(df$count, decreasing=TRUE), ]
-for (i in 1:nrow(df)){
-  print(i)
-}
+#Eliminar acentos en los dept
+
+#for (i in 1:nrow(df)){
+#  tempVariable <- df[i,]
+#  tempVariable$depocu <-iconv(tempVariable$depocu, to="ASCII//TRANSLIT")
+#  #tempVariable$n <- i
+#  df[i,] <- tempVariable
+#}
+
+
+
+df2 <- df%>%
+  group_by(count) %>%
+  summarise(count = n())
+df2 <- df2[order(df2$count, decreasing=TRUE), ]
+df2$n <- 1
+
 View(df)
 ggplot(df, aes(x = depocu, y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = ""), vjust = -0.5) 
 
