@@ -39,7 +39,9 @@ names(datosIne)[11] <- "mredif"
 names(datosIne)[12] <- "caudef"
 ```
 
+
 ```{r}
+#Only letter
 datosIne <- datosIne[-1,]
 datosIne$caudef <- substr(datosIne$caudef, 1, 1)
 datosIne<-filter(datosIne, caudef == "V")
@@ -47,11 +49,23 @@ datosIne<-filter(datosIne, caudef == "V")
 
 
 ```{r}
-
-datosIne 
-
+#Eliminate special characters
+datosIne$depocu <- str_replace_all(datosIne$depocu, "[^[:alnum:]]", "")
+datosIne$mupocu <- str_replace_all(datosIne$mupocu, "[^[:alnum:]]", "")
+datosIne$mesocu <- str_replace_all(datosIne$mesocu, "[^[:alnum:]]", "")
+datosIne$escodif <- str_replace_all(datosIne$escodif, "[^[:alnum:]]", "")
+datosIne$dredif <- str_replace_all(datosIne$dredif, "[^[:alnum:]]", "")
+datosIne$mredif <- str_replace_all(datosIne$mredif, "[^[:alnum:]]", "")
 #datosIne$caudef > "V00"
-  
+```
+
+```{r}
+#Eliminate (a)
+datosIne$ecidif <- str_replace_all(datosIne$ecidif, "\\(a\\)", "")
+```
+
+```{r}
+datosIne
 ```
 
 
@@ -368,7 +382,7 @@ datosIne
 ```
 
 ```{r}
-#Pais departamento
+#Departamento
 df <- datosIne %>%
   group_by(depocu) %>%
   summarise(count = n())
@@ -404,12 +418,8 @@ df <- datosIne %>%
   group_by(sexo) %>%
   summarise(count = n())
 df <- df[order(-df$count),]
-df$n <- 1
-for (i in 1:nrow(df)){
-  df[i,]$n <- i
-}
 print(df)
-ggplot(df, aes(x = reorder(n, count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
+ggplot(df, aes(x = reorder(sexo, count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
 ```
 
 ```{r}
