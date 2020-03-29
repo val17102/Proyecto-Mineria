@@ -516,6 +516,7 @@ datosIneN$depocu <- as.numeric(factor(datosIne$depocu))
 datosIneN$mupocu <- as.numeric(factor(datosIne$mupocu))
 datosIneN$sexo <- as.numeric(factor(datosIne$sexo))
 datosIneN$diaocu <- as.numeric(factor(datosIne$diaocu))
+datosIneN$anoreg <- as.numeric(factor(datosIne$anoreg))
 datosIneN$mesocu <- as.numeric(factor(datosIne$mesocu))
 datosIneN$edadif <- as.numeric(factor(datosIne$edadif))
 datosIneN$ecidif <- as.numeric(factor(datosIne$ecidif))
@@ -525,14 +526,98 @@ datosIneN$mredif <- as.numeric(factor(datosIne$mredif))
 datosIneN$caudef <- as.numeric(factor(datosIne$caudef))
 datosIneN
 ```
+```{r}
+library(corrplot)
+matriz_cor <- cor(datosIneN[-12])
+matriz_cor
+ corrplot(matriz_cor)
+```
+
+```{r}
+wss <- (nrow(datosIneN[-12])-1)*sum(apply(datosIneN[-12],2,var))
+
+for (i in 2:10) 
+  wss[i] <- sum(kmeans(datosIneN[-12], centers=i)$withinss)
+
+plot(1:10, wss, type="b", xlab="Number of Clusters",  ylab="Within groups sum of squares")
+
+```
 
 
+```{r} 
+#Cluster Kmeans
+library(cluster) #Para calcular la silueta
+library(fpc)
+km<-kmeans(datosIneN[-12],2)
+plotcluster(datosIneN[-12],km$cluster)
+
+#Método de la silueta para las k-medias
+silkm<-silhouette(km$cluster,dist(datosIneN[-12]))
+silkm
+mean(silkm[,3]) #0.55, no es la mejor partición pero no está mal
+```
+
+```{r}
+#Cluster Kmodes
+library(klaR)
+kmo<-kmodes(datosIneN[-12], 2, iter.max = 10, weighted = FALSE)
+#kmo
+plotcluster(datosIneN[-12],kmo$cluster)
+
+#Método de la silueta para las k-medias
+silkm<-silhouette(kmo$cluster,dist(datosIneN[-12]))
+mean(silkm[,3]) #0.55, no es la mejor partición pero no está mal
+```
+
+```{r}
+plotp1 <- datosIneN[-12]
+plotp2 <- plotp1[6:11] 
+plotp1 <- plotp1[1:6]
+plot(plotp1)
+plot(plotp2)
+
+```
+
+```{r}
+#datosIneN
+dc <-  datosIneN[c(2,3,4,6,8,10)]
+km<-kmeans(dc,2)
+plotcluster(dc,km$cluster)
+silkm<-silhouette(km$cluster,dist(dc))
+mean(silkm[,3]) 
+```
 
 
+```{r}
+#datosIneN
+library(e1071)
+dc <-  datosIneN[c(2,3,4,6,8,10)]
+cm<-cmeans(dc,2)
+plotcluster(dc,cm$cluster)
+silkm<-silhouette(cm$cluster,dist(dc))
+mean(silkm[,3]) 
+```
 
+```{r}
+#datosIneN
+library(mclust)
+dc <-  datosIneN[c(3,5,6,11)]
+mc<-Mclust(dc,2)
+plot(mc, what = "classification", main="MClust Classification")
+silmg<-silhouette(mc$classification,dist(dc))
+mean(silmg[,3])
+```
 
+```{r}
+#datosIneN
+library(mclust)
+dc <-  datosIneN[c(3,5,6,11)]
+hc<-hclust(dist(dc))
+plot(hc)
+rect.hclust(hc,k=2)
+groups<-cutree(hc,k=2)
+silch<-silhouette(groups,dist(dc))
+mean(silch[,3])
 
-
-
-
+```
 
