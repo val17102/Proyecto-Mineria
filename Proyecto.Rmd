@@ -509,7 +509,6 @@ ggplot(df, aes(x = reorder(n, count), y = count)) + geom_bar(fill = "blue", stat
 ```
 
 
-
 ```{r}
 #Convert categorical dataset into numerical categorical
 datosIneN <- datosIne
