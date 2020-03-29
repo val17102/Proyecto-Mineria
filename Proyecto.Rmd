@@ -17,13 +17,9 @@ datos<-na.omit(datos)
 ```
 
 ```{r setup, include=FALSE}
-library(ggplot2)
-library(dplyr)
+library(stringr)
 setwd("~/Documents/Mineria/Proyecto-Mineria/")
 datosIne<-read.csv("mortalidadIne2.csv", header=FALSE, stringsAsFactors=FALSE, fileEncoding="latin1")
-```
-
-```{r setup, include=FALSE}
 #names(datosIne)[1] <- "hola"
 names(datosIne)[1] <- "depocu"
 names(datosIne)[2] <- "mupocu"	
@@ -37,19 +33,10 @@ names(datosIne)[9] <- "escodif"
 names(datosIne)[10] <- "dredif"
 names(datosIne)[11] <- "mredif"
 names(datosIne)[12] <- "caudef"
-```
-
-
-```{r}
 #Only letter
 datosIne <- datosIne[-1,]
 datosIne$caudef <- substr(datosIne$caudef, 1, 1)
 datosIne<-filter(datosIne, caudef == "V")
-```
-
-
-```{r}
-library(stringr)
 #Eliminate special characters
 datosIne$depocu <- str_replace_all(datosIne$depocu, "[^[:alnum:]]", "")
 datosIne$mupocu <- str_replace_all(datosIne$mupocu, "[^[:alnum:]]", "")
@@ -58,17 +45,23 @@ datosIne$escodif <- str_replace_all(datosIne$escodif, "[^[:alnum:]]", "")
 datosIne$dredif <- str_replace_all(datosIne$dredif, "[^[:alnum:]]", "")
 datosIne$mredif <- str_replace_all(datosIne$mredif, "[^[:alnum:]]", "")
 #datosIne$caudef > "V00"
-```
-
-```{r}
+#Eliminate (a)
+datosIne$ecidif <- str_replace_all(datosIne$ecidif, "\\(a\\)", "")
+#Only letter
+datosIne <- datosIne[-1,]
+datosIne$caudef <- substr(datosIne$caudef, 1, 1)
+datosIne<-filter(datosIne, caudef == "V")
+#Eliminate special characters
+datosIne$depocu <- str_replace_all(datosIne$depocu, "[^[:alnum:]]", "")
+datosIne$mupocu <- str_replace_all(datosIne$mupocu, "[^[:alnum:]]", "")
+datosIne$mesocu <- str_replace_all(datosIne$mesocu, "[^[:alnum:]]", "")
+datosIne$escodif <- str_replace_all(datosIne$escodif, "[^[:alnum:]]", "")
+datosIne$dredif <- str_replace_all(datosIne$dredif, "[^[:alnum:]]", "")
+datosIne$mredif <- str_replace_all(datosIne$mredif, "[^[:alnum:]]", "")
+#datosIne$caudef > "V00"
 #Eliminate (a)
 datosIne$ecidif <- str_replace_all(datosIne$ecidif, "\\(a\\)", "")
 ```
-
-```{r}
-#datosIne
-```
-
 
 ### Descripción de  la situación problemática:
 
