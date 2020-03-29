@@ -543,24 +543,66 @@ for (i in 2:10)
 plot(1:10, wss, type="b", xlab="Number of Clusters",  ylab="Within groups sum of squares")
 ```
 #=======
+
 ```{r}
 #Convert categorical dataset into numerical categorical
-datosSAT<-read.csv("importacionesVehiculosSAT.csv", stringsAsFactors = FALSE)
-
+datosSAT<-datos
 datosSAT$Pais.de.Proveniencia <- as.numeric(factor(datosSAT$Pais.de.Proveniencia))
-datosSAT$Aduana.de.Ingreso <- as.numeric(factor(datosSAT$Aduana.de.Ingreso))
-datosSAT$Fecha.de.la.Poliza <- as.numeric(factor(datosSAT$Fecha.de.la.Poliza))
+datosSAT$Modelo.del.Vehiculo <- as.numeric(factor(datosSAT$Modelo.del.Vehiculo))
 datosSAT$Marca <- as.numeric(factor(datosSAT$Marca))
 datosSAT$Linea <- as.numeric(factor(datosSAT$Linea))
 datosSAT$Distintivo <- as.numeric(factor(datosSAT$Distintivo))
 datosSAT$Tipo.de.Vehiculo <- as.numeric(factor(datosSAT$Tipo.de.Vehiculo))
-datosSAT$Tipo.de.Importador <- as.numeric(factor(datosSAT$Tipo.de.Importador))
 datosSAT$Tipo.Combustible <- as.numeric(factor(datosSAT$Tipo.Combustible))
 datosSAT
-#>>>>>>> 6a7ba32c8373f72a05f2ebf489ac53650af34e8a
+```
+#### **Clusters SAT**
+```{r}
+library(factoextra)
+library(cluster)
+library(corrplot)
+library(fpc)
+corel <- cor(datosSAT)
+corel
+corrplot(corel)
+
+wcss <- vector()
+for(i in 1:10){
+  wcss[i] <- sum(kmeans(datosSAT, i)$withinss)
+}
+
+ggplot() + geom_point(aes(x = 1:10, y = wcss), color = 'blue') + 
+  geom_line(aes(x = 1:10, y = wcss), color = 'blue') + 
+  ggtitle("Método del Codo") + 
+  xlab('Cantidad de Centroides k') + 
+  ylab('WCSS')
 ```
 
 
+```{r} 
+k <- kmeans(datosSAT, centers = 2)
+p <- fviz_cluster(k, geom = "point", data = datosSAT)+ ggtitle("k = 2")
+p
+datosSAT$kgroup <- k$cluster
+plotcluster(datosSAT[,-c(17)],k$cluster)
+sam<-sample(1:nrow(datosSAT),20000)
+silkm<-silhouette(datosSAT[sam,"kgroup"],dist(datosSAT[sam,1:16]))
+mean(silkm[,3])
+```
+
+
+```{r} 
+library(e1071)#para cmeans
+library(cluster) #Para calcular la silueta
+datosSample <- sample(1:nrow(datosSAT), 10000)
+#cmeans
+fcm<-cmeans(datosSAT,2)
+datosSAT$FCGrupos<-fcm$cluster
+#silueta
+silfcm<-silhouette(datosSAT[datosSample,"FCGrupos"],dist(datosSAT[datosSample,1:16]))
+mean(silfcm[,3])
+```
+#### **Clusters INE**
 ```{r} 
 #Cluster Kmeans
 library(cluster) #Para calcular la silueta
