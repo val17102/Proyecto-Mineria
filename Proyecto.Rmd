@@ -49,6 +49,7 @@ datosIne<-filter(datosIne, caudef == "V")
 
 
 ```{r}
+library(stringr)
 #Eliminate special characters
 datosIne$depocu <- str_replace_all(datosIne$depocu, "[^[:alnum:]]", "")
 datosIne$mupocu <- str_replace_all(datosIne$mupocu, "[^[:alnum:]]", "")
@@ -65,7 +66,7 @@ datosIne$ecidif <- str_replace_all(datosIne$ecidif, "\\(a\\)", "")
 ```
 
 ```{r}
-datosIne
+#datosIne
 ```
 
 
@@ -449,7 +450,7 @@ df <- datosIne %>%
   group_by(mesocu) %>%
   summarise(count = n())
 df <- df[order(-df$count),]
-df <- df[1:10,]
+df <- df[1:9,]
 print(df)
 ggplot(df, aes(x = reorder(mesocu, count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
 ```
