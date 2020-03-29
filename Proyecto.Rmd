@@ -371,9 +371,6 @@ ggplot(df, aes(x = reorder(Anio, count), y = count)) + geom_bar(fill = "blue", s
 ```
 #### **Ine**
 
-```{r}
-datosIne 
-```
 
 ```{r}
 #Departamento
@@ -509,6 +506,25 @@ for (i in 1:nrow(df)){
 }
 print(df)
 ggplot(df, aes(x = reorder(n, count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
+```
+
+
+
+```{r}
+#Convert categorical dataset into numerical categorical
+datosIneN <- datosIne
+datosIneN$depocu <- as.numeric(factor(datosIne$depocu))
+datosIneN$mupocu <- as.numeric(factor(datosIne$mupocu))
+datosIneN$sexo <- as.numeric(factor(datosIne$sexo))
+datosIneN$diaocu <- as.numeric(factor(datosIne$diaocu))
+datosIneN$mesocu <- as.numeric(factor(datosIne$mesocu))
+datosIneN$edadif <- as.numeric(factor(datosIne$edadif))
+datosIneN$ecidif <- as.numeric(factor(datosIne$ecidif))
+datosIneN$escodif <- as.numeric(factor(datosIne$escodif))
+datosIneN$dredif <- as.numeric(factor(datosIne$dredif))
+datosIneN$mredif <- as.numeric(factor(datosIne$mredif))
+datosIneN$caudef <- as.numeric(factor(datosIne$caudef))
+datosIneN
 ```
 
 
