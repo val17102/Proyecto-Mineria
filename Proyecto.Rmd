@@ -579,10 +579,6 @@ datosSAT$Tipo.Combustible <- as.numeric(factor(datosSAT$Tipo.Combustible))
 ```
 
 ```{r}
-install.packages("rlang",type="win.binary") 
-devtools::install_github("kassambara/ggpubr")
-devtools::install_github("kassambara/factoextra")
-
 library(factoextra)
 library(cluster)
 library(corrplot)
@@ -627,6 +623,115 @@ datosSAT$FCGrupos<-fcm$cluster
 silfcm<-silhouette(datosSAT[datosSample,"FCGrupos"],dist(datosSAT[datosSample,1:16]))
 mean(silfcm[,3])
 ```
+
+###Histogramas de variables SAT por grupo
+
+
+#### **Modelo del vehiculo**
+```{r}
+#grupo 1
+hist(datosSAT[datosSAT$kgroup==1, "Modelo.del.Vehiculo"])
+```
+
+```{r}
+#grupo 2
+hist(datosSAT[datosSAT$kgroup==2, "Modelo.del.Vehiculo"])
+```
+Los histogramas anteriores nos muestran como se ve la variable "modelo del vehiculo" en ambos grupos del cluster.
+En el grupo 1 hay muy pocos carros que sean modelo antes de 2010 y no hay ninguno que sea antes del 2000, mientras que en el grupo 2 hay un poqueño pocentaje de carros que son modelo antes del 2000, los demas estan entre 2000 y 2020.
+
+#### **Marca**
+```{r}
+#grupo 1
+hist(datosSAT[datosSAT$kgroup==1, "Marca"])
+```
+
+```{r}
+#grupo 2
+hist(datosSAT[datosSAT$kgroup==2, "Marca"])
+```
+Los histogramas anteriores nos muestran como se ve la variable "Marca" en ambos grupos del cluster.
+En el grupo 1 se puede observar que hay 2 marcas que sobresalen, las cuales son Toyota seguido de Honda. Mientras que en el grupo 2 las 2 que sobre salen es Honda, al igual que en el grupo 1, seguida de Suzuki.
+
+#### **Linea**
+```{r}
+#grupo 1
+hist(datosSAT[datosSAT$kgroup==1, "Linea"])
+```
+
+```{r}
+#grupo 2
+hist(datosSAT[datosSAT$kgroup==2, "Linea"])
+```
+Los histogramas anteriores nos muestran como se ve la variable "Linea" en ambos grupos del cluster.
+En el grupo uno la linea que mas se repite es GN125F, mientras que en el grupo 2 la que mas se repite es CGL125.
+
+
+#### **Centimetros Cubicos**
+```{r}
+#grupo 1
+hist(datosSAT[datosSAT$kgroup==1, "Centimetros.Cubicos"])
+```
+
+```{r}
+#grupo 2
+hist(datosSAT[datosSAT$kgroup==2, "Centimetros.Cubicos"])
+```
+Los histogramas anteriores nos muestran como se ve la variable "Centimetros cubicos" en ambos grupos del cluster.
+Como se puede observar la distribucion de ambos grupos esta igual.
+
+#### **Tipo de vehiculo**
+```{r}
+#grupo 1
+hist(datosSAT[datosSAT$kgroup==1, "Tipo.de.Vehiculo"])
+```
+
+```{r}
+#grupo 2
+hist(datosSAT[datosSAT$kgroup==2, "Tipo.de.Vehiculo"])
+```
+Los histogramas anteriores nos muestran como se ve la variable "tipo de vehiculo" en ambos grupos del cluster.
+Como se puede ver en ambos grupos el tipo de vehiculo que mas se repite es el mismo, siento este las motocicletas. 
+
+#### **Asientos**
+```{r}
+#grupo 1
+hist(datosSAT[datosSAT$kgroup==1, "Asientos"])
+```
+
+```{r}
+#grupo 2
+hist(datosSAT[datosSAT$kgroup==2, "Asientos"])
+```
+Los histogramas anteriores nos muestran como se ve la variable "Asientos" en ambos grupos del cluster.
+Como se puede observar la distribucion de ambos grupos esta igual.
+
+#### **Puertas**
+```{r}
+#grupo 1
+hist(datosSAT[datosSAT$kgroup==1, "Puertas"])
+```
+
+```{r}
+#grupo 2
+hist(datosSAT[datosSAT$kgroup==2, "Puertas"])
+```
+Los histogramas anteriores nos muestran como se ve la variable "Puertas" en ambos grupos del cluster.
+Como se puede observar la cantidad de puertas que mas se repite es 0, esto se debe a que el tipo de vehiculo que mas se repite en ambos grupos son las motocicletass.
+
+#### **Valor CIF**
+```{r}
+#grupo 1
+hist(datosSAT[datosSAT$kgroup==1, "Valor.CIF"])
+```
+
+```{r}
+#grupo 2
+hist(datosSAT[datosSAT$kgroup==2, "Valor.CIF"])
+```
+Los histogramas anteriores nos muestran como se ve la variable "Valor CIF" en ambos grupos del cluster.
+Como se puede observar el valor que mas se repite en ambos grupos es el 0.
+
 #### **Clusters INE**
 
 Con el objetivo de la realización de los clústeres, se convirtieron todos los factores categóricos en factores categóricos numéricos. De esta manera es posible la agrupación por parte de los algoritmos. 
@@ -1037,116 +1142,6 @@ ggplot(df, aes(x = reorder(n, count), y = count)) + geom_bar(fill = "blue", stat
 
 En primer lugar, podemos observar que el Grupo No.1 generado por el clúster es considerablemente más grande que el Grupo No. 2. En una proporción aproximada de 3 a 1. Para las variables sexo, año de ocurrencia, mes de ocurrencia, edad, estado civil y educación, parecería ser que el clúster dividió la frecuencia en proporciones iguales entre los grupos. Por lo que no brinda gran información para generar una diferenciación. Si ignoramos los valores de Guatemala y escuintla, gracias a que cuentan con una mayor frecuencia; pareciera ser que las variables de departamento de ocurrencia, municipio de ocurrencia , departamento de residencia del difunto y municipio de residencia del difunto, dividen el país en regiones diferentes. Por lo que esto puede ser una manera en que se diferencien los grupos. Nombrandolos Región 1 y Región 2. Además en lo que respecta a los días de ocurrencia, pareciera ser que se dividen los días del mes entre los dos grupos. El primer grupo contando con más días de la primera y segunda semana si no se toman en consideración los repetidos. Y el segundo grupo con más días de la tercera y última semana, sino se toman en cuenta los repetidos. Por lo que podría ser otra manera en que se le podría designar a los grupos, Mitad 1 del mes, Mitad 2 del mes. 
 
-
-###Histogramas de variables SAT por grupo
-
-
-#### **Modelo del vehiculo**
-```{r}
-#grupo 1
-hist(datosSAT[datosSAT$kgroup==1, "Modelo.del.Vehiculo"])
-```
-
-```{r}
-#grupo 2
-hist(datosSAT[datosSAT$kgroup==2, "Modelo.del.Vehiculo"])
-```
-Los histogramas anteriores nos muestran como se ve la variable "modelo del vehiculo" en ambos grupos del cluster.
-En el grupo 1 hay muy pocos carros que sean modelo antes de 2010 y no hay ninguno que sea antes del 2000, mientras que en el grupo 2 hay un poqueño pocentaje de carros que son modelo antes del 2000, los demas estan entre 2000 y 2020.
-
-#### **Marca**
-```{r}
-#grupo 1
-hist(datosSAT[datosSAT$kgroup==1, "Marca"])
-```
-
-```{r}
-#grupo 2
-hist(datosSAT[datosSAT$kgroup==2, "Marca"])
-```
-Los histogramas anteriores nos muestran como se ve la variable "Marca" en ambos grupos del cluster.
-En el grupo 1 se puede observar que hay 2 marcas que sobresalen, las cuales son Toyota seguido de Honda. Mientras que en el grupo 2 las 2 que sobre salen es Honda, al igual que en el grupo 1, seguida de Suzuki.
-
-#### **Linea**
-```{r}
-#grupo 1
-hist(datosSAT[datosSAT$kgroup==1, "Linea"])
-```
-
-```{r}
-#grupo 2
-hist(datosSAT[datosSAT$kgroup==2, "Linea"])
-```
-Los histogramas anteriores nos muestran como se ve la variable "Linea" en ambos grupos del cluster.
-En el grupo uno la linea que mas se repite es GN125F, mientras que en el grupo 2 la que mas se repite es CGL125.
-
-
-#### **Centimetros Cubicos**
-```{r}
-#grupo 1
-hist(datosSAT[datosSAT$kgroup==1, "Centimetros.Cubicos"])
-```
-
-```{r}
-#grupo 2
-hist(datosSAT[datosSAT$kgroup==2, "Centimetros.Cubicos"])
-```
-Los histogramas anteriores nos muestran como se ve la variable "Centimetros cubicos" en ambos grupos del cluster.
-Como se puede observar la distribucion de ambos grupos esta igual.
-
-#### **Tipo de vehiculo**
-```{r}
-#grupo 1
-hist(datosSAT[datosSAT$kgroup==1, "Tipo.de.Vehiculo"])
-```
-
-```{r}
-#grupo 2
-hist(datosSAT[datosSAT$kgroup==2, "Tipo.de.Vehiculo"])
-```
-Los histogramas anteriores nos muestran como se ve la variable "tipo de vehiculo" en ambos grupos del cluster.
-Como se puede ver en ambos grupos el tipo de vehiculo que mas se repite es el mismo, siento este las motocicletas. 
-
-#### **Asientos**
-```{r}
-#grupo 1
-hist(datosSAT[datosSAT$kgroup==1, "Asientos"])
-```
-
-```{r}
-#grupo 2
-hist(datosSAT[datosSAT$kgroup==2, "Asientos"])
-```
-Los histogramas anteriores nos muestran como se ve la variable "Asientos" en ambos grupos del cluster.
-Como se puede observar la distribucion de ambos grupos esta igual.
-
-#### **Puertas**
-```{r}
-#grupo 1
-hist(datosSAT[datosSAT$kgroup==1, "Puertas"])
-```
-
-```{r}
-#grupo 2
-hist(datosSAT[datosSAT$kgroup==2, "Puertas"])
-```
-Los histogramas anteriores nos muestran como se ve la variable "Puertas" en ambos grupos del cluster.
-Como se puede observar la cantidad de puertas que mas se repite es 0, esto se debe a que el tipo de vehiculo que mas se repite en ambos grupos son las motocicletass.
-
-#### **Valor CIF**
-```{r}
-#grupo 1
-hist(datosSAT[datosSAT$kgroup==1, "Valor.CIF"])
-```
-
-```{r}
-#grupo 2
-hist(datosSAT[datosSAT$kgroup==2, "Valor.CIF"])
-```
-Los histogramas anteriores nos muestran como se ve la variable "Valor CIF" en ambos grupos del cluster.
-Como se puede observar el valor que mas se repite en ambos grupos es el 0.
-
-
 ### **Hallazgos INE**
 
 El objetivo al analizar la base de datos de defunciones del INE fue identificar aquellas muertes que sucedieron a causa de un accidente automovilístico y las condiciones en las que estos ocurrieron. A la vez, se buscó reconocer aquellos datos que se pudieran relacionar con los datos de importación de vehículos de la SAT. Uno de los datos con potencial para identificar estas características, fue la distribución de defunciones según el departamento, ya que se podría razonar que, en aquellos departamentos con mayor población y tráfico vehicular, es mucho más probable que existan defunciones por accidentes. La tasa de crecimiento de decesos por año había sido lineal, hasta que en 2018 mostró crecer de forma exponencial, lo cual se puede atribuir a un mejor registro, pero tiene el potencial de que sea por mayor circulación de vehículos, y como se puede observar en la base de datos de la SAT, la importación de vehículos ha crecido de forma exponencial también. Respecto a las características que aquellos que han fallecido en accidentes automovilísticos, han sido en su gran mayoría adultos jóvenes de alrededor de los 20 años. Esta característica se puede razonar, que es debido al estilo de vida que es común en esas edades, tal como falta de experiencia al conducir, y que conforme aumenta la edad, los decesos se reducen.
@@ -1159,3 +1154,6 @@ Nuestro objetivo al realizar en análisis de datos sobre la base de datos de imp
 
 Al realizar un análisis con la gráfica de codo, se encontró que la cantidad ideal de clusters a crear serían 2, y se crearon clusters con varios métodos diferentes para identificar cual de todos tenía un mejor resultado en la prueba de la silueta, y se encontró que el mejor método fue kmeans. Se analizaron los 2 grupos creados por kmeans, evaluando las características de cada variable según el grupo al que pertenecían. 
 
+###Conclusión
+ 
+En lo que respecta al siguiente paso a seguir, se considera que en base a los hallazgos es posible generar un modelo que auxilie en la determinación de riesgos de accidentes fatales en regiones las condiciones temporales.
