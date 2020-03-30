@@ -57,15 +57,15 @@ datosIne$ecidif <- str_replace_all(datosIne$ecidif, "\\(a\\)", "")
 
 Los accidentes de tránsito son la segunda causa de muerte en Guatemala, por detrás de los incidentes que involucran armas de fuego. Diariamente alrededor de 17 accidentes de tránsito deja varios fallecidos según el Instituto Nacional de Ciencias Forenses. A pesar de que los incidentes han disminuido en cantidad durante el plazo 2018 - 2019, la magnitud de los accidentes y la cantidad de muertes solo ha aumentado. En comparación, el año 2019 ha excedido a su predecesor por más de 113 muertes. Las causas varían relacionando a todo tipo de vehiculos, buses de transporte extraurbano, transporte de carga y automóviles livianos. Por lo que se busca determinar el impacto de las crecientes importaciones de vehículos, en este fenómeno. 
 
-### Problema científico y Objetivos preliminares. 
+### Objetivos preliminares. 
 
-Identificar la categoría de vehículo que está involucrada en  mayor cantidad de accidentes de tránsito que  resulte en la muerte de las personas. Tomando en cuenta la proporción que representan tránsito vehicular, para determinar su impacto. 
+Identificar las condiciones en que estos accidentes de tránsito letales ocurren en mayor consistencia.
 
-Identificar las condiciones en que estos accidentes de tránsito ocurren en mayor consistencia.
+Identificar los perfiles de las personas involucradas en los accidentes de tránsito letales.
 
-Identificar las causas principales de de estos accidentes de tránsito.
+Identificar las regiones con mayor incidencia de accidentes de tráfico letales.
 
-Determinar si la categoría vehicular con mayor culpabilidad de accidentes, es la que cuenta con mayor crecimiento por importación. 
+Determinar si la región  con mayor indice de importación coincide con la región de mayor incidencia de accidentes de tránsito letal. 
 
 ### Información a utilizar 
 
