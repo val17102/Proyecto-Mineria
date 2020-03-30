@@ -387,6 +387,9 @@ print(df)
 ggplot(df, aes(x = reorder(n, count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
 ```
 
+La tabla de frecuencia muestra la cantidad de decesos registrados por departamento ordenados de froma decendiente, para los 10 deparatamentos con mayor cantidad de decesos. Como se puede observar Escuintla cuenta con el mayor número de decesos, seguido por Guatemala. Como se puede ver en los histogramas , la diferencia entre los primeros dos departamentos y los demás es evidente. Para la cantia posición la cantidad de decesos se redujo a la mitad. 
+
+
 ```{r}
 #Municipio
 df <- datosIne %>%
@@ -402,6 +405,7 @@ print(df)
 ggplot(df, aes(x = reorder(n, count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
 ```
 
+La siguiente tabla de frecuencia muestra la cantidad de decesos registrados por municipio ordenados de froma decendiente, para los 10 municipios con mayor cantidad de decesos. Como se puede observar Guatemala cuenta con el mayor número de decesos, seguido por Escuintla. En relación a la gráfica anterior , resalta como es que la posición de los departamentos represetnados cambia en orden.  De una misma manera es evidente el decenso exponencial que existe, al moverse de los primeros municipios , a las posiciones medias de la tabla.  
 
 ```{r}
 #Sexo
@@ -412,6 +416,9 @@ df <- df[order(-df$count),]
 print(df)
 ggplot(df, aes(x = reorder(sexo, count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
 ```
+
+La tabla de frecuencia muestra la cantidad de decesos registrados por sexo. Como se puede ver en los histogramas , la diferencia entre la cantidad de honbres y mujeres es considerable en consideración. La cantidad de hombres es casi 4 veces más que las mujeres.  
+
 
 ```{r}
 #Día de ocurrencia
@@ -424,6 +431,8 @@ print(df)
 ggplot(df, aes(x = reorder(diaocu, count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
 ```
 
+La siguiente tabla de frecuencia muestra la cantidad de decesos registrados por día del mes de froma decendiente, para los 10 días con mayor cantidad de decesos. Como se puede observar la quincena y el principio de mes, son los días que se presenta una mayor cantidad de decesos. Probablemente relacionado con que ambos días son días de pago. Sin embargo la cantidad no deciende mucho en relación a los demás días como se puede ver en el histograma. 
+
 ```{r}
 #Año de registro
 df <- datosIne %>%
@@ -433,6 +442,9 @@ df <- df[order(-df$count),]
 print(df)
 ggplot(df, aes(x = reorder(anoreg, count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
 ```
+
+La siguiente tabla de frecuencia muestra la cantidad de decesos registrados por año de froma decendiente, para el periodo 2016-2019. Como se puede observar en los histogramas, existe un crecimiento exponencial del año 2017 al 2018. Por lo que se supone que en 2018 existio un mejor registro, en relación a los demás años.  Además los años 2016 y 2019, cuentan con valores extremadamente bajos, lo que se puede deber a un mal registro. 
+
 
 ```{r}
 #Mes de ocurrencia
@@ -445,6 +457,9 @@ print(df)
 ggplot(df, aes(x = reorder(mesocu, count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
 ```
 
+La siguiente tabla de frecuencia muestra la cantidad de decesos registrados por mes de froma decendiente, para los 9 meses con mayor cantidad de decesos registrados. Como se puede observar diciembre es el mes que cuenta con una mayor cantidad de muertes. Probablemente relacionado con la coincidencia con el preiodo de vacciones. Sin embargo la cantidad no varía mucho entre los meses restantes. 
+
+
 ```{r}
 #Edad de difuntos 
 df <- datosIne %>%
@@ -455,6 +470,9 @@ df <- df[1:10,]
 print(df)
 ggplot(df, aes(x = reorder(edadif, count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
 ```
+
+La siguiente tabla de frecuencia muestra la cantidad de decesos registrados por edad. Como se puede observar el rango se maneja de 19 a 28 años. Sin existir una gran diferencia. Sin embargo, tomando en cuenta que la mayoría de los primeros valores, pertencen a la primera mitad del rango. Podríamos afirmar que a medida que la edad aumenta los decesos relacionados con incidentes vehiculares deciende. 
+
 
 ```{r}
 #Estado civil
@@ -467,6 +485,8 @@ ggplot(df, aes(x = reorder(ecidif, count), y = count)) + geom_bar(fill = "blue",
 
 ```
 
+La siguiente tabla de frecuencia muestra la cantidad de decesos registrados agrupados por el estado civil del difunto. Como se puede observar es evidente que los solteros , son la gran mayoria. Tomando en cuenta la tabla anterior, que la mayoria de decesos este relacionada con gente jóven, puede dar razón al por qué de esta distribución. Sin embargo también puede estar relacionado a la tasa de matriomonios del país, aunque esto no forma parte del enfoque del estudio. 
+
 ```{r}
 #Escolaridad del difunto
 df <- datosIne %>%
@@ -477,6 +497,8 @@ print(df)
 ggplot(df, aes(x = reorder(escodif, count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
 
 ```
+
+La siguiente tabla de frecuencia muestra la cantidad de decesos registrados agrupados por la escolaridad del difunto. Los grupos con menor educación cuentan con las primeras posiciones de la tabla. A pesar de que el grupo Primaria sobrepasa al no que no estudio, esto puede estar relacionado con el mayor acceso que se puede llegar a tener a vehiculos. Además manteniendo la misma linea de pensamiento, se puede observar como es que tanto los grados universitarios como Postgrado, representan el fondo de la tabla. 
 
 ```{r}
 #Departamwnto de residencia del difunto
@@ -493,6 +515,8 @@ print(df)
 ggplot(df, aes(x = reorder(n, count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
 ```
 
+La tabla de frecuencia muestra la cantidad de decesos registrados por departamento de recidencia ordenados de froma decendiente, para los 10 deparatamentos de recidencia con mayor cantidad de decesos. Como se puede observar Guatemala cuenta con el mayor número de decesos, seguido por Escuintla, concordando con lsa tablas del inicio. Sin embargo la diferencia es considerable en comparción. 
+
 ```{r}
 #Municipio de residencia del difunto
 df <- datosIne %>%
@@ -508,6 +532,10 @@ print(df)
 ggplot(df, aes(x = reorder(n, count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
 ```
 
+
+La tabla de frecuencia muestra la cantidad de decesos registrados por departamento de recidencia ordenados de froma decendiente, para los 10 deparatamentos de recidencia con mayor cantidad de decesos. Como se puede observar Guatemala cuenta con el mayor número de decesos, seguido por Escuintla, concordando con lsa tablas del inicio. Sin embargo la diferencia es considerable en comparción. 
+
+Con el objetivo de la realización de los clústeres, se convirtieron todos los factores categoricos en factores categoricos npumericos. De esta manera es posible la agrupación por parte de los algoritmos. 
 
 ```{r}
 #Convert categorical dataset into numerical categorical
@@ -526,6 +554,9 @@ datosIneN$mredif <- as.numeric(factor(datosIne$mredif))
 datosIneN$caudef <- as.numeric(factor(datosIne$caudef))
 datosIneN
 ```
+
+A continuación se presentan las correlaciones que existen entre los diferentes datos:
+
 ```{r}
 library(corrplot)
 matriz_cor <- cor(datosIneN[-12])
@@ -533,16 +564,21 @@ matriz_cor
  corrplot(matriz_cor)
 ```
 
+Como se puede observar, con excepción del departamento de registro de la defunción y el departamento de ocurrencia, las variables son independientes entre sí. Es evidente la razón de la existencia de la  relación depocu y dredif, sin embargo es interesante observar como no es uno.Lo que significa que exite un porcentaje considerable de decesos que se registran en departamentos diferentes. 
+
+Se realiza una grafica de codo para determinar el número de grupos para la realización de los clústeres. 
+
 ```{r}
 wss <- (nrow(datosIneN[-12])-1)*sum(apply(datosIneN[-12],2,var))
 
 for (i in 2:10) 
   wss[i] <- sum(kmeans(datosIneN[-12], centers=i)$withinss)
 
-#<<<<<<< HEAD
+
 plot(1:10, wss, type="b", xlab="Number of Clusters",  ylab="Within groups sum of squares")
 ```
-#=======
+
+Dos es el número indicado. 
 
 ```{r}
 #Convert categorical dataset into numerical categorical
@@ -603,6 +639,8 @@ silfcm<-silhouette(datosSAT[datosSample,"FCGrupos"],dist(datosSAT[datosSample,1:
 mean(silfcm[,3])
 ```
 #### **Clusters INE**
+
+Se inicia con un clúster con el algoritmo de Kmeans.
 ```{r} 
 #Cluster Kmeans
 library(cluster) #Para calcular la silueta
@@ -612,9 +650,10 @@ plotcluster(datosIneN[-12],km$cluster)
 
 #Método de la silueta para las k-medias
 silkm<-silhouette(km$cluster,dist(datosIneN[-12]))
-silkm
 mean(silkm[,3]) #0.55, no es la mejor partición pero no está mal
 ```
+
+Kmodes es una variación del algoritmo especifica para variables categoricas, por lo que se realiza esperando un mejor valor de silueta. 
 
 ```{r}
 #Cluster Kmodes
@@ -628,6 +667,8 @@ silkm<-silhouette(kmo$cluster,dist(datosIneN[-12]))
 mean(silkm[,3]) #0.55, no es la mejor partición pero no está mal
 ```
 
+Al no mejorar se trabaj sobre Kmeans. Se grafican las variables para hacerse una idea de la manera en que están distribuidas respecto a las demás
+
 ```{r}
 plotp1 <- datosIneN[-12]
 plotp2 <- plotp1[6:11] 
@@ -636,6 +677,8 @@ plot(plotp1)
 plot(plotp2)
 
 ```
+
+Se seleccionan mupocu, sexo, diaocu, mesocu, ecidif y dredif, gracias a que se optiene un mejor valor de silueta.
 
 ```{r}
 #datosIneN
@@ -646,6 +689,7 @@ silkm<-silhouette(km$cluster,dist(dc))
 mean(silkm[,3]) 
 ```
 
+Se prueba Cmeans para ver si mejora la silueta. 
 
 ```{r}
 #datosIneN
@@ -657,6 +701,8 @@ silkm<-silhouette(cm$cluster,dist(dc))
 mean(silkm[,3]) 
 ```
 
+Se cuenta con mejor un mejor agrupamiento. Además se prueba con mixture of gaussians.
+
 ```{r}
 #datosIneN
 library(mclust)
@@ -666,6 +712,8 @@ plot(mc, what = "classification", main="MClust Classification")
 silmg<-silhouette(mc$classification,dist(dc))
 mean(silmg[,3])
 ```
+
+Se prueba con clustering jerárquico.
 
 ```{r}
 #datosIneN
@@ -679,4 +727,6 @@ silch<-silhouette(groups,dist(dc))
 mean(silch[,3])
 
 ```
+
+Por ser el mejor agrupamiento, este es el clúster seleccionado. 
 
