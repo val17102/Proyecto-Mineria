@@ -228,8 +228,6 @@ En el caso de Ine, las variables a utilizar serán, depocu, mupocu, sexo, diaocu
 
 #### **SAT**
 
-Como se puede observar en la gráfica, solo se presentan 10 países, esto se debe a que la cantidad de países dentro de los datos es muy grande para poder graficarlos de tal manera que se pueda identificar los países claramente, por lo cual se eligieron los 10 países con la mayor cantidad de instancias. Se pueden observar los países con la cantidad más grande de instancias de importaciones son China, Japón y Estado Unidos.
-
 #### **Pais de Proveniencia**
 ```{r}
 #Pais de Proveniencia
@@ -242,7 +240,7 @@ ggplot(df[1:10,], aes(x = reorder(Pais.de.Proveniencia,count), y = count)) + geo
 
 ```
 
-Esta gráfica presenta la distribución de el año de modelo de los vehículos, y como se puede observar, la tasa de crecimiento a lo largo de los años ha sido exponencial, de tal manera que la cantidad de importaciones año tras año ha ido incrementando, con últimos 3 años como los que tienen la mayor cantidad.
+Como se puede observar en la gráfica, solo se presentan 10 países, esto se debe a que la cantidad de países dentro de los datos es muy grande para poder graficarlos de tal manera que se pueda identificar los países claramente, por lo cual se eligieron los 10 países con la mayor cantidad de instancias. Se pueden observar los países con la cantidad más grande de instancias de importaciones son China, Japón y Estado Unidos.
 
 #### **Modelo de Vehículo**
 ```{r}
@@ -255,6 +253,8 @@ ggplot(df, aes(x = Modelo.del.Vehiculo, y = count)) + geom_bar(fill = "blue", st
 hist(datos$Modelo.del.Vehiculo)
 ```
 
+Esta gráfica presenta la distribución de el año de modelo de los vehículos, y como se puede observar, la tasa de crecimiento a lo largo de los años ha sido exponencial, de tal manera que la cantidad de importaciones año tras año ha ido incrementando, con últimos 3 años como los que tienen la mayor cantidad.
+
 #### **Marca**
 ```{r}
 #Marca
@@ -265,6 +265,8 @@ df <- df[order(-df$count),]
 ggplot(df[1:10,], aes(x = reorder(Marca,count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
 
 ```
+
+En esta gráfica se presenta la distribución de la cantidad de vehículos por marca, tomando en cuenta las 10 marcas con mayor cantidad de filas, donde curiosamente las 3 marcas con la mayor cantidad de instancias son japonesas, y como se pudo ver en el país de proveniencia, también es uno de los países que más apareció.
 
 #### **Linea**
 ```{r}
@@ -277,6 +279,8 @@ ggplot(df[1:10,], aes(x = reorder(Linea,count), y = count)) + geom_bar(fill = "b
 
 ```
 
+Como se puede observar en la gráfica, se presentan las 10 líneas de vehículo con la mayor cantidad de filas que las contienen, y como se puede observar, la que tiene la mayor cantidad es una motocicleta marca Suzuki, la cual aparece casi el doble del segundo lugar.
+
 #### **Centimetros Cubicos**
 ```{r}
 #Centimetros.Cubicos
@@ -287,6 +291,8 @@ df <- df[order(-df$count),]
 ggplot(df[1:10,], aes(x = reorder(Centimetros.Cubicos,count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
 
 ```
+
+Esta gráfica presenta el tamaño del motor del vehículo en centímetros cúbicos, y debido a la gran cantidad de datos, se presentan los 10 tamaños más comunes en el dataset, con el tamaño más común siendo de 125 centímetros cúbicos.
 
 #### **Distintivo**
 ```{r}
@@ -299,6 +305,8 @@ df
 ggplot(df, aes(x = reorder(Distintivo,count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
 
 ```
+
+En esta gráfica se puede observar el distintivo del vehículo, en la cual las 3 posibles categorías son Liviano, Pesado y ninguno de los 2. Claramente la mayor cantidad de vehículos son clasificados como livianos.
 
 #### **Tipo de Vehiculo**
 ```{r}
@@ -322,6 +330,8 @@ ggplot(df, aes(x = reorder(Tipo.Combustible, count), y = count)) + geom_bar(fill
 
 ```
 
+Esta gráfica muestra el tipo de combustible de los vehículos importados, donde estos pueden utilizar gasolina, Diesel u otros, y se puede ver que los vehículos son principalmente de gasolina.
+
 #### **Asientos**
 ```{r}
 #Asientos
@@ -332,6 +342,8 @@ df <- df[order(-df$count),]
 ggplot(df[1:10,], aes(x = reorder(Asientos, count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
 
 ```
+
+En esta gráfica se puede observar la cantidad de asientos que tiene el vehículo, en las cuales la más común es 2, lo cual podría asumir que es una motocicleta como se vio en las gráficas anteriores, y el siguiente que es de 5, se puede suponer que es un automóvil.
 
 #### **Puertas**
 ```{r}
@@ -344,6 +356,8 @@ ggplot(df, aes(x = reorder(Puertas, count), y = count)) + geom_bar(fill = "blue"
 
 ```
 
+Como se puede apreciar en esta gráfica se puede observar la cantidad de puertas que tiene el vehículo, en las cuales la más común es 0, lo cual podría asumir que es una motocicleta como se vio en las gráficas anteriores, y el siguiente que es de 4 y 2, se puede suponer que es un automóvil.
+
 #### **Tonelaje**
 ```{r}
 #Tonelaje
@@ -355,6 +369,8 @@ ggplot(df[1:10,], aes(x = reorder(Tonelaje, count), y = count)) + geom_bar(fill 
 
 ```
 
+En gráfica muestra el tonelaje del vehículo, en las cuales la más común es 0, lo cual podría asumir que es un vehículo que no necesariamente pese 0 toneladas, sino que menos de 1 tonelada, y el siguiente que es de 1, se puede suponer que es un vehículo más pesado pero del mismo tipo.
+
 #### **Valor CIF**
 ```{r}
 #Valor.CIF
@@ -365,6 +381,8 @@ df <- df[order(-df$count),]
 hist(df$Valor.CIF)
 
 ```
+
+En esta gráfica se puede observar el Valor CIF de cada vehículo, el cual es el valor real de las mercancías durante el despacho aduanero, en el cual se incluye el costo de las mercancías, el seguro y del flete hasta el puerto de destino.
 
 #### **Año**
 ```{r}
