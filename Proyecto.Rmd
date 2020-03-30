@@ -316,6 +316,8 @@ ggplot(df[1:10,], aes(x = reorder(Tipo.de.Vehiculo,count), y = count)) + geom_ba
 
 ```
 
+Como se puede observar en la gráfica, aquí se presenta el tipo de vehículo que se está importando, donde el tipo que más se importa son las motocicletas, siendo casi el triple de la cantidad de automóviles importados. Esto se puede razonar a ser debido a que los precios de moto suelen ser mucho menores a la de los carros, por lo cual es una alternativa que suele elegirse debido a la situación económica de la población. 
+
 #### **Tipo de Combustible**
 ```{r}
 #Tipo de Combustible
@@ -1144,4 +1146,16 @@ hist(datosSAT[datosSAT$kgroup==2, "Valor.CIF"])
 Los histogramas anteriores nos muestran como se ve la variable "Valor CIF" en ambos grupos del cluster.
 Como se puede observar el valor que mas se repite en ambos grupos es el 0.
 
+
+### **Hallazgos INE**
+
+El objetivo al analizar la base de datos de defunciones del INE fue identificar aquellas muertes que sucedieron a causa de un accidente automovilístico y las condiciones en las que estos ocurrieron. A la vez, se buscó reconocer aquellos datos que se pudieran relacionar con los datos de importación de vehículos de la SAT. Uno de los datos con potencial para identificar estas características, fue la distribución de defunciones según el departamento, ya que se podría razonar que, en aquellos departamentos con mayor población y tráfico vehicular, es mucho más probable que existan defunciones por accidentes. La tasa de crecimiento de decesos por año había sido lineal, hasta que en 2018 mostró crecer de forma exponencial, lo cual se puede atribuir a un mejor registro, pero tiene el potencial de que sea por mayor circulación de vehículos, y como se puede observar en la base de datos de la SAT, la importación de vehículos ha crecido de forma exponencial también. Respecto a las características que aquellos que han fallecido en accidentes automovilísticos, han sido en su gran mayoría adultos jóvenes de alrededor de los 20 años. Esta característica se puede razonar, que es debido al estilo de vida que es común en esas edades, tal como falta de experiencia al conducir, y que conforme aumenta la edad, los decesos se reducen.
+
+Al realizar un análisis de los datos con la gráfica de codo, se decidió que la cantidad ideal de clusters sería 2. Luego de esto se crearon los grupos utilizando los métodos de clustering kmeans, kmodes, cmeans y hclust, realizando la prueba de la silueta para cada resultado. Al realizar la prueba de la silueta se encontró que el método con el mejor resultado fue hclust, por lo cual se utilizará la agrupación creada por este.
+
+### **Hallazgos SAT**
+
+Nuestro objetivo al realizar en análisis de datos sobre la base de datos de importaciones de la SAT era poder identificar tendencias en las características de los vehículos importados. Al analizar esta información se buscará alguna relación existente entre estas características con aquellas identificadas en la base de datos del INE. La relación que se espera encontrar es que aquellos vehículos que están involucrados en mayor cantidad de accidentes de tránsito que resulte en la muerte de las personas, también posean alguna característica evidente en la base de datos de importaciones. Por el momento lo que se han logrado identificar algunas características de los vehículos importados que podrían aportar a los fines de la investigación. Se encontró que el tipo de vehículo que más se importa en Guatemala es la motocicleta, lo cual podría tener alta significancia en el ámbito de defunciones por accidentes automovilísticos, ya que se le suele atribuir a las motocicletas como un medio de transporte más peligroso que otros. Este dato también viene respaldado por las otras variables que también resultaron teniendo las características de una motocicleta como la más común, por ejemplo, el tamaño del motor, la cantidad de asientos, el número de puertas y el peso del vehículo.
+
+Al realizar un análisis con la gráfica de codo, se encontró que la cantidad ideal de clusters a crear serían 2, y se crearon clusters con varios métodos diferentes para identificar cual de todos tenía un mejor resultado en la prueba de la silueta, y se encontró que el mejor método fue kmeans. Se analizaron los 2 grupos creados por kmeans, evaluando las características de cada variable según el grupo al que pertenecían. 
 
