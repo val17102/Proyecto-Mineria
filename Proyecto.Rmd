@@ -530,7 +530,6 @@ datosIneN$escodif <- as.numeric(factor(datosIne$escodif))
 datosIneN$dredif <- as.numeric(factor(datosIne$dredif))
 datosIneN$mredif <- as.numeric(factor(datosIne$mredif))
 datosIneN$caudef <- as.numeric(factor(datosIne$caudef))
-datosIneN
 ```
 ```{r}
 library(corrplot)
@@ -560,7 +559,6 @@ datosSAT$Linea <- as.numeric(factor(datosSAT$Linea))
 datosSAT$Distintivo <- as.numeric(factor(datosSAT$Distintivo))
 datosSAT$Tipo.de.Vehiculo <- as.numeric(factor(datosSAT$Tipo.de.Vehiculo))
 datosSAT$Tipo.Combustible <- as.numeric(factor(datosSAT$Tipo.Combustible))
-datosSAT
 ```
 #### **Clusters SAT**
 ```{r}
@@ -618,7 +616,6 @@ plotcluster(datosIneN[-12],km$cluster)
 
 #Método de la silueta para las k-medias
 silkm<-silhouette(km$cluster,dist(datosIneN[-12]))
-silkm
 mean(silkm[,3]) #0.55, no es la mejor partición pero no está mal
 ```
 
