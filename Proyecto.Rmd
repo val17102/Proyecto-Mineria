@@ -74,70 +74,70 @@ Para responder la problemática que se presenta, se utilizaran:
 - Base de datos de la importaciones de la SAT
 - Base de datos de defunciones del Ine
 
-#### Descripcion de Variables:
+#### Descripción de Variables:
 
 ##### **SAT**
 
-La base de datos de defucniones de la SAT, busca alamcenar toda la información pertienente en relación a la importacipon de vehiculos al territorio nacialonal; registrando la mayor cantidad de datos en relación. A continuación se presenta una lista de las variables presentes dentro de este set de datos, además de el valor que representan. 
+La base de datos de defunciones de la SAT, busca almacenar toda la información pertinente en relación a la importación de vehículos al territorio nacional; registrando la mayor cantidad de datos en relación. A continuación se presenta una lista de las variables presentes dentro de este set de datos, además de el valor que representan. 
 
-**Pais de Provinencia (Cualitativa Nominal):**
-País del que proviene el vehiculo
+**País de Proveniencia (Cualitativa Nominal):**
+País del que proviene el vehículo
 
 **Aduana de ingreso (Cualitativa Nominal):**
-Nombre de la aduana en la que el vehiculo ingreso
+Nombre de la aduana en la que el vehículo ingreso
 
-**Fecha de la Poliza (Cualitativa Ordinal):**
+**Fecha de la Póliza (Cualitativa Ordinal):**
 Fecha en la que el carro es registrado
 
 **Partida Arancelaria (Cuantitativa Discreta):**
-Codigo de distincion para saber al grupo de pago de impuestos al que pertenece
+Código de distinción para saber al grupo de pago de impuestos al que pertenece
 
-**Modelo del Vehiculo (Cualitativa Ordinal):**
-Modelo del vehiculo
+**Modelo del Vehículo (Cualitativa Ordinal):**
+Modelo del vehículo
 
 **Marca (Cualitativa Nominal): **
-Marca del vehiculo
+Marca del vehículo
 
-**Linea (Cualitativa Nominal):**
+**Línea (Cualitativa Nominal):**
 Linea del vehiculo 
 
-**Centimetros Cubicos (Cuantitativa Discreta): **
+**Centímetros Cúbicos (Cuantitativa Discreta): **
 Tamaño del motor
 
 **Distintivo (Cualitativa Nominal):**
-Distintivo del vehiculo
+Distintivo del vehículo
 
-**Tipo de Vehiculo (Cualitativa Nominal):**
-Tipo de vehiculo
+**Tipo de Vehículo (Cualitativa Nominal):**
+Tipo de vehículo
 
 **Tipo de Importador (Cualitativa Nominal):**
 Tipo de importador (OCASIONAL o DISTRIBUIDOR)
 
 **Tipo Combustible (Cualitativa Nominal):**
-Combustible que utiliza el vehiculo
+Combustible que utiliza el vehículo
 
 **Asientos (Cuantitativa Discreta):**
-Numero de asientos que tiene el vehiculo
+Número de asientos que tiene el vehiculo
 
 **Puertas (Cuantitativa Discreta):**
-Numero de puertas que tiene el vehiculo
+Número de puertas que tiene el vehículo
 
 **Tonelaje (Cuantitativa Discreta):**
-Peso del vehiculo
+Peso del vehículo
 
 **Valor VIF (Cuantitativa Continua):**
-Costo del vehiculo despues de haber pagado impuestos
+Costo del vehículo después de haber pagado impuestos
 
 **Impuesto (Cuantitativa Continua):**
 Cantidad de impuestos que se debe pagar
 
-En el caso de la SAT, las variables que se utilizarán son País de Provinencia, Modelo del Vehículo, Marca, Línea, Centímetros Cúbicos, Distintivo, Tipo de Vehículo, Tipo de Combustible, Asientos, Puertas, Tonelaje y Valor CIF. Estas variables se eligieron debido a que luego de identificar las características de los vehículos involucrados en accidentes fatales, se evaluarían sus características en el ámbito de importaciones.
+En el caso de la SAT, las variables que se utilizarán son País de Proveniencia, Modelo del Vehículo, Marca, Línea, Centímetros Cúbicos, Distintivo, Tipo de Vehículo, Tipo de Combustible, Asientos, Puertas, Tonelaje y Valor CIF. Estas variables se eligieron debido a que luego de identificar las características de los vehículos involucrados en accidentes fatales, se evaluarían sus características en el ámbito de importaciones.
 
 Para el dataset de importaciones de la SAT los procesos de limpieza que se realizaron fueron los siguientes: Se eliminaron todas las filas en las cuales existieran valores nulos para algunos de las columnas. Luego se buscó estandarizar los datos categóricos, asegurando que no existieron caracteres especiales en los diferentes valores. Los valores que se buscaron fueron tildes y signos de puntuación, pero estos no se encontraron ya que todas las variables con caracteres estaban en mayúsculas y sin tildes.
 
 #### **INE**
 
-La base de datos de defucniones del INE, busca alamcenar toda la información pertienente en relación al deceso de una persona dentro del territorio nacialonal; registrando la mayor cantidad de datos en relación al suceso. A continuación se presenta una lista de las variables presentes dentro de este set de datos, además de el valor que representan. 
+La base de datos de defunciones del INE, busca almacenar toda la información pertinente en relación al deceso de una persona dentro del territorio nacional; registrando la mayor cantidad de datos en relación al suceso. A continuación se presenta una lista de las variables presentes dentro de este set de datos, además de el valor que representan. 
 
 **Depocu (Cualitativa Nominal):**
 Departamento de registro
@@ -214,9 +214,9 @@ Sitio de ocurrencia
 **Cerdef (Cualitativa Nominal):**
 Quien certifica
 
-En el caso de Ine, las variables a utilizar serán, depocu, mupocu, sexo, diaocu, añoreg, mesocu, edadif, ecidif, escodif, dredif, mredif, caudef. Esto en primer lugar, gracias a que son variables que se encuentran presentes en todos los datasets año tras año, del 2011 al 2018. Además en variables como la ocupación del difunto el valor indefinido se encuetra respetidas veces por lo que no permite la extracción de información de manera adecuada. 
+En el caso de Ine, las variables a utilizar serán, depocu, mupocu, sexo, diaocu, añoreg, mesocu, edadif, ecidif, escodif, dredif, mredif, caudef. Esto en primer lugar, gracias a que son variables que se encuentran presentes en todos los datasets año tras año, del 2011 al 2018. Además en variables como la ocupación del difunto el valor indefinido se encuentra repetidas veces por lo que no permite la extracción de información de manera adecuada. 
 
-Para el dataset de defunciones del INE los procesos de limpieza que se realizaron fueron los siguientes: Se eliminaron todas las filas en las cuales existieran valores nulos para algunos de las columnas. Luego se buscó estandarizar los datos categóricos, asegurando que no existieron caracteres especiales en los diferentes valores. Los valores que se buscaron fueron tildes y signos de puntuación, que por facilidad se eliminaron en su mayoria desde excel. Además se estandarizo el valor del estado civil, por la existencia de categorias con genero y sin genero. Por último se seleccionó únicamente los decesos relacionados con inicidentes vehiculares. 
+Para el dataset de defunciones del INE los procesos de limpieza que se realizaron fueron los siguientes: Se eliminaron todas las filas en las cuales existieran valores nulos para algunos de las columnas. Luego se buscó estandarizar los datos categóricos, asegurando que no existieron caracteres especiales en los diferentes valores. Los valores que se buscaron fueron tildes y signos de puntuación, que por facilidad se eliminaron en su mayoría desde excel. Además se estandarizó el valor del estado civil, por la existencia de categorías con género y sin género. Por último se seleccionó únicamente los decesos relacionados con incidentes vehiculares. 
 
 ### **Tablas de frecuencia de variables elegidas**
 
@@ -278,9 +278,9 @@ ggplot(df[1:10,], aes(x = reorder(Linea,count), y = count)) + geom_bar(fill = "b
 
 Como se puede observar en la gráfica, se presentan las 10 líneas de vehículo con la mayor cantidad de filas que las contienen, y como se puede observar, la que tiene la mayor cantidad es una motocicleta marca Suzuki, la cual aparece casi el doble del segundo lugar.
 
-#### **Centimetros Cubicos**
+#### **Centímetros Cúbicos**
 ```{r}
-#Centimetros.Cubicos
+#Centímetros.Cúbicos
 df <- datos %>%
   group_by(Centimetros.Cubicos) %>%
   summarise(count = n())
@@ -305,9 +305,9 @@ ggplot(df, aes(x = reorder(Distintivo,count), y = count)) + geom_bar(fill = "blu
 
 En esta gráfica se puede observar el distintivo del vehículo, en la cual las 3 posibles categorías son Liviano, Pesado y ninguno de los 2. Claramente la mayor cantidad de vehículos son clasificados como livianos.
 
-#### **Tipo de Vehiculo**
+#### **Tipo de Vehículo**
 ```{r}
-#Tipo de Vehiculo
+#Tipo de Vehículo
 df <- datos %>%
   group_by(Tipo.de.Vehiculo) %>%
   summarise(count = n())
@@ -392,7 +392,7 @@ ggplot(df, aes(x = reorder(Anio, count), y = count)) + geom_bar(fill = "blue", s
 ```
 #### **Ine**
 
-
+#### **Departamento**
 ```{r}
 #Departamento
 df <- datosIne %>%
@@ -408,9 +408,9 @@ print(df)
 ggplot(df, aes(x = reorder(n, count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
 ```
 
-La tabla de frecuencia muestra la cantidad de decesos registrados por departamento ordenados de froma decendiente, para los 10 deparatamentos con mayor cantidad de decesos. Como se puede observar Escuintla cuenta con el mayor número de decesos, seguido por Guatemala. Como se puede ver en los histogramas , la diferencia entre los primeros dos departamentos y los demás es evidente. Para la cantia posición la cantidad de decesos se redujo a la mitad. 
+La tabla de frecuencia muestra la cantidad de decesos registrados por departamento ordenados de forma descendente, para los 10 departamentos con mayor cantidad de decesos. Como se puede observar Escuintla cuenta con el mayor número de decesos, seguido por Guatemala. Como se puede ver en los histogramas , la diferencia entre los primeros dos departamentos y los demás es evidente. Para la cantia posición la cantidad de decesos se redujo a la mitad. 
 
-
+#### **Municipio**
 ```{r}
 #Municipio
 df <- datosIne %>%
@@ -426,8 +426,9 @@ print(df)
 ggplot(df, aes(x = reorder(n, count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
 ```
 
-La siguiente tabla de frecuencia muestra la cantidad de decesos registrados por municipio ordenados de froma decendiente, para los 10 municipios con mayor cantidad de decesos. Como se puede observar Guatemala cuenta con el mayor número de decesos, seguido por Escuintla. En relación a la gráfica anterior , resalta como es que la posición de los departamentos represetnados cambia en orden.  De una misma manera es evidente el decenso exponencial que existe, al moverse de los primeros municipios , a las posiciones medias de la tabla.  
+La siguiente tabla de frecuencia muestra la cantidad de decesos registrados por municipio ordenados de forma descendente, para los 10 municipios con mayor cantidad de decesos. Como se puede observar Guatemala cuenta con el mayor número de decesos, seguido por Escuintla. En relación a la gráfica anterior , resalta cómo es que la posición de los departamentos representados cambia en orden.  De una misma manera es evidente el descenso exponencial que existe, al moverse de los primeros municipios , a las posiciones medias de la tabla.  
 
+#### **Sexo**
 ```{r}
 #Sexo
 df <- datosIne %>%
@@ -438,9 +439,9 @@ print(df)
 ggplot(df, aes(x = reorder(sexo, count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
 ```
 
-La tabla de frecuencia muestra la cantidad de decesos registrados por sexo. Como se puede ver en los histogramas , la diferencia entre la cantidad de honbres y mujeres es considerable en consideración. La cantidad de hombres es casi 4 veces más que las mujeres.  
+La tabla de frecuencia muestra la cantidad de decesos registrados por sexo. Como se puede ver en los histogramas , la diferencia entre la cantidad de hombres y mujeres es considerable en consideración. La cantidad de hombres es casi 4 veces más que las mujeres.  
 
-
+#### **Día de ocurrencia**
 ```{r}
 #Día de ocurrencia
 df <- datosIne %>%
@@ -452,8 +453,9 @@ print(df)
 ggplot(df, aes(x = reorder(diaocu, count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
 ```
 
-La siguiente tabla de frecuencia muestra la cantidad de decesos registrados por día del mes de froma decendiente, para los 10 días con mayor cantidad de decesos. Como se puede observar la quincena y el principio de mes, son los días que se presenta una mayor cantidad de decesos. Probablemente relacionado con que ambos días son días de pago. Sin embargo la cantidad no deciende mucho en relación a los demás días como se puede ver en el histograma. 
+La siguiente tabla de frecuencia muestra la cantidad de decesos registrados por día del mes de forma descendente, para los 10 días con mayor cantidad de decesos. Como se puede observar la quincena y el principio de mes, son los días que se presenta una mayor cantidad de decesos. Probablemente relacionado con que ambos días son días de pago. Sin embargo la cantidad no desciende mucho en relación a los demás días como se puede ver en el histograma. 
 
+#### **Año de registro**
 ```{r}
 #Año de registro
 df <- datosIne %>%
@@ -464,9 +466,9 @@ print(df)
 ggplot(df, aes(x = reorder(anoreg, count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
 ```
 
-La siguiente tabla de frecuencia muestra la cantidad de decesos registrados por año de froma decendiente, para el periodo 2016-2019. Como se puede observar en los histogramas, existe un crecimiento exponencial del año 2017 al 2018. Por lo que se supone que en 2018 existio un mejor registro, en relación a los demás años.  Además los años 2016 y 2019, cuentan con valores extremadamente bajos, lo que se puede deber a un mal registro. 
+La siguiente tabla de frecuencia muestra la cantidad de decesos registrados por año de forma descendiente, para el periodo 2016-2019. Como se puede observar en los histogramas, existe un crecimiento exponencial del año 2017 al 2018. Por lo que se supone que en 2018 existió un mejor registro, en relación a los demás años.  Además los años 2016 y 2019, cuentan con valores extremadamente bajos, lo que se puede deber a un mal registro. 
 
-
+#### **Mes de ocurrencia**
 ```{r}
 #Mes de ocurrencia
 df <- datosIne %>%
@@ -478,9 +480,9 @@ print(df)
 ggplot(df, aes(x = reorder(mesocu, count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
 ```
 
-La siguiente tabla de frecuencia muestra la cantidad de decesos registrados por mes de froma decendiente, para los 9 meses con mayor cantidad de decesos registrados. Como se puede observar diciembre es el mes que cuenta con una mayor cantidad de muertes. Probablemente relacionado con la coincidencia con el preiodo de vacciones. Sin embargo la cantidad no varía mucho entre los meses restantes. 
+La siguiente tabla de frecuencia muestra la cantidad de decesos registrados por mes de forma descendente, para los 9 meses con mayor cantidad de decesos registrados. Como se puede observar diciembre es el mes que cuenta con una mayor cantidad de muertes. Probablemente relacionado con la coincidencia con el periodo de vacaciones. Sin embargo la cantidad no varía mucho entre los meses restantes. 
 
-
+#### **Edad de difuntos**
 ```{r}
 #Edad de difuntos 
 df <- datosIne %>%
@@ -492,9 +494,9 @@ print(df)
 ggplot(df, aes(x = reorder(edadif, count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
 ```
 
-La siguiente tabla de frecuencia muestra la cantidad de decesos registrados por edad. Como se puede observar el rango se maneja de 19 a 28 años. Sin existir una gran diferencia. Sin embargo, tomando en cuenta que la mayoría de los primeros valores, pertencen a la primera mitad del rango. Podríamos afirmar que a medida que la edad aumenta los decesos relacionados con incidentes vehiculares deciende. 
+La siguiente tabla de frecuencia muestra la cantidad de decesos registrados por edad. Como se puede observar el rango se maneja de 19 a 28 años. Sin existir una gran diferencia. Sin embargo, tomando en cuenta que la mayoría de los primeros valores, pertenecen a la primera mitad del rango. Podríamos afirmar que a medida que la edad aumentan los decesos relacionados con incidentes vehiculares desciende. 
 
-
+#### **Estado civil**
 ```{r}
 #Estado civil
 df <- datosIne %>%
@@ -506,8 +508,9 @@ ggplot(df, aes(x = reorder(ecidif, count), y = count)) + geom_bar(fill = "blue",
 
 ```
 
-La siguiente tabla de frecuencia muestra la cantidad de decesos registrados agrupados por el estado civil del difunto. Como se puede observar es evidente que los solteros , son la gran mayoria. Tomando en cuenta la tabla anterior, que la mayoria de decesos este relacionada con gente jóven, puede dar razón al por qué de esta distribución. Sin embargo también puede estar relacionado a la tasa de matriomonios del país, aunque esto no forma parte del enfoque del estudio. 
+La siguiente tabla de frecuencia muestra la cantidad de decesos registrados agrupados por el estado civil del difunto. Como se puede observar es evidente que los solteros , son la gran mayoría. Tomando en cuenta la tabla anterior, que la mayoría de decesos esté relacionada con gente jóven, puede dar razón al por qué de esta distribución. Sin embargo también puede estar relacionado a la tasa de matrimonios del país, aunque esto no forma parte del enfoque del estudio. 
 
+#### **Escolaridad del difunto**
 ```{r}
 #Escolaridad del difunto
 df <- datosIne %>%
@@ -519,10 +522,11 @@ ggplot(df, aes(x = reorder(escodif, count), y = count)) + geom_bar(fill = "blue"
 
 ```
 
-La siguiente tabla de frecuencia muestra la cantidad de decesos registrados agrupados por la escolaridad del difunto. Los grupos con menor educación cuentan con las primeras posiciones de la tabla. A pesar de que el grupo Primaria sobrepasa al no que no estudio, esto puede estar relacionado con el mayor acceso que se puede llegar a tener a vehiculos. Además manteniendo la misma linea de pensamiento, se puede observar como es que tanto los grados universitarios como Postgrado, representan el fondo de la tabla. 
+La siguiente tabla de frecuencia muestra la cantidad de decesos registrados agrupados por la escolaridad del difunto. Los grupos con menor educación cuentan con las primeras posiciones de la tabla. A pesar de que el grupo Primaria sobrepasa al no que no estudio, esto puede estar relacionado con el mayor acceso que se puede llegar a tener a vehículos. Además manteniendo la misma línea de pensamiento, se puede observar cómo es que tanto los grados universitarios como Postgrado, representan el fondo de la tabla. 
 
+#### **Departamento de residencia del difunto**
 ```{r}
-#Departamwnto de residencia del difunto
+#Departamento de residencia del difunto
 df <- datosIne %>%
   group_by(dredif) %>%
   summarise(count = n())
@@ -536,8 +540,9 @@ print(df)
 ggplot(df, aes(x = reorder(n, count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
 ```
 
-La tabla de frecuencia muestra la cantidad de decesos registrados por departamento de recidencia ordenados de froma decendiente, para los 10 deparatamentos de recidencia con mayor cantidad de decesos. Como se puede observar Guatemala cuenta con el mayor número de decesos, seguido por Escuintla, concordando con lsa tablas del inicio. Sin embargo la diferencia es considerable en comparción. 
+La tabla de frecuencia muestra la cantidad de decesos registrados por departamento de residencia ordenados de forma descendente, para los 10 departamentos de recidencia con mayor cantidad de decesos. Como se puede observar Guatemala cuenta con el mayor número de decesos, seguido por Escuintla, concordando con las tablas del inicio. Sin embargo la diferencia es considerable en comparación. 
 
+#### **Municipio de residencia del difunto**
 ```{r}
 #Municipio de residencia del difunto
 df <- datosIne %>%
@@ -554,7 +559,7 @@ ggplot(df, aes(x = reorder(n, count), y = count)) + geom_bar(fill = "blue", stat
 ```
 
 
-La tabla de frecuencia muestra la cantidad de decesos registrados por departamento de recidencia ordenados de froma decendiente, para los 10 deparatamentos de recidencia con mayor cantidad de decesos. Como se puede observar Guatemala cuenta con el mayor número de decesos, seguido por Escuintla, concordando con lsa tablas del inicio. Sin embargo la diferencia es considerable en comparción. 
+La tabla de frecuencia muestra la cantidad de decesos registrados por departamento de residencia ordenados de forma descendente, para los 10 departamentos de recidencia con mayor cantidad de decesos. Como se puede observar Guatemala cuenta con el mayor número de decesos, seguido por Escuintla, concordando con las tablas del inicio. Sin embargo la diferencia es considerable en comparación. 
 
 #### **Clusters SAT**
 
@@ -622,7 +627,7 @@ mean(silfcm[,3])
 ```
 #### **Clusters INE**
 
-Con el objetivo de la realización de los clústeres, se convirtieron todos los factores categoricos en factores categoricos npumericos. De esta manera es posible la agrupación por parte de los algoritmos. 
+Con el objetivo de la realización de los clústeres, se convirtieron todos los factores categóricos en factores categóricos numéricos. De esta manera es posible la agrupación por parte de los algoritmos. 
 
 ```{r}
 #Convert categorical dataset into numerical categorical
@@ -650,9 +655,9 @@ matriz_cor
  corrplot(matriz_cor)
 ```
 
-Como se puede observar, con excepción del departamento de registro de la defunción y el departamento de ocurrencia, las variables son independientes entre sí. Es evidente la razón de la existencia de la  relación depocu y dredif, sin embargo es interesante observar como el valor de correlación no es uno. Lo que significa que exite un porcentaje considerable de decesos que se registran en departamentos diferentes. 
+Como se puede observar, con excepción del departamento de registro de la defunción y el departamento de ocurrencia, las variables son independientes entre sí. Es evidente la razón de la existencia de la  relación depocu y dredif, sin embargo es interesante observar como el valor de correlación no es uno. Lo que significa que existe un porcentaje considerable de decesos que se registran en departamentos diferentes. 
 
-Se realiza una grafica de codo para determinar el número de grupos para la realización de los clústeres. 
+Se realiza una gráfica de codo para determinar el número de grupos para la realización de los clústeres. 
 
 ```{r}
 wss <- (nrow(datosIneN[-12])-1)*sum(apply(datosIneN[-12],2,var))
@@ -693,7 +698,7 @@ silkm<-silhouette(kmo$cluster,dist(datosIneN[-12]))
 mean(silkm[,3]) #0.55, no es la mejor partición pero no está mal
 ```
 
-Al no mejorar se trabaj sobre Kmeans. Se grafican las variables para hacerse una idea de la manera en que están distribuidas respecto a las demás
+Al no mejorar se trabaja sobre Kmeans. Se grafican las variables para hacerse una idea de la manera en que están distribuidas respecto a las demás
 
 ```{r}
 plotp1 <- datosIneN[-12]
@@ -751,8 +756,282 @@ rect.hclust(hc,k=2)
 groups<-cutree(hc,k=2)
 silch<-silhouette(groups,dist(dc))
 mean(silch[,3])
-
 ```
 
-Por ser el mejor agrupamiento, este es el clúster seleccionado. 
+Por ser el mejor agrupamiento, este es el clúster seleccionado. A continuación se muestran los grupos formados. 
+
+```{r}
+datosIne$grupo <- groups
+g1<-datosIne[datosIne$grupo==1,]
+g2<-datosIne[datosIne$grupo==2,]
+```
+
+Para el análisis de los clústeres se procedio a generar las tablas de frecuencia e histogramas de todas las varibles, como se muestra acontinuación:
+
+```{r}
+df <- g1 %>%
+  group_by(depocu) %>%
+  summarise(count = n())
+df <- df[order(-df$count),]
+df <- df[1:10,]
+df$n <- 1
+for (i in 1:nrow(df)){
+  df[i,]$n <- i
+}
+print(df)
+ggplot(df, aes(x = reorder(n, count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
+
+df <- g2 %>%
+  group_by(depocu) %>%
+  summarise(count = n())
+df <- df[order(-df$count),]
+df <- df[1:10,]
+df$n <- 1
+for (i in 1:nrow(df)){
+  df[i,]$n <- i
+}
+print(df)
+ggplot(df, aes(x = reorder(n, count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
+```
+
+```{r}
+df <- g1 %>%
+  group_by(mupocu) %>%
+  summarise(count = n())
+df <- df[order(-df$count),]
+df <- df[1:10,]
+df$n <- 1
+for (i in 1:nrow(df)){
+  df[i,]$n <- i
+}
+print(df)
+ggplot(df, aes(x = reorder(n, count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
+
+df <- g2 %>%
+  group_by(mupocu) %>%
+  summarise(count = n())
+df <- df[order(-df$count),]
+df <- df[1:10,]
+df$n <- 1
+for (i in 1:nrow(df)){
+  df[i,]$n <- i
+}
+print(df)
+ggplot(df, aes(x = reorder(n, count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
+```
+
+```{r}
+df <- g1 %>%
+  group_by(sexo) %>%
+  summarise(count = n())
+df <- df[order(-df$count),]
+print(df)
+ggplot(df, aes(x = reorder(sexo, count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
+
+df <- g2 %>%
+  group_by(sexo) %>%
+  summarise(count = n())
+df <- df[order(-df$count),]
+print(df)
+ggplot(df, aes(x = reorder(sexo, count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
+```
+```{r}
+df <- g1 %>%
+  group_by(diaocu) %>%
+  summarise(count = n())
+df <- df[order(-df$count),]
+df <- df[1:10,]
+df$n <- 1
+for (i in 1:nrow(df)){
+  df[i,]$n <- i
+}
+print(df)
+ggplot(df, aes(x = reorder(diaocu, count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
+
+df <- g2 %>%
+  group_by(diaocu) %>%
+  summarise(count = n())
+df <- df[order(-df$count),]
+df <- df[1:10,]
+df$n <- 1
+for (i in 1:nrow(df)){
+  df[i,]$n <- i
+}
+print(df)
+ggplot(df, aes(x = reorder(diaocu, count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
+```
+
+```{r}
+df <- g1 %>%
+  group_by(anoreg) %>%
+  summarise(count = n())
+df <- df[order(-df$count),]
+df$n <- 1
+for (i in 1:nrow(df)){
+  df[i,]$n <- i
+}
+print(df)
+ggplot(df, aes(x = reorder(anoreg, count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
+
+df <- g2 %>%
+  group_by(anoreg) %>%
+  summarise(count = n())
+df <- df[order(-df$count),]
+df$n <- 1
+for (i in 1:nrow(df)){
+  df[i,]$n <- i
+}
+print(df)
+ggplot(df, aes(x = reorder(anoreg, count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
+```
+
+```{r}
+df <- g1 %>%
+  group_by(mesocu) %>%
+  summarise(count = n())
+df <- df[order(-df$count),]
+df <- df[1:10,]
+df$n <- 1
+for (i in 1:nrow(df)){
+  df[i,]$n <- i
+}
+print(df)
+ggplot(df, aes(x = reorder(mesocu, count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
+
+df <- g2 %>%
+  group_by(mesocu) %>%
+  summarise(count = n())
+df <- df[order(-df$count),]
+df <- df[1:10,]
+df$n <- 1
+for (i in 1:nrow(df)){
+  df[i,]$n <- i
+}
+print(df)
+ggplot(df, aes(x = reorder(mesocu, count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
+```
+
+```{r}
+df <- g1 %>%
+  group_by(edadif) %>%
+  summarise(count = n())
+df <- df[order(-df$count),]
+df <- df[1:10,]
+df$n <- 1
+for (i in 1:nrow(df)){
+  df[i,]$n <- i
+}
+print(df)
+ggplot(df, aes(x = reorder(edadif, count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
+
+df <- g2 %>%
+  group_by(edadif) %>%
+  summarise(count = n())
+df <- df[order(-df$count),]
+df <- df[1:10,]
+df$n <- 1
+for (i in 1:nrow(df)){
+  df[i,]$n <- i
+}
+print(df)
+ggplot(df, aes(x = reorder(edadif, count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
+```
+```{r}
+df <- g1 %>%
+  group_by(ecidif) %>%
+  summarise(count = n())
+df <- df[order(-df$count),]
+df$n <- 1
+for (i in 1:nrow(df)){
+  df[i,]$n <- i
+}
+print(df)
+ggplot(df, aes(x = reorder(ecidif, count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
+
+df <- g2 %>%
+  group_by(ecidif) %>%
+  summarise(count = n())
+df <- df[order(-df$count),]
+df$n <- 1
+for (i in 1:nrow(df)){
+  df[i,]$n <- i
+}
+print(df)
+ggplot(df, aes(x = reorder(ecidif, count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
+```
+```{r}
+df <- g1 %>%
+  group_by(escodif) %>%
+  summarise(count = n())
+df <- df[order(-df$count),]
+df$n <- 1
+for (i in 1:nrow(df)){
+  df[i,]$n <- i
+}
+print(df)
+ggplot(df, aes(x = reorder(escodif, count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
+
+df <- g2 %>%
+  group_by(escodif) %>%
+  summarise(count = n())
+df <- df[order(-df$count),]
+df$n <- 1
+for (i in 1:nrow(df)){
+  df[i,]$n <- i
+}
+print(df)
+ggplot(df, aes(x = reorder(escodif, count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
+```
+```{r}
+df <- g1 %>%
+  group_by(dredif) %>%
+  summarise(count = n())
+df <- df[order(-df$count),]
+df <- df[1:10,]
+df$n <- 1
+for (i in 1:nrow(df)){
+  df[i,]$n <- i
+}
+print(df)
+ggplot(df, aes(x = reorder(n, count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
+
+df <- g2 %>%
+  group_by(dredif) %>%
+  summarise(count = n())
+df <- df[order(-df$count),]
+df <- df[1:10,]
+df$n <- 1
+for (i in 1:nrow(df)){
+  df[i,]$n <- i
+}
+print(df)
+ggplot(df, aes(x = reorder(n, count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
+```
+```{r}
+df <- g1 %>%
+  group_by(mredif) %>%
+  summarise(count = n())
+df <- df[order(-df$count),]
+df <- df[1:10,]
+df$n <- 1
+for (i in 1:nrow(df)){
+  df[i,]$n <- i
+}
+print(df)
+ggplot(df, aes(x = reorder(n, count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
+
+df <- g2 %>%
+  group_by(mredif) %>%
+  summarise(count = n())
+df <- df[order(-df$count),]
+df <- df[1:10,]
+df$n <- 1
+for (i in 1:nrow(df)){
+  df[i,]$n <- i
+}
+print(df)
+ggplot(df, aes(x = reorder(n, count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
+```
+
+En primer lugar, podemos observar que el Grupo No.1 generado por el clúster es considerablemente más grande que el Grupo No. 2. En una proporción aproximada de 3 a 1. Para las variables sexo, año de ocurrencia, mes de ocurrencia, edad, estado civil y educación, parecería ser que el clúster dividió la frecuencia en proporciones iguales entre los grupos. Por lo que no brinda gran información para generar una diferenciación. Si ignoramos los valores de Guatemala y escuintla, gracias a que cuentan con una mayor frecuencia; pareciera ser que las variables de departamento de ocurrencia, municipio de ocurrencia , departamento de residencia del difunto y municipio de residencia del difunto, dividen el país en regiones diferentes. Por lo que esto puede ser una manera en que se diferencien los grupos. Nombrandolos Región 1 y Región 2. Además en lo que respecta a los días de ocurrencia, pareciera ser que se dividen los días del mes entre los dos grupos. El primer grupo contando con más días de la primera y segunda semana si no se toman en consideración los repetidos. Y el segundo grupo con más días de la tercera y última semana, sino se toman en cuenta los repetidos. Por lo que podría ser otra manera en que se le podría designar a los grupos, Mitad 1 del mes, Mitad 2 del mes. 
 
