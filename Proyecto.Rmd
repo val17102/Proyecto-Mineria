@@ -59,13 +59,16 @@ Los accidentes de tránsito son la segunda causa de muerte en Guatemala, por det
 
 ### Objetivos preliminares. 
 
-Identificar las condiciones en que estos accidentes de tránsito letales ocurren en mayor consistencia.
+Identificar las condiciones en que estos accidentes de tránsito fatales ocurren en mayor consistencia.
 
-Identificar los perfiles de las personas involucradas en los accidentes de tránsito letales.
+Identificar los perfiles de las personas involucradas en los accidentes de tránsito fatales.
 
-Identificar las regiones con mayor incidencia de accidentes de tráfico letales.
+Identificar las regiones con mayor incidencia de accidentes de tráfico fatales.
 
-Determinar si la región  con mayor indice de importación coincide con la región de mayor incidencia de accidentes de tránsito letal. 
+Determinar si la región  con mayor índice de importación coincide con la región de mayor incidencia de accidentes de tránsito letal. 
+
+Determinar la relación entre los tipos de vehículo involucrados en accidentes de tránsito fatales y los vehículos importados.
+
 
 ### Información a utilizar 
 
