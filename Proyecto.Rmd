@@ -16,6 +16,8 @@ datos<-datos[,-c(2,3,4,11,17)]
 datos<-na.omit(datos)
 ```
 
+
+
 ```{r}
 library(stringr)
 #setwd("~/Documents/Mineria/Proyecto-Mineria/")
@@ -47,21 +49,9 @@ datosIne$mredif <- str_replace_all(datosIne$mredif, "[^[:alnum:]]", "")
 #datosIne$caudef > "V00"
 #Eliminate (a)
 datosIne$ecidif <- str_replace_all(datosIne$ecidif, "\\(a\\)", "")
-#Only letter
-datosIne <- datosIne[-1,]
-datosIne$caudef <- substr(datosIne$caudef, 1, 1)
-datosIne<-filter(datosIne, caudef == "V")
-#Eliminate special characters
-datosIne$depocu <- str_replace_all(datosIne$depocu, "[^[:alnum:]]", "")
-datosIne$mupocu <- str_replace_all(datosIne$mupocu, "[^[:alnum:]]", "")
-datosIne$mesocu <- str_replace_all(datosIne$mesocu, "[^[:alnum:]]", "")
-datosIne$escodif <- str_replace_all(datosIne$escodif, "[^[:alnum:]]", "")
-datosIne$dredif <- str_replace_all(datosIne$dredif, "[^[:alnum:]]", "")
-datosIne$mredif <- str_replace_all(datosIne$mredif, "[^[:alnum:]]", "")
-#datosIne$caudef > "V00"
-#Eliminate (a)
-datosIne$ecidif <- str_replace_all(datosIne$ecidif, "\\(a\\)", "")
 ```
+
+
 
 ### Descripción de  la situación problemática:
 
@@ -87,6 +77,8 @@ Para responder la problemática que se presenta, se utilizaran:
 #### Descripcion de Variables:
 
 ##### **SAT**
+
+La base de datos de defucniones de la SAT, busca alamcenar toda la información pertienente en relación a la importacipon de vehiculos al territorio nacialonal; registrando la mayor cantidad de datos en relación. A continuación se presenta una lista de las variables presentes dentro de este set de datos, además de el valor que representan. 
 
 **Pais de Provinencia (Cualitativa Nominal):**
 País del que proviene el vehiculo
@@ -145,7 +137,7 @@ Para el dataset de importaciones de la SAT los procesos de limpieza que se reali
 
 #### **INE**
 
-La base de datos de defucniones del INE, busca alamcenar toda la información pertienente en relación al deceso de una persona dentro del territorio nacialonal. Registrando la mayor cantidad de datos en relación al suceso. A continuación se presenta una lista de las variables presentes dentro de este set de datos, además de el valor que representan. 
+La base de datos de defucniones del INE, busca alamcenar toda la información pertienente en relación al deceso de una persona dentro del territorio nacialonal; registrando la mayor cantidad de datos en relación al suceso. A continuación se presenta una lista de las variables presentes dentro de este set de datos, además de el valor que representan. 
 
 **Depocu (Cualitativa Nominal):**
 Departamento de registro
@@ -224,6 +216,8 @@ Quien certifica
 
 En el caso de Ine, las variables a utilizar serán, depocu, mupocu, sexo, diaocu, añoreg, mesocu, edadif, ecidif, escodif, dredif, mredif, caudef. Esto en primer lugar, gracias a que son variables que se encuentran presentes en todos los datasets año tras año, del 2011 al 2018. Además en variables como la ocupación del difunto el valor indefinido se encuetra respetidas veces por lo que no permite la extracción de información de manera adecuada. 
 
+Para el dataset de defunciones del INE los procesos de limpieza que se realizaron fueron los siguientes: Se eliminaron todas las filas en las cuales existieran valores nulos para algunos de las columnas. Luego se buscó estandarizar los datos categóricos, asegurando que no existieron caracteres especiales en los diferentes valores. Los valores que se buscaron fueron tildes y signos de puntuación, que por facilidad se eliminaron en su mayoria desde excel. Además se estandarizo el valor del estado civil, por la existencia de categorias con genero y sin genero. Por último se seleccionó únicamente los decesos relacionados con inicidentes vehiculares. 
+
 ### **Tablas de frecuencia de variables elegidas**
 
 #### **SAT**
@@ -236,6 +230,7 @@ df <- datos %>%
   summarise(count = n())
 df <- df[order(-df$count),]
 df[1:10,]
+
 ggplot(df[1:10,], aes(x = reorder(Pais.de.Proveniencia,count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.3) + theme_pubclean()
 
 ```
@@ -248,6 +243,8 @@ Como se puede observar en la gráfica, solo se presentan 10 países, esto se deb
 df <- datos %>%
   group_by(Modelo.del.Vehiculo) %>%
   summarise(count = n())
+
+
 df
 ggplot(df, aes(x = Modelo.del.Vehiculo, y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = ""), vjust = -0.5) + theme_pubclean()
 hist(datos$Modelo.del.Vehiculo)
@@ -559,51 +556,8 @@ ggplot(df, aes(x = reorder(n, count), y = count)) + geom_bar(fill = "blue", stat
 
 La tabla de frecuencia muestra la cantidad de decesos registrados por departamento de recidencia ordenados de froma decendiente, para los 10 deparatamentos de recidencia con mayor cantidad de decesos. Como se puede observar Guatemala cuenta con el mayor número de decesos, seguido por Escuintla, concordando con lsa tablas del inicio. Sin embargo la diferencia es considerable en comparción. 
 
-Con el objetivo de la realización de los clústeres, se convirtieron todos los factores categoricos en factores categoricos npumericos. De esta manera es posible la agrupación por parte de los algoritmos. 
+#### **Clusters SAT**
 
-```{r}
-#Convert categorical dataset into numerical categorical
-datosIneN <- datosIne
-datosIneN$depocu <- as.numeric(factor(datosIne$depocu))
-datosIneN$mupocu <- as.numeric(factor(datosIne$mupocu))
-datosIneN$sexo <- as.numeric(factor(datosIne$sexo))
-datosIneN$diaocu <- as.numeric(factor(datosIne$diaocu))
-datosIneN$anoreg <- as.numeric(factor(datosIne$anoreg))
-datosIneN$mesocu <- as.numeric(factor(datosIne$mesocu))
-datosIneN$edadif <- as.numeric(factor(datosIne$edadif))
-datosIneN$ecidif <- as.numeric(factor(datosIne$ecidif))
-datosIneN$escodif <- as.numeric(factor(datosIne$escodif))
-datosIneN$dredif <- as.numeric(factor(datosIne$dredif))
-datosIneN$mredif <- as.numeric(factor(datosIne$mredif))
-datosIneN$caudef <- as.numeric(factor(datosIne$caudef))
-```
-
-A continuación se presentan las correlaciones que existen entre los diferentes datos:
-
-```{r}
-library(corrplot)
-matriz_cor <- cor(datosIneN[-12])
-matriz_cor
- corrplot(matriz_cor)
-```
-
-Como se puede observar, con excepción del departamento de registro de la defunción y el departamento de ocurrencia, las variables son independientes entre sí. Es evidente la razón de la existencia de la  relación depocu y dredif, sin embargo es interesante observar como no es uno.Lo que significa que exite un porcentaje considerable de decesos que se registran en departamentos diferentes. 
-
-Se realiza una grafica de codo para determinar el número de grupos para la realización de los clústeres. 
-
-```{r}
-wss <- (nrow(datosIneN[-12])-1)*sum(apply(datosIneN[-12],2,var))
-
-for (i in 2:10) 
-  wss[i] <- sum(kmeans(datosIneN[-12], centers=i)$withinss)
-
-
-plot(1:10, wss, type="b", xlab="Number of Clusters",  ylab="Within groups sum of squares")
-```
-
-Dos es el número indicado. 
-
-#=======
 Para poder llevar a cabo un mejor análisis de las variables categóricas del dataset de importaciones de la SAT, se le asignaron valores numéricos a cada instancia única de las variables, para así poder utilizar varias herramientas de análisis como histogramas, mapas de calor, matrices de correlación y otras.
 ```{r}
 #Convert categorical dataset into numerical categorical
@@ -616,8 +570,12 @@ datosSAT$Distintivo <- as.numeric(factor(datosSAT$Distintivo))
 datosSAT$Tipo.de.Vehiculo <- as.numeric(factor(datosSAT$Tipo.de.Vehiculo))
 datosSAT$Tipo.Combustible <- as.numeric(factor(datosSAT$Tipo.Combustible))
 ```
-#### **Clusters SAT**
+
 ```{r}
+install.packages("rlang",type="win.binary") 
+devtools::install_github("kassambara/ggpubr")
+devtools::install_github("kassambara/factoextra")
+
 library(factoextra)
 library(cluster)
 library(corrplot)
@@ -663,6 +621,50 @@ silfcm<-silhouette(datosSAT[datosSample,"FCGrupos"],dist(datosSAT[datosSample,1:
 mean(silfcm[,3])
 ```
 #### **Clusters INE**
+
+Con el objetivo de la realización de los clústeres, se convirtieron todos los factores categoricos en factores categoricos npumericos. De esta manera es posible la agrupación por parte de los algoritmos. 
+
+```{r}
+#Convert categorical dataset into numerical categorical
+datosIneN <- datosIne
+datosIneN$depocu <- as.numeric(factor(datosIne$depocu))
+datosIneN$mupocu <- as.numeric(factor(datosIne$mupocu))
+datosIneN$sexo <- as.numeric(factor(datosIne$sexo))
+datosIneN$diaocu <- as.numeric(factor(datosIne$diaocu))
+datosIneN$anoreg <- as.numeric(factor(datosIne$anoreg))
+datosIneN$mesocu <- as.numeric(factor(datosIne$mesocu))
+datosIneN$edadif <- as.numeric(factor(datosIne$edadif))
+datosIneN$ecidif <- as.numeric(factor(datosIne$ecidif))
+datosIneN$escodif <- as.numeric(factor(datosIne$escodif))
+datosIneN$dredif <- as.numeric(factor(datosIne$dredif))
+datosIneN$mredif <- as.numeric(factor(datosIne$mredif))
+datosIneN$caudef <- as.numeric(factor(datosIne$caudef))
+```
+
+A continuación se presentan las correlaciones que existen entre los diferentes datos:
+
+```{r}
+library(corrplot)
+matriz_cor <- cor(datosIneN[-12])
+matriz_cor
+ corrplot(matriz_cor)
+```
+
+Como se puede observar, con excepción del departamento de registro de la defunción y el departamento de ocurrencia, las variables son independientes entre sí. Es evidente la razón de la existencia de la  relación depocu y dredif, sin embargo es interesante observar como el valor de correlación no es uno. Lo que significa que exite un porcentaje considerable de decesos que se registran en departamentos diferentes. 
+
+Se realiza una grafica de codo para determinar el número de grupos para la realización de los clústeres. 
+
+```{r}
+wss <- (nrow(datosIneN[-12])-1)*sum(apply(datosIneN[-12],2,var))
+
+for (i in 2:10) 
+  wss[i] <- sum(kmeans(datosIneN[-12], centers=i)$withinss)
+
+
+plot(1:10, wss, type="b", xlab="Number of Clusters",  ylab="Within groups sum of squares")
+```
+
+Dos es el número indicado. 
 
 Se inicia con un clúster con el algoritmo de Kmeans.
 ```{r} 
