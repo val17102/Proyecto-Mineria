@@ -16,9 +16,9 @@ datos<-datos[,-c(2,3,4,11,17)]
 datos<-na.omit(datos)
 ```
 
-```{r setup, include=FALSE}
+```{r}
 library(stringr)
-setwd("~/Documents/Mineria/Proyecto-Mineria/")
+#setwd("~/Documents/Mineria/Proyecto-Mineria/")
 datosIne<-read.csv("mortalidadIne2.csv", header=FALSE, stringsAsFactors=FALSE, fileEncoding="latin1")
 #names(datosIne)[1] <- "hola"
 names(datosIne)[1] <- "depocu"
@@ -141,6 +141,8 @@ Cantidad de impuestos que se debe pagar
 
 En el caso de la SAT, las variables que se utilizarán son País de Provinencia, Modelo del Vehículo, Marca, Línea, Centímetros Cúbicos, Distintivo, Tipo de Vehículo, Tipo de Combustible, Asientos, Puertas, Tonelaje y Valor CIF. Estas variables se eligieron debido a que luego de identificar las características de los vehículos involucrados en accidentes fatales, se evaluarían sus características en el ámbito de importaciones.
 
+Para el dataset de importaciones de la SAT los procesos de limpieza que se realizaron fueron los siguientes: Se eliminaron todas las filas en las cuales existieran valores nulos para algunos de las columnas. Luego se buscó estandarizar los datos categóricos, asegurando que no existieron caracteres especiales en los diferentes valores. Los valores que se buscaron fueron tildes y signos de puntuación, pero estos no se encontraron ya que todas las variables con caracteres estaban en mayúsculas y sin tildes.
+
 #### **INE**
 
 La base de datos de defucniones del INE, busca alamcenar toda la información pertienente en relación al deceso de una persona dentro del territorio nacialonal. Registrando la mayor cantidad de datos en relación al suceso. A continuación se presenta una lista de las variables presentes dentro de este set de datos, además de el valor que representan. 
@@ -226,6 +228,8 @@ En el caso de Ine, las variables a utilizar serán, depocu, mupocu, sexo, diaocu
 
 #### **SAT**
 
+Como se puede observar en la gráfica, solo se presentan 10 países, esto se debe a que la cantidad de países dentro de los datos es muy grande para poder graficarlos de tal manera que se pueda identificar los países claramente, por lo cual se eligieron los 10 países con la mayor cantidad de instancias. Se pueden observar los países con la cantidad más grande de instancias de importaciones son China, Japón y Estado Unidos.
+
 #### **Pais de Proveniencia**
 ```{r}
 #Pais de Proveniencia
@@ -237,6 +241,8 @@ df[1:10,]
 ggplot(df[1:10,], aes(x = reorder(Pais.de.Proveniencia,count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.3) + theme_pubclean()
 
 ```
+
+Esta gráfica presenta la distribución de el año de modelo de los vehículos, y como se puede observar, la tasa de crecimiento a lo largo de los años ha sido exponencial, de tal manera que la cantidad de importaciones año tras año ha ido incrementando, con últimos 3 años como los que tienen la mayor cantidad.
 
 #### **Modelo de Vehículo**
 ```{r}
@@ -543,7 +549,7 @@ for (i in 2:10)
 plot(1:10, wss, type="b", xlab="Number of Clusters",  ylab="Within groups sum of squares")
 ```
 #=======
-
+Para poder llevar a cabo un mejor análisis de las variables categóricas del dataset de importaciones de la SAT, se le asignaron valores numéricos a cada instancia única de las variables, para así poder utilizar varias herramientas de análisis como histogramas, mapas de calor, matrices de correlación y otras.
 ```{r}
 #Convert categorical dataset into numerical categorical
 datosSAT<-datos
@@ -577,7 +583,7 @@ ggplot() + geom_point(aes(x = 1:10, y = wcss), color = 'blue') +
   xlab('Cantidad de Centroides k') + 
   ylab('WCSS')
 ```
-
+Debido a que la cantidad de datos que se encuentra en el dataset de importaciones de la SAT es más de 2 millones de filas con 16 columnas, varios de los métodos de análisis que se implementaron no podían soportar un manejo de datos tan grande por lo cual se tuvo que crear samples del dataset del tamaño más grande que fuera posible para el método. Específicamente para la prueba de la silueta, no se pudo evaluar sobre todos los datos, pero como se puede observar sobre el sample que se obtuvo, el resultado fue consistentemente alrededor de 0.80 por lo cual la clasificación por clustering elegida con K-means fue aceptable definiendo 2 centroides de acuerdo a la gráfica de codo. 
 
 ```{r} 
 k <- kmeans(datosSAT, centers = 2)
