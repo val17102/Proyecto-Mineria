@@ -39,8 +39,15 @@ names(datosIne)[11] <- "mredif"
 names(datosIne)[12] <- "caudef"
 #Only letter
 datosIne <- datosIne[-1,]
+filtro <- substr(datosIne$caudef, 1, 1)
+datosIne <- filter(datosIne, filtro == "V")
+param1 <- substr(datosIne$caudef, 2, 2)
+param2 <- substr(datosIne$caudef, 3, 3)
+param3 <- substr(datosIne$caudef, 4, 4)
+
 datosIne$caudef <- substr(datosIne$caudef, 1, 1)
 datosIne<-filter(datosIne, caudef == "V")
+
 #Eliminate special characters
 datosIne$depocu <- str_replace_all(datosIne$depocu, "[^[:alnum:]]", "")
 datosIne$mupocu <- str_replace_all(datosIne$mupocu, "[^[:alnum:]]", "")
