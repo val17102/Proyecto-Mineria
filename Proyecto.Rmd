@@ -2,7 +2,9 @@
 title: "Proyecto No.1"
 author: "Héctor Valle, Rodrigo Samayoa & Paul Belches"
 date: "23/3/2020"
-output: html_document
+output:
+  html_document: default
+  pdf_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -59,16 +61,13 @@ Los accidentes de tránsito son la segunda causa de muerte en Guatemala, por det
 
 ### Objetivos preliminares. 
 
-Identificar las condiciones en que estos accidentes de tránsito fatales ocurren en mayor consistencia.
+Identificar las condiciones en que estos accidentes de tránsito letales ocurren en mayor consistencia.
 
-Identificar los perfiles de las personas involucradas en los accidentes de tránsito fatales.
+Identificar los perfiles de las personas involucradas en los accidentes de tránsito letales.
 
-Identificar las regiones con mayor incidencia de accidentes de tráfico fatales.
+Identificar las regiones con mayor incidencia de accidentes de tráfico letales.
 
-Determinar si la región  con mayor índice de importación coincide con la región de mayor incidencia de accidentes de tránsito letal. 
-
-Determinar la relación entre los tipos de vehículo involucrados en accidentes de tránsito fatales y los vehículos importados.
-
+Determinar si la región  con mayor indice de importación coincide con la región de mayor incidencia de accidentes de tránsito letal. 
 
 ### Información a utilizar 
 
@@ -1157,6 +1156,6 @@ Nuestro objetivo al realizar en análisis de datos sobre la base de datos de imp
 
 Al realizar un análisis con la gráfica de codo, se encontró que la cantidad ideal de clusters a crear serían 2, y se crearon clusters con varios métodos diferentes para identificar cual de todos tenía un mejor resultado en la prueba de la silueta, y se encontró que el mejor método fue kmeans. Se analizaron los 2 grupos creados por kmeans, evaluando las características de cada variable según el grupo al que pertenecían. 
 
-###Conclusión
+### **Conclusión**
  
 En lo que respecta al siguiente paso a seguir, se considera que en base a los hallazgos es posible generar un modelo que auxilie en la determinación de riesgos de accidentes fatales en regiones las condiciones temporales.

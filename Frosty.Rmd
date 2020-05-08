@@ -1,0 +1,200 @@
+---
+title: "Proyecto No.1"
+author: "Héctor Valle, Rodrigo Samayoa & Paul Belches"
+date: "23/3/2020"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ggplot2)
+library(ggpubr)
+library(dplyr)
+theme_set(theme_pubr())
+datos<-read.csv("INE-Accidentes.csv", stringsAsFactors = FALSE)
+datos<-na.omit(datos)
+```
+
+```{r}
+#Día de ocurrencia
+df <- datos %>%
+  group_by(dia_ocu) %>%
+  summarise(count = n())
+df <- df[order(-df$count),]
+df <- df[1:10,]
+print(df)
+ggplot(df, aes(x = reorder(dia_ocu, count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
+```
+
+```{r}
+datos
+```
+
+```{r}
+#Diade ocurrencia
+df <- datos %>%
+  group_by(dia_ocu) %>%
+  summarise(count = n())
+df <- df[order(-df$count),]
+df <- df[1:10,]
+print(df)
+ggplot(df, aes(x = reorder(dia_ocu, count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
+```
+
+```{r}
+#Mes de ocurrencia
+df <- datos %>%
+  group_by(mes_ocu) %>%
+  summarise(count = n())
+df <- df[order(-df$count),]
+df <- df[1:10,]
+print(df)
+ggplot(df, aes(x = reorder(mes_ocu, count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
+```
+
+
+```{r}
+#Día de la semana de ocurrencia
+df <- datos %>%
+  group_by(dia_sem_ocu) %>%
+  summarise(count = n())
+df <- df[order(-df$count),]
+df <- df[1:10,]
+print(df)
+ggplot(df, aes(x = reorder(dia_sem_ocu, count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
+```
+
+```{r}
+#Hora de ocurrencia
+df <- datos %>%
+  group_by(hora_ocu) %>%
+  summarise(count = n())
+df <- df[order(-df$count),]
+df <- df[1:10,]
+print(df)
+ggplot(df, aes(x = reorder(hora_ocu, count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
+```
+
+```{r}
+#Departamnto de ocurrencia
+df <- datos %>%
+  group_by(depto_ocu) %>%
+  summarise(count = n())
+df <- df[order(-df$count),]
+df <- df[1:10,]
+print(df)
+ggplot(df, aes(x = reorder(depto_ocu, count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
+```
+
+```{r}
+#Municipio de ocurrencia
+df <- datos %>%
+  group_by(zona_ocu) %>%
+  summarise(count = n())
+df <- df[order(-df$count),]
+df <- df[1:10,]
+print(df)
+ggplot(df, aes(x = reorder(zona_ocu, count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
+```
+
+```{r}
+#Zona ocurrencia
+df <- datos %>%
+  group_by(zona_ocu) %>%
+  summarise(count = n())
+df <- df[order(-df$count),]
+df <- df[1:10,]
+print(df)
+ggplot(df, aes(x = reorder(zona_ocu, count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
+```
+
+
+```{r}
+#Sexo del involucrado
+df <- datos %>%
+  group_by(sexo_fall_les) %>%
+  summarise(count = n())
+df <- df[order(-df$count),]
+df <- df[1:10,]
+print(df)
+ggplot(df, aes(x = reorder(sexo_fall_les, count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
+```
+
+
+```{r}
+#Edad del involucrado
+df <- datos %>%
+  group_by(edad_fall_les) %>%
+  summarise(count = n())
+df <- df[order(-df$count),]
+df <- df[1:10,]
+print(df)
+ggplot(df, aes(x = reorder(edad_fall_les, count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
+```
+
+```{r}
+#Tipo de vehiculo
+df <- datos %>%
+  group_by(tipo_vehi) %>%
+  summarise(count = n())
+df <- df[order(-df$count),]
+df <- df[1:10,]
+print(df)
+ggplot(df, aes(x = reorder(tipo_vehi, count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
+```
+
+
+```{r}
+#Color vehiculo
+df <- datos %>%
+  group_by(color_vehi) %>%
+  summarise(count = n())
+df <- df[order(-df$count),]
+df <- df[1:10,]
+print(df)
+ggplot(df, aes(x = reorder(color_vehi, count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
+```
+
+
+```{r}
+#Causa de ocurrencia
+df <- datos %>%
+  group_by(causa_acc) %>%
+  summarise(count = n())
+df <- df[order(-df$count),]
+df <- df[1:10,]
+print(df)
+ggplot(df, aes(x = reorder(causa_acc, count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
+```
+
+```{r}
+#Estado del implicado
+df <- datos %>%
+  group_by(estado_implicado) %>%
+  summarise(count = n())
+df <- df[order(-df$count),]
+df <- df[1:10,]
+print(df)
+ggplot(df, aes(x = reorder(estado_implicado, count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
+```
+
+```{r}
+#Año
+df <- datos %>%
+  group_by(year) %>%
+  summarise(count = n())
+df <- df[order(-df$count),]
+df <- df[1:10,]
+print(df)
+ggplot(df, aes(x = reorder(year, count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
+```
+
+
+
+
+
+
+
+
