@@ -192,7 +192,29 @@ ggplot(df, aes(x = reorder(year, count), y = count)) + geom_bar(fill = "blue", s
 ```
 
 
+```{r}
+#Limpieza de Datos de Insivumeh
+library(readxl)
 
+datosInsi <- read_xlsx("Insivumeh.xlsx")
+datosInsi<-datosInsi[,-c(17)]
+names(datosInsi)[1] <- "anio"
+names(datosInsi)[2] <- "mes"	
+names(datosInsi)[3] <- "dia"
+names(datosInsi)[4] <- "tempMax"
+names(datosInsi)[5] <- "tempMin"
+names(datosInsi)[6] <- "tempMed"
+names(datosInsi)[7] <- "lluviaMed"
+names(datosInsi)[8] <- "brilloSolTotal"
+names(datosInsi)[9] <- "radMed"
+names(datosInsi)[10] <- "evapTanqueTotal"
+names(datosInsi)[11] <- "evapPicheTotal"
+names(datosInsi)[12] <- "nuboMedia"
+names(datosInsi)[13] <- "dirVientoPred"
+names(datosInsi)[14] <- "VelVientoMed"
+names(datosInsi)[15] <- "humeRelMedia"
+names(datosInsi)[16] <- "presionAtmMedia"
+```
 
 
 
