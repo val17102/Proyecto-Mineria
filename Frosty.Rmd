@@ -15,20 +15,23 @@ library(dplyr)
 theme_set(theme_pubr())
 datos<-read.csv("INE-Accidentes.csv", stringsAsFactors = FALSE)
 datos<-na.omit(datos)
+datos <- datos[which(datos$depto_ocu == "Guatemala"), ]
 ```
 
 ```{r}
-#Día de ocurrencia
-df <- datos %>%
-  group_by(dia_ocu) %>%
-  summarise(count = n())
-df <- df[order(-df$count),]
-df <- df[1:10,]
-print(df)
-ggplot(df, aes(x = reorder(dia_ocu, count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
-```
-
-```{r}
+datos$mes <- 0
+datos[which(datos$mes_ocu == "Enero"), ]$mes <- 1
+datos[which(datos$mes_ocu == "Febrero"), ]$mes <- 2
+datos[which(datos$mes_ocu == "Marzo"), ]$mes <- 3
+datos[which(datos$mes_ocu == "Abril"), ]$mes <- 4
+datos[which(datos$mes_ocu == "Mayo"), ]$mes <- 5
+datos[which(datos$mes_ocu == "Junio"), ]$mes <- 6
+datos[which(datos$mes_ocu == "Julio"), ]$mes <- 7
+datos[which(datos$mes_ocu == "Agosto"), ]$mes <- 8
+datos[which(datos$mes_ocu == "Septiembre"), ]$mes <- 9
+datos[which(datos$mes_ocu == "Octubre"), ]$mes <- 10
+datos[which(datos$mes_ocu == "Noviembre"), ]$mes <- 11
+datos[which(datos$mes_ocu == "Diciembre"), ]$mes <- 12
 datos
 ```
 
@@ -77,16 +80,6 @@ print(df)
 ggplot(df, aes(x = reorder(hora_ocu, count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
 ```
 
-```{r}
-#Departamnto de ocurrencia
-df <- datos %>%
-  group_by(depto_ocu) %>%
-  summarise(count = n())
-df <- df[order(-df$count),]
-df <- df[1:10,]
-print(df)
-ggplot(df, aes(x = reorder(depto_ocu, count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
-```
 
 ```{r}
 #Municipio de ocurrencia
@@ -186,7 +179,6 @@ df <- datos %>%
   group_by(year) %>%
   summarise(count = n())
 df <- df[order(-df$count),]
-df <- df[1:10,]
 print(df)
 ggplot(df, aes(x = reorder(year, count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
 ```
@@ -198,9 +190,9 @@ library(readxl)
 
 datosInsi <- read_xlsx("Insivumeh.xlsx")
 datosInsi<-datosInsi[,-c(17)]
-names(datosInsi)[1] <- "anio"
+names(datosInsi)[1] <- "year"
 names(datosInsi)[2] <- "mes"	
-names(datosInsi)[3] <- "dia"
+names(datosInsi)[3] <- "dia_ocu"
 names(datosInsi)[4] <- "tempMax"
 names(datosInsi)[5] <- "tempMin"
 names(datosInsi)[6] <- "tempMed"
@@ -216,7 +208,18 @@ names(datosInsi)[15] <- "humeRelMedia"
 names(datosInsi)[16] <- "presionAtmMedia"
 ```
 
+```{r}
+datosInsi
+```
 
+```{r}
+datos
+```
+
+```{r}
+prueba <- merge(x = datos, y = datosInsi, by = c("mes","year","dia_ocu") )
+prueba
+```
 
 
 
