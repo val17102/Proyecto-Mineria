@@ -13,7 +13,7 @@ library(ggplot2)
 library(ggpubr)
 library(dplyr)
 theme_set(theme_pubr())
-datos<-read.csv("INE-Accidentes.csv", stringsAsFactors = FALSE)
+datos<-read.csv("INE-Accidentes-Guatemala.csv", stringsAsFactors = FALSE)
 datos<-na.omit(datos)
 datos <- datos[which(datos$depto_ocu == "Guatemala"), ]
 ```
@@ -36,7 +36,7 @@ datos
 ```
 
 ```{r}
-#Diade ocurrencia
+#Dia de ocurrencia
 df <- datos %>%
   group_by(dia_ocu) %>%
   summarise(count = n())
@@ -64,7 +64,6 @@ df <- datos %>%
   group_by(dia_sem_ocu) %>%
   summarise(count = n())
 df <- df[order(-df$count),]
-df <- df[1:10,]
 print(df)
 ggplot(df, aes(x = reorder(dia_sem_ocu, count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
 ```
@@ -110,7 +109,6 @@ df <- datos %>%
   group_by(sexo_fall_les) %>%
   summarise(count = n())
 df <- df[order(-df$count),]
-df <- df[1:10,]
 print(df)
 ggplot(df, aes(x = reorder(sexo_fall_les, count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
 ```
@@ -157,7 +155,6 @@ df <- datos %>%
   group_by(causa_acc) %>%
   summarise(count = n())
 df <- df[order(-df$count),]
-df <- df[1:10,]
 print(df)
 ggplot(df, aes(x = reorder(causa_acc, count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
 ```
@@ -168,7 +165,6 @@ df <- datos %>%
   group_by(estado_implicado) %>%
   summarise(count = n())
 df <- df[order(-df$count),]
-df <- df[1:10,]
 print(df)
 ggplot(df, aes(x = reorder(estado_implicado, count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
 ```
@@ -212,6 +208,8 @@ names(datosInsi)[16] <- "presionAtmMedia"
 datosInsi
 ```
 
+
+
 ```{r}
 datos
 ```
@@ -221,5 +219,57 @@ prueba <- merge(x = datos, y = datosInsi, by = c("mes","year","dia_ocu") )
 prueba
 ```
 
+```{r}
+matriz_cor <- cor(prueba)
+corrplot(matriz_cor)
+```
+
+#Redes
+
+#Random Forest
 
 
+#con random forest
+
+
+#modeloRF1<-randomForest(train$grupo~.,data=train)
+#prediccionRF1<-predict(modeloRF1,newdata = test)
+#testCompleto<-test
+
+#testCompleto$predRF<-round(prediccionRF1)
+
+#testCompleto$predRF
+#testCompleto$grupo
+#cfmRandomForest <- confusionMatrix(table(testCompleto$predRF, testCompleto$grupo))
+#cfmRandomForest
+
+#Regresion logistica
+
+### Training
+#```{r}
+#num <- which(colnames(train) == "Bajo")
+#modelo <- glm(Bajo~., data = train[, c(1:5, num)], family = #binomial(), maxit = 100)
+
+#modelo
+
+#summary(modelo)
+#```
+
+#```{r}
+#pred <- predict(modelo, newdata = test[, 1:5], type = #"response")
+#prediccion <- ifelse(pred >= 0.5, 1, 0)
+#confusionMatrix(as.factor(test$Bajo), as.factor(prediccion))
+#```
+
+#Ada boost
+#Naive Bayes
+
+
+## Naive Bayes
+
+#nbTest = select(test, TotalBsmtSF, X1stFlrSF, GrLivArea, #GarageCars, GarageArea, Bajo)
+#nbTrain = select(train, TotalBsmtSF, X1stFlrSF, GrLivArea, #GarageCars, GarageArea, Bajo)
+
+#modelo <- naiveBayes(as.factor(nbTrain$Bajo)~., data=nbTrain)
+#predBayes <- predict(modelo, newdata = test[, 1:5])
+#confusionMatrix(as.factor(predBayes), as.factor(nbTest$Bajo))
