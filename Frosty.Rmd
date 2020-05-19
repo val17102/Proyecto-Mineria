@@ -185,7 +185,7 @@ ggplot(df, aes(x = reorder(year, count), y = count)) + geom_bar(fill = "blue", s
 library(readxl)
 
 datosInsi <- read_xlsx("Insivumeh.xlsx")
-datosInsi<-datosInsi[,-c(17)]
+datosInsi<-datosInsi[,-c(8, 9, 10, 11, 13, 14, 17)]
 names(datosInsi)[1] <- "year"
 names(datosInsi)[2] <- "mes"	
 names(datosInsi)[3] <- "dia_ocu"
@@ -193,15 +193,9 @@ names(datosInsi)[4] <- "tempMax"
 names(datosInsi)[5] <- "tempMin"
 names(datosInsi)[6] <- "tempMed"
 names(datosInsi)[7] <- "lluviaMed"
-names(datosInsi)[8] <- "brilloSolTotal"
-names(datosInsi)[9] <- "radMed"
-names(datosInsi)[10] <- "evapTanqueTotal"
-names(datosInsi)[11] <- "evapPicheTotal"
-names(datosInsi)[12] <- "nuboMedia"
-names(datosInsi)[13] <- "dirVientoPred"
-names(datosInsi)[14] <- "VelVientoMed"
-names(datosInsi)[15] <- "humeRelMedia"
-names(datosInsi)[16] <- "presionAtmMedia"
+names(datosInsi)[8] <- "nuboMedia"
+names(datosInsi)[9] <- "humeRelMedia"
+names(datosInsi)[10] <- "presionAtmMedia"
 ```
 
 #Data analisis tempMax
@@ -299,6 +293,67 @@ shapiro.test(sample$tempMed)
 summary(datosInsi$tempMed)
 ```
 
+#Data analisis lluviaMed
+```{r}
+df <- datosInsi %>%
+  group_by(lluviaMed) %>%
+  summarise(count = n())
+
+ggplot(df, aes(x = reorder(lluviaMed, count), y = count)) + geom_bar(fill = "blue", stat = "identity")+ theme_pubclean()
+
+
+sample = datosInsi[sample(nrow(datosInsi), 5000), ]
+shapiro.test(sample$lluviaMed)
+summary(datosInsi$lluviaMed)
+```
+#Data correction
+```{r}
+datosInsi$lluviaMed[is.na(datosInsi$lluviaMed)] <-3.49
+```
+#Post data analysis
+```{r}
+df <- datosInsi %>%
+  group_by(lluviaMed) %>%
+  summarise(count = n())
+
+ggplot(df, aes(x = reorder(lluviaMed, count), y = count)) + geom_bar(fill = "blue", stat = "identity")+ theme_pubclean()
+
+
+sample = datosInsi[sample(nrow(datosInsi), 5000), ]
+shapiro.test(sample$lluviaMed)
+summary(datosInsi$lluviaMed)
+```
+
+#Data analisis nuboMedia
+```{r}
+df <- datosInsi %>%
+  group_by(nuboMedia) %>%
+  summarise(count = n())
+
+ggplot(df, aes(x = reorder(nuboMedia, count), y = count)) + geom_bar(fill = "blue", stat = "identity")+ theme_pubclean()
+
+
+sample = datosInsi[sample(nrow(datosInsi), 5000), ]
+shapiro.test(sample$nuboMedia)
+summary(datosInsi$nuboMedia)
+```
+#Data correction
+```{r}
+datosInsi$nuboMedia[is.na(datosInsi$nuboMedia)] <-5.667
+```
+#Post data analysis
+```{r}
+df <- datosInsi %>%
+  group_by(nuboMedia) %>%
+  summarise(count = n())
+
+ggplot(df, aes(x = reorder(nuboMedia, count), y = count)) + geom_bar(fill = "blue", stat = "identity")+ theme_pubclean()
+
+
+sample = datosInsi[sample(nrow(datosInsi), 5000), ]
+shapiro.test(sample$nuboMedia)
+summary(datosInsi$nuboMedia)
+```
 
 ```{r}
 prueba <- merge(x = datos, y = datosInsi, by = c("mes","year","dia_ocu") )
