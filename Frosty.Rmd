@@ -204,15 +204,101 @@ names(datosInsi)[15] <- "humeRelMedia"
 names(datosInsi)[16] <- "presionAtmMedia"
 ```
 
+#Data analisis tempMax
 ```{r}
-datosInsi
+df <- datosInsi %>%
+  group_by(tempMax) %>%
+  summarise(count = n())
+
+ggplot(df, aes(x = reorder(tempMax, count), y = count)) + geom_bar(fill = "blue", stat = "identity")+ theme_pubclean()
+
+
+sample = datosInsi[sample(nrow(datosInsi), 5000), ]
+shapiro.test(sample$tempMax)
+summary(datosInsi$tempMax)
+```
+#Data correction
+```{r}
+datosInsi$tempMax[is.na(datosInsi$tempMax)] <-25.66
+```
+#Post data analysis
+```{r}
+df <- datosInsi %>%
+  group_by(tempMax) %>%
+  summarise(count = n())
+
+ggplot(df, aes(x = reorder(tempMax, count), y = count)) + geom_bar(fill = "blue", stat = "identity")+ theme_pubclean()
+
+
+sample = datosInsi[sample(nrow(datosInsi), 5000), ]
+shapiro.test(sample$tempMax)
+summary(datosInsi$tempMax)
 ```
 
 
-
+#Data analisis tempMin
 ```{r}
-datos
+df <- datosInsi %>%
+  group_by(tempMin) %>%
+  summarise(count = n())
+
+ggplot(df, aes(x = reorder(tempMin, count), y = count)) + geom_bar(fill = "blue", stat = "identity")+ theme_pubclean()
+
+
+sample = datosInsi[sample(nrow(datosInsi), 5000), ]
+shapiro.test(sample$tempMin)
+summary(datosInsi$tempMin)
 ```
+#Data correction
+```{r}
+datosInsi$tempMin[is.na(datosInsi$tempMin)] <-15.56
+```
+#Post data analysis
+```{r}
+df <- datosInsi %>%
+  group_by(tempMin) %>%
+  summarise(count = n())
+
+ggplot(df, aes(x = reorder(tempMin, count), y = count)) + geom_bar(fill = "blue", stat = "identity")+ theme_pubclean()
+
+
+sample = datosInsi[sample(nrow(datosInsi), 5000), ]
+shapiro.test(sample$tempMin)
+summary(datosInsi$tempMin)
+```
+
+
+#Data analisis tempMed
+```{r}
+df <- datosInsi %>%
+  group_by(tempMed) %>%
+  summarise(count = n())
+
+ggplot(df, aes(x = reorder(tempMed, count), y = count)) + geom_bar(fill = "blue", stat = "identity")+ theme_pubclean()
+
+
+sample = datosInsi[sample(nrow(datosInsi), 5000), ]
+shapiro.test(sample$tempMed)
+summary(datosInsi$tempMed)
+```
+#Data correction
+```{r}
+datosInsi$tempMed[is.na(datosInsi$tempMed)] <- 19.97
+```
+#Post data analysis
+```{r}
+df <- datosInsi %>%
+  group_by(tempMed) %>%
+  summarise(count = n())
+
+ggplot(df, aes(x = reorder(tempMed, count), y = count)) + geom_bar(fill = "blue", stat = "identity")+ theme_pubclean()
+
+
+sample = datosInsi[sample(nrow(datosInsi), 5000), ]
+shapiro.test(sample$tempMed)
+summary(datosInsi$tempMed)
+```
+
 
 ```{r}
 prueba <- merge(x = datos, y = datosInsi, by = c("mes","year","dia_ocu") )
