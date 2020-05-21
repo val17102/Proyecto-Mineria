@@ -356,9 +356,19 @@ summary(datosInsi$nuboMedia)
 ```
 
 ```{r}
+datosInsi
+```
+
+
+```{r}
 prueba <- merge(x = datos, y = datosInsi, by = c("mes","year","dia_ocu") )
 prueba
 ```
+
+```{r}
+
+```
+
 
 ```{r}
 matriz_cor <- cor(prueba)
