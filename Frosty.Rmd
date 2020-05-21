@@ -355,6 +355,73 @@ shapiro.test(sample$nuboMedia)
 summary(datosInsi$nuboMedia)
 ```
 
+#Data analisis humeRelMedia
+```{r}
+df <- datosInsi %>%
+  group_by(humeRelMedia) %>%
+  summarise(count = n())
+
+ggplot(df, aes(x = reorder(humeRelMedia, count), y = count)) + geom_bar(fill = "blue", stat = "identity")+ theme_pubclean()
+
+sample = datosInsi[sample(nrow(datosInsi), 5000), ]
+shapiro.test(sample$humeRelMedia)
+summary(datosInsi$humeRelMedia)
+
+```
+
+#Data correction
+```{r}
+datosInsi$humeRelMedia[is.na(datosInsi$humeRelMedia)] <-75.6
+```
+
+#Post data analysis
+```{r}
+df <- datosInsi %>%
+  group_by(humeRelMedia) %>%
+  summarise(count = n())
+
+ggplot(df, aes(x = reorder(humeRelMedia, count), y = count)) + geom_bar(fill = "blue", stat = "identity")+ theme_pubclean()
+
+sample = datosInsi[sample(nrow(datosInsi), 5000), ]
+shapiro.test(sample$humeRelMedia)
+summary(datosInsi$humeRelMedia)
+
+```
+
+#Data analisis presionAtmMedia
+```{r}
+df <- datosInsi %>%
+  group_by(presionAtmMedia) %>%
+  summarise(count = n())
+
+ggplot(df, aes(x = reorder(presionAtmMedia, count), y = count)) + geom_bar(fill = "blue", stat = "identity")+ theme_pubclean()
+
+sample = datosInsi[sample(nrow(datosInsi), 5000), ]
+shapiro.test(sample$presionAtmMedia)
+summary(datosInsi$presionAtmMedia)
+
+```
+
+#Data correction
+```{r}
+datosInsi$presionAtmMedia[is.na(datosInsi$presionAtmMedia)] <-640.7
+```
+
+#Post data analysis
+```{r}
+df <- datosInsi %>%
+  group_by(presionAtmMedia) %>%
+  summarise(count = n())
+
+ggplot(df, aes(x = reorder(presionAtmMedia, count), y = count)) + geom_bar(fill = "blue", stat = "identity")+ theme_pubclean()
+
+sample = datosInsi[sample(nrow(datosInsi), 5000), ]
+shapiro.test(sample$presionAtmMedia)
+summary(datosInsi$presionAtmMedia)
+
+```
+
+
 ```{r}
 prueba <- merge(x = datos, y = datosInsi, by = c("mes","year","dia_ocu") )
 prueba
