@@ -1,0 +1,510 @@
+---
+title: "Proyecto No.1"
+author: "Héctor Valle, Rodrigo Samayoa & Paul Belches"
+date: "23/3/2020"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ggplot2)
+library(ggpubr)
+library(dplyr)
+theme_set(theme_pubr())
+datos<-read.csv("INE-Accidentes-Guatemala.csv", stringsAsFactors = FALSE)
+datos<-na.omit(datos)
+datos <- datos[which(datos$depto_ocu == "Guatemala"), ]
+```
+
+```{r}
+datos$mes <- 0
+datos[which(datos$mes_ocu == "Enero"), ]$mes <- 1
+datos[which(datos$mes_ocu == "Febrero"), ]$mes <- 2
+datos[which(datos$mes_ocu == "Marzo"), ]$mes <- 3
+datos[which(datos$mes_ocu == "Abril"), ]$mes <- 4
+datos[which(datos$mes_ocu == "Mayo"), ]$mes <- 5
+datos[which(datos$mes_ocu == "Junio"), ]$mes <- 6
+datos[which(datos$mes_ocu == "Julio"), ]$mes <- 7
+datos[which(datos$mes_ocu == "Agosto"), ]$mes <- 8
+datos[which(datos$mes_ocu == "Septiembre"), ]$mes <- 9
+datos[which(datos$mes_ocu == "Octubre"), ]$mes <- 10
+datos[which(datos$mes_ocu == "Noviembre"), ]$mes <- 11
+datos[which(datos$mes_ocu == "Diciembre"), ]$mes <- 12
+datos
+```
+
+```{r}
+#Dia de ocurrencia
+df <- datos %>%
+  group_by(dia_ocu) %>%
+  summarise(count = n())
+df <- df[order(-df$count),]
+df <- df[1:10,]
+print(df)
+ggplot(df, aes(x = reorder(dia_ocu, count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
+```
+
+```{r}
+#Mes de ocurrencia
+df <- datos %>%
+  group_by(mes_ocu) %>%
+  summarise(count = n())
+df <- df[order(-df$count),]
+df <- df[1:10,]
+print(df)
+ggplot(df, aes(x = reorder(mes_ocu, count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
+```
+
+
+```{r}
+#Día de la semana de ocurrencia
+df <- datos %>%
+  group_by(dia_sem_ocu) %>%
+  summarise(count = n())
+df <- df[order(-df$count),]
+print(df)
+ggplot(df, aes(x = reorder(dia_sem_ocu, count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
+```
+
+```{r}
+#Hora de ocurrencia
+df <- datos %>%
+  group_by(hora_ocu) %>%
+  summarise(count = n())
+df <- df[order(-df$count),]
+df <- df[1:10,]
+print(df)
+ggplot(df, aes(x = reorder(hora_ocu, count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
+```
+
+
+```{r}
+#Municipio de ocurrencia
+df <- datos %>%
+  group_by(zona_ocu) %>%
+  summarise(count = n())
+df <- df[order(-df$count),]
+df <- df[1:10,]
+print(df)
+ggplot(df, aes(x = reorder(zona_ocu, count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
+```
+
+```{r}
+#Zona ocurrencia
+df <- datos %>%
+  group_by(zona_ocu) %>%
+  summarise(count = n())
+df <- df[order(-df$count),]
+df <- df[1:10,]
+print(df)
+ggplot(df, aes(x = reorder(zona_ocu, count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
+```
+
+
+```{r}
+#Sexo del involucrado
+df <- datos %>%
+  group_by(sexo_fall_les) %>%
+  summarise(count = n())
+df <- df[order(-df$count),]
+print(df)
+ggplot(df, aes(x = reorder(sexo_fall_les, count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
+```
+
+
+```{r}
+#Edad del involucrado
+df <- datos %>%
+  group_by(edad_fall_les) %>%
+  summarise(count = n())
+df <- df[order(-df$count),]
+df <- df[1:10,]
+print(df)
+ggplot(df, aes(x = reorder(edad_fall_les, count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
+```
+
+```{r}
+#Tipo de vehiculo
+df <- datos %>%
+  group_by(tipo_vehi) %>%
+  summarise(count = n())
+df <- df[order(-df$count),]
+df <- df[1:10,]
+print(df)
+ggplot(df, aes(x = reorder(tipo_vehi, count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
+```
+
+
+```{r}
+#Color vehiculo
+df <- datos %>%
+  group_by(color_vehi) %>%
+  summarise(count = n())
+df <- df[order(-df$count),]
+df <- df[1:10,]
+print(df)
+ggplot(df, aes(x = reorder(color_vehi, count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
+```
+
+
+```{r}
+#Causa de ocurrencia
+df <- datos %>%
+  group_by(causa_acc) %>%
+  summarise(count = n())
+df <- df[order(-df$count),]
+print(df)
+ggplot(df, aes(x = reorder(causa_acc, count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
+```
+
+```{r}
+#Estado del implicado
+df <- datos %>%
+  group_by(estado_implicado) %>%
+  summarise(count = n())
+df <- df[order(-df$count),]
+print(df)
+ggplot(df, aes(x = reorder(estado_implicado, count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
+```
+
+```{r}
+#Año
+df <- datos %>%
+  group_by(year) %>%
+  summarise(count = n())
+df <- df[order(-df$count),]
+print(df)
+ggplot(df, aes(x = reorder(year, count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
+```
+
+
+```{r}
+#Limpieza de Datos de Insivumeh
+library(readxl)
+
+datosInsi <- read_xlsx("Insivumeh.xlsx")
+datosInsi<-datosInsi[,-c(8, 9, 10, 11, 13, 14, 17)]
+names(datosInsi)[1] <- "year"
+names(datosInsi)[2] <- "mes"	
+names(datosInsi)[3] <- "dia_ocu"
+names(datosInsi)[4] <- "tempMax"
+names(datosInsi)[5] <- "tempMin"
+names(datosInsi)[6] <- "tempMed"
+names(datosInsi)[7] <- "lluviaMed"
+names(datosInsi)[8] <- "nuboMedia"
+names(datosInsi)[9] <- "humeRelMedia"
+names(datosInsi)[10] <- "presionAtmMedia"
+```
+
+#Data analisis tempMax
+```{r}
+df <- datosInsi %>%
+  group_by(tempMax) %>%
+  summarise(count = n())
+
+ggplot(df, aes(x = reorder(tempMax, count), y = count)) + geom_bar(fill = "blue", stat = "identity")+ theme_pubclean()
+
+
+sample = datosInsi[sample(nrow(datosInsi), 5000), ]
+shapiro.test(sample$tempMax)
+summary(datosInsi$tempMax)
+```
+#Data correction
+```{r}
+datosInsi$tempMax[is.na(datosInsi$tempMax)] <-25.66
+```
+#Post data analysis
+```{r}
+df <- datosInsi %>%
+  group_by(tempMax) %>%
+  summarise(count = n())
+
+ggplot(df, aes(x = reorder(tempMax, count), y = count)) + geom_bar(fill = "blue", stat = "identity")+ theme_pubclean()
+
+
+sample = datosInsi[sample(nrow(datosInsi), 5000), ]
+shapiro.test(sample$tempMax)
+summary(datosInsi$tempMax)
+```
+
+
+#Data analisis tempMin
+```{r}
+df <- datosInsi %>%
+  group_by(tempMin) %>%
+  summarise(count = n())
+
+ggplot(df, aes(x = reorder(tempMin, count), y = count)) + geom_bar(fill = "blue", stat = "identity")+ theme_pubclean()
+
+
+sample = datosInsi[sample(nrow(datosInsi), 5000), ]
+shapiro.test(sample$tempMin)
+summary(datosInsi$tempMin)
+```
+#Data correction
+```{r}
+datosInsi$tempMin[is.na(datosInsi$tempMin)] <-15.56
+```
+#Post data analysis
+```{r}
+df <- datosInsi %>%
+  group_by(tempMin) %>%
+  summarise(count = n())
+
+ggplot(df, aes(x = reorder(tempMin, count), y = count)) + geom_bar(fill = "blue", stat = "identity")+ theme_pubclean()
+
+
+sample = datosInsi[sample(nrow(datosInsi), 5000), ]
+shapiro.test(sample$tempMin)
+summary(datosInsi$tempMin)
+```
+
+
+#Data analisis tempMed
+```{r}
+df <- datosInsi %>%
+  group_by(tempMed) %>%
+  summarise(count = n())
+
+ggplot(df, aes(x = reorder(tempMed, count), y = count)) + geom_bar(fill = "blue", stat = "identity")+ theme_pubclean()
+
+
+sample = datosInsi[sample(nrow(datosInsi), 5000), ]
+shapiro.test(sample$tempMed)
+summary(datosInsi$tempMed)
+```
+#Data correction
+```{r}
+datosInsi$tempMed[is.na(datosInsi$tempMed)] <- 19.97
+```
+#Post data analysis
+```{r}
+df <- datosInsi %>%
+  group_by(tempMed) %>%
+  summarise(count = n())
+
+ggplot(df, aes(x = reorder(tempMed, count), y = count)) + geom_bar(fill = "blue", stat = "identity")+ theme_pubclean()
+
+
+sample = datosInsi[sample(nrow(datosInsi), 5000), ]
+shapiro.test(sample$tempMed)
+summary(datosInsi$tempMed)
+```
+
+#Data analisis lluviaMed
+```{r}
+df <- datosInsi %>%
+  group_by(lluviaMed) %>%
+  summarise(count = n())
+
+ggplot(df, aes(x = reorder(lluviaMed, count), y = count)) + geom_bar(fill = "blue", stat = "identity")+ theme_pubclean()
+
+
+sample = datosInsi[sample(nrow(datosInsi), 5000), ]
+shapiro.test(sample$lluviaMed)
+summary(datosInsi$lluviaMed)
+```
+#Data correction
+```{r}
+datosInsi$lluviaMed[is.na(datosInsi$lluviaMed)] <-3.49
+```
+#Post data analysis
+```{r}
+df <- datosInsi %>%
+  group_by(lluviaMed) %>%
+  summarise(count = n())
+
+ggplot(df, aes(x = reorder(lluviaMed, count), y = count)) + geom_bar(fill = "blue", stat = "identity")+ theme_pubclean()
+
+
+sample = datosInsi[sample(nrow(datosInsi), 5000), ]
+shapiro.test(sample$lluviaMed)
+summary(datosInsi$lluviaMed)
+```
+
+#Data analisis nuboMedia
+```{r}
+df <- datosInsi %>%
+  group_by(nuboMedia) %>%
+  summarise(count = n())
+
+ggplot(df, aes(x = reorder(nuboMedia, count), y = count)) + geom_bar(fill = "blue", stat = "identity")+ theme_pubclean()
+
+
+sample = datosInsi[sample(nrow(datosInsi), 5000), ]
+shapiro.test(sample$nuboMedia)
+summary(datosInsi$nuboMedia)
+```
+#Data correction
+```{r}
+datosInsi$nuboMedia[is.na(datosInsi$nuboMedia)] <-5.667
+```
+#Post data analysis
+```{r}
+df <- datosInsi %>%
+  group_by(nuboMedia) %>%
+  summarise(count = n())
+
+ggplot(df, aes(x = reorder(nuboMedia, count), y = count)) + geom_bar(fill = "blue", stat = "identity")+ theme_pubclean()
+
+
+sample = datosInsi[sample(nrow(datosInsi), 5000), ]
+shapiro.test(sample$nuboMedia)
+summary(datosInsi$nuboMedia)
+```
+
+#Data analisis humeRelMedia
+```{r}
+df <- datosInsi %>%
+  group_by(humeRelMedia) %>%
+  summarise(count = n())
+
+ggplot(df, aes(x = reorder(humeRelMedia, count), y = count)) + geom_bar(fill = "blue", stat = "identity")+ theme_pubclean()
+
+sample = datosInsi[sample(nrow(datosInsi), 5000), ]
+shapiro.test(sample$humeRelMedia)
+summary(datosInsi$humeRelMedia)
+
+```
+
+#Data correction
+```{r}
+datosInsi$humeRelMedia[is.na(datosInsi$humeRelMedia)] <-75.6
+```
+
+#Post data analysis
+```{r}
+df <- datosInsi %>%
+  group_by(humeRelMedia) %>%
+  summarise(count = n())
+
+ggplot(df, aes(x = reorder(humeRelMedia, count), y = count)) + geom_bar(fill = "blue", stat = "identity")+ theme_pubclean()
+
+sample = datosInsi[sample(nrow(datosInsi), 5000), ]
+shapiro.test(sample$humeRelMedia)
+summary(datosInsi$humeRelMedia)
+
+```
+
+#Data analisis presionAtmMedia
+```{r}
+df <- datosInsi %>%
+  group_by(presionAtmMedia) %>%
+  summarise(count = n())
+
+ggplot(df, aes(x = reorder(presionAtmMedia, count), y = count)) + geom_bar(fill = "blue", stat = "identity")+ theme_pubclean()
+
+sample = datosInsi[sample(nrow(datosInsi), 5000), ]
+shapiro.test(sample$presionAtmMedia)
+summary(datosInsi$presionAtmMedia)
+
+```
+
+#Data correction
+```{r}
+datosInsi$presionAtmMedia[is.na(datosInsi$presionAtmMedia)] <-640.7
+```
+
+#Post data analysis
+```{r}
+df <- datosInsi %>%
+  group_by(presionAtmMedia) %>%
+  summarise(count = n())
+
+ggplot(df, aes(x = reorder(presionAtmMedia, count), y = count)) + geom_bar(fill = "blue", stat = "identity")+ theme_pubclean()
+
+sample = datosInsi[sample(nrow(datosInsi), 5000), ]
+shapiro.test(sample$presionAtmMedia)
+summary(datosInsi$presionAtmMedia)
+
+```
+
+
+```{r}
+datosInsi
+```
+
+
+```{r}
+dataMezclada <- merge(x = datos, y = datosInsi, by = c("mes","year","dia_ocu"))
+dataMezclada<-dataMezclada[,-c(9)]
+dataMezclada
+```
+
+```{r}
+#Convertir variables categoritas a numericas categoricas
+dataMezclada$mes_ocu <- as.numeric(factor(dataMezclada$mes_ocu))
+dataMezclada$dia_sem_ocu <- as.numeric(factor(dataMezclada$dia_sem_ocu))
+dataMezclada$dia_sem_ocu <- as.numeric(factor(dataMezclada$dia_sem_ocu))
+dataMezclada$depto_ocu <- as.numeric(factor(dataMezclada$depto_ocu))
+dataMezclada$mupio_ocu <- as.numeric(factor(dataMezclada$mupio_ocu))
+dataMezclada$sexo_fall_les <- as.numeric(factor(dataMezclada$sexo_fall_les))
+dataMezclada$tipo_vehi <- as.numeric(factor(dataMezclada$tipo_vehi))
+dataMezclada$color_vehi <- as.numeric(factor(dataMezclada$color_vehi))
+dataMezclada$causa_acc <- as.numeric(factor(dataMezclada$causa_acc))
+dataMezclada$estado_implicado <- as.numeric(factor(dataMezclada$estado_implicado))
+
+dataMezclada[2:3] <- lapply(dataMezclada[2:3], as.numeric)
+dataMezclada[6] <- lapply(dataMezclada[6], as.numeric)
+dataMezclada[10] <- lapply(dataMezclada[10], as.numeric)
+dataMezclada
+```
+
+
+```{r}
+library(corrplot)
+matriz_cor <- cor(dataMezclada)
+corrplot(matriz_cor)
+```
+
+#Redes
+
+#Random Forest
+
+
+#con random forest
+
+
+#modeloRF1<-randomForest(train$grupo~.,data=train)
+#prediccionRF1<-predict(modeloRF1,newdata = test)
+#testCompleto<-test
+
+#testCompleto$predRF<-round(prediccionRF1)
+
+#testCompleto$predRF
+#testCompleto$grupo
+#cfmRandomForest <- confusionMatrix(table(testCompleto$predRF, testCompleto$grupo))
+#cfmRandomForest
+
+#Regresion logistica
+
+### Training
+#```{r}
+#num <- which(colnames(train) == "Bajo")
+#modelo <- glm(Bajo~., data = train[, c(1:5, num)], family = #binomial(), maxit = 100)
+
+#modelo
+
+#summary(modelo)
+#```
+
+#```{r}
+#pred <- predict(modelo, newdata = test[, 1:5], type = #"response")
+#prediccion <- ifelse(pred >= 0.5, 1, 0)
+#confusionMatrix(as.factor(test$Bajo), as.factor(prediccion))
+#```
+
+#Ada boost
+#Naive Bayes
+
+
+## Naive Bayes
+
+#nbTest = select(test, TotalBsmtSF, X1stFlrSF, GrLivArea, #GarageCars, GarageArea, Bajo)
+#nbTrain = select(train, TotalBsmtSF, X1stFlrSF, GrLivArea, #GarageCars, GarageArea, Bajo)
+
+#modelo <- naiveBayes(as.factor(nbTrain$Bajo)~., data=nbTrain)
+#predBayes <- predict(modelo, newdata = test[, 1:5])
+#confusionMatrix(as.factor(predBayes), as.factor(nbTest$Bajo))
