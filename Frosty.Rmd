@@ -16,6 +16,7 @@ theme_set(theme_pubr())
 datos<-read.csv("INE-Accidentes-Guatemala.csv", stringsAsFactors = FALSE)
 datos<-na.omit(datos)
 datos <- datos[which(datos$depto_ocu == "Guatemala"), ]
+datos
 ```
 
 ```{r}

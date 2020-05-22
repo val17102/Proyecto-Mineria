@@ -36,151 +36,6 @@ datos
 ```
 
 ```{r}
-#Dia de ocurrencia
-df <- datos %>%
-  group_by(dia_ocu) %>%
-  summarise(count = n())
-df <- df[order(-df$count),]
-df <- df[1:10,]
-print(df)
-ggplot(df, aes(x = reorder(dia_ocu, count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
-```
-
-```{r}
-#Mes de ocurrencia
-df <- datos %>%
-  group_by(mes_ocu) %>%
-  summarise(count = n())
-df <- df[order(-df$count),]
-df <- df[1:10,]
-print(df)
-ggplot(df, aes(x = reorder(mes_ocu, count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
-```
-
-
-```{r}
-#Día de la semana de ocurrencia
-df <- datos %>%
-  group_by(dia_sem_ocu) %>%
-  summarise(count = n())
-df <- df[order(-df$count),]
-print(df)
-ggplot(df, aes(x = reorder(dia_sem_ocu, count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
-```
-
-```{r}
-#Hora de ocurrencia
-df <- datos %>%
-  group_by(hora_ocu) %>%
-  summarise(count = n())
-df <- df[order(-df$count),]
-df <- df[1:10,]
-print(df)
-ggplot(df, aes(x = reorder(hora_ocu, count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
-```
-
-
-```{r}
-#Municipio de ocurrencia
-df <- datos %>%
-  group_by(zona_ocu) %>%
-  summarise(count = n())
-df <- df[order(-df$count),]
-df <- df[1:10,]
-print(df)
-ggplot(df, aes(x = reorder(zona_ocu, count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
-```
-
-```{r}
-#Zona ocurrencia
-df <- datos %>%
-  group_by(zona_ocu) %>%
-  summarise(count = n())
-df <- df[order(-df$count),]
-df <- df[1:10,]
-print(df)
-ggplot(df, aes(x = reorder(zona_ocu, count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
-```
-
-
-```{r}
-#Sexo del involucrado
-df <- datos %>%
-  group_by(sexo_fall_les) %>%
-  summarise(count = n())
-df <- df[order(-df$count),]
-print(df)
-ggplot(df, aes(x = reorder(sexo_fall_les, count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
-```
-
-
-```{r}
-#Edad del involucrado
-df <- datos %>%
-  group_by(edad_fall_les) %>%
-  summarise(count = n())
-df <- df[order(-df$count),]
-df <- df[1:10,]
-print(df)
-ggplot(df, aes(x = reorder(edad_fall_les, count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
-```
-
-```{r}
-#Tipo de vehiculo
-df <- datos %>%
-  group_by(tipo_vehi) %>%
-  summarise(count = n())
-df <- df[order(-df$count),]
-df <- df[1:10,]
-print(df)
-ggplot(df, aes(x = reorder(tipo_vehi, count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
-```
-
-
-```{r}
-#Color vehiculo
-df <- datos %>%
-  group_by(color_vehi) %>%
-  summarise(count = n())
-df <- df[order(-df$count),]
-df <- df[1:10,]
-print(df)
-ggplot(df, aes(x = reorder(color_vehi, count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
-```
-
-
-```{r}
-#Causa de ocurrencia
-df <- datos %>%
-  group_by(causa_acc) %>%
-  summarise(count = n())
-df <- df[order(-df$count),]
-print(df)
-ggplot(df, aes(x = reorder(causa_acc, count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
-```
-
-```{r}
-#Estado del implicado
-df <- datos %>%
-  group_by(estado_implicado) %>%
-  summarise(count = n())
-df <- df[order(-df$count),]
-print(df)
-ggplot(df, aes(x = reorder(estado_implicado, count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
-```
-
-```{r}
-#Año
-df <- datos %>%
-  group_by(year) %>%
-  summarise(count = n())
-df <- df[order(-df$count),]
-print(df)
-ggplot(df, aes(x = reorder(year, count), y = count)) + geom_bar(fill = "blue", stat = "identity") + geom_text(aes(label = count), vjust = -0.5) + theme_pubclean()
-```
-
-
-```{r}
 #Limpieza de Datos de Insivumeh
 library(readxl)
 
@@ -198,175 +53,27 @@ names(datosInsi)[9] <- "humeRelMedia"
 names(datosInsi)[10] <- "presionAtmMedia"
 ```
 
-#Data analisis tempMax
-```{r}
-df <- datosInsi %>%
-  group_by(tempMax) %>%
-  summarise(count = n())
-
-ggplot(df, aes(x = reorder(tempMax, count), y = count)) + geom_bar(fill = "blue", stat = "identity")+ theme_pubclean()
-
-
-sample = datosInsi[sample(nrow(datosInsi), 5000), ]
-shapiro.test(sample$tempMax)
-summary(datosInsi$tempMax)
-```
 #Data correction
 ```{r}
 datosInsi$tempMax[is.na(datosInsi$tempMax)] <-25.66
 ```
-#Post data analysis
-```{r}
-df <- datosInsi %>%
-  group_by(tempMax) %>%
-  summarise(count = n())
 
-ggplot(df, aes(x = reorder(tempMax, count), y = count)) + geom_bar(fill = "blue", stat = "identity")+ theme_pubclean()
-
-
-sample = datosInsi[sample(nrow(datosInsi), 5000), ]
-shapiro.test(sample$tempMax)
-summary(datosInsi$tempMax)
-```
-
-
-#Data analisis tempMin
-```{r}
-df <- datosInsi %>%
-  group_by(tempMin) %>%
-  summarise(count = n())
-
-ggplot(df, aes(x = reorder(tempMin, count), y = count)) + geom_bar(fill = "blue", stat = "identity")+ theme_pubclean()
-
-
-sample = datosInsi[sample(nrow(datosInsi), 5000), ]
-shapiro.test(sample$tempMin)
-summary(datosInsi$tempMin)
-```
 #Data correction
 ```{r}
 datosInsi$tempMin[is.na(datosInsi$tempMin)] <-15.56
-```
-#Post data analysis
-```{r}
-df <- datosInsi %>%
-  group_by(tempMin) %>%
-  summarise(count = n())
-
-ggplot(df, aes(x = reorder(tempMin, count), y = count)) + geom_bar(fill = "blue", stat = "identity")+ theme_pubclean()
-
-
-sample = datosInsi[sample(nrow(datosInsi), 5000), ]
-shapiro.test(sample$tempMin)
-summary(datosInsi$tempMin)
-```
-
-
-#Data analisis tempMed
-```{r}
-df <- datosInsi %>%
-  group_by(tempMed) %>%
-  summarise(count = n())
-
-ggplot(df, aes(x = reorder(tempMed, count), y = count)) + geom_bar(fill = "blue", stat = "identity")+ theme_pubclean()
-
-
-sample = datosInsi[sample(nrow(datosInsi), 5000), ]
-shapiro.test(sample$tempMed)
-summary(datosInsi$tempMed)
 ```
 #Data correction
 ```{r}
 datosInsi$tempMed[is.na(datosInsi$tempMed)] <- 19.97
 ```
-#Post data analysis
-```{r}
-df <- datosInsi %>%
-  group_by(tempMed) %>%
-  summarise(count = n())
-
-ggplot(df, aes(x = reorder(tempMed, count), y = count)) + geom_bar(fill = "blue", stat = "identity")+ theme_pubclean()
-
-
-sample = datosInsi[sample(nrow(datosInsi), 5000), ]
-shapiro.test(sample$tempMed)
-summary(datosInsi$tempMed)
-```
-
-#Data analisis lluviaMed
-```{r}
-df <- datosInsi %>%
-  group_by(lluviaMed) %>%
-  summarise(count = n())
-
-ggplot(df, aes(x = reorder(lluviaMed, count), y = count)) + geom_bar(fill = "blue", stat = "identity")+ theme_pubclean()
-
-
-sample = datosInsi[sample(nrow(datosInsi), 5000), ]
-shapiro.test(sample$lluviaMed)
-summary(datosInsi$lluviaMed)
-```
 #Data correction
 ```{r}
 datosInsi$lluviaMed[is.na(datosInsi$lluviaMed)] <-3.49
 ```
-#Post data analysis
-```{r}
-df <- datosInsi %>%
-  group_by(lluviaMed) %>%
-  summarise(count = n())
 
-ggplot(df, aes(x = reorder(lluviaMed, count), y = count)) + geom_bar(fill = "blue", stat = "identity")+ theme_pubclean()
-
-
-sample = datosInsi[sample(nrow(datosInsi), 5000), ]
-shapiro.test(sample$lluviaMed)
-summary(datosInsi$lluviaMed)
-```
-
-#Data analisis nuboMedia
-```{r}
-df <- datosInsi %>%
-  group_by(nuboMedia) %>%
-  summarise(count = n())
-
-ggplot(df, aes(x = reorder(nuboMedia, count), y = count)) + geom_bar(fill = "blue", stat = "identity")+ theme_pubclean()
-
-
-sample = datosInsi[sample(nrow(datosInsi), 5000), ]
-shapiro.test(sample$nuboMedia)
-summary(datosInsi$nuboMedia)
-```
 #Data correction
 ```{r}
 datosInsi$nuboMedia[is.na(datosInsi$nuboMedia)] <-5.667
-```
-#Post data analysis
-```{r}
-df <- datosInsi %>%
-  group_by(nuboMedia) %>%
-  summarise(count = n())
-
-ggplot(df, aes(x = reorder(nuboMedia, count), y = count)) + geom_bar(fill = "blue", stat = "identity")+ theme_pubclean()
-
-
-sample = datosInsi[sample(nrow(datosInsi), 5000), ]
-shapiro.test(sample$nuboMedia)
-summary(datosInsi$nuboMedia)
-```
-
-#Data analisis humeRelMedia
-```{r}
-df <- datosInsi %>%
-  group_by(humeRelMedia) %>%
-  summarise(count = n())
-
-ggplot(df, aes(x = reorder(humeRelMedia, count), y = count)) + geom_bar(fill = "blue", stat = "identity")+ theme_pubclean()
-
-sample = datosInsi[sample(nrow(datosInsi), 5000), ]
-shapiro.test(sample$humeRelMedia)
-summary(datosInsi$humeRelMedia)
-
 ```
 
 #Data correction
@@ -374,53 +81,10 @@ summary(datosInsi$humeRelMedia)
 datosInsi$humeRelMedia[is.na(datosInsi$humeRelMedia)] <-75.6
 ```
 
-#Post data analysis
-```{r}
-df <- datosInsi %>%
-  group_by(humeRelMedia) %>%
-  summarise(count = n())
-
-ggplot(df, aes(x = reorder(humeRelMedia, count), y = count)) + geom_bar(fill = "blue", stat = "identity")+ theme_pubclean()
-
-sample = datosInsi[sample(nrow(datosInsi), 5000), ]
-shapiro.test(sample$humeRelMedia)
-summary(datosInsi$humeRelMedia)
-
-```
-
-#Data analisis presionAtmMedia
-```{r}
-df <- datosInsi %>%
-  group_by(presionAtmMedia) %>%
-  summarise(count = n())
-
-ggplot(df, aes(x = reorder(presionAtmMedia, count), y = count)) + geom_bar(fill = "blue", stat = "identity")+ theme_pubclean()
-
-sample = datosInsi[sample(nrow(datosInsi), 5000), ]
-shapiro.test(sample$presionAtmMedia)
-summary(datosInsi$presionAtmMedia)
-
-```
-
 #Data correction
 ```{r}
 datosInsi$presionAtmMedia[is.na(datosInsi$presionAtmMedia)] <-640.7
 ```
-
-#Post data analysis
-```{r}
-df <- datosInsi %>%
-  group_by(presionAtmMedia) %>%
-  summarise(count = n())
-
-ggplot(df, aes(x = reorder(presionAtmMedia, count), y = count)) + geom_bar(fill = "blue", stat = "identity")+ theme_pubclean()
-
-sample = datosInsi[sample(nrow(datosInsi), 5000), ]
-shapiro.test(sample$presionAtmMedia)
-summary(datosInsi$presionAtmMedia)
-
-```
-
 
 ```{r}
 datosInsi
@@ -430,6 +94,7 @@ datosInsi
 ```{r}
 dataMezclada <- merge(x = datos, y = datosInsi, by = c("mes","year","dia_ocu"))
 dataMezclada<-dataMezclada[,-c(9)]
+dataMezcladaPrueba <- dataMezclada
 dataMezclada
 ```
 
@@ -459,52 +124,145 @@ matriz_cor <- cor(dataMezclada)
 corrplot(matriz_cor)
 ```
 
+```{r}
+#dataMezcladaPrueba
+#dataMezcladaPrueba$dia_sem_ocu
+
+#contrasts(dataMezcladaPrueba$mes)
+#datos <- cbind(datos, dummy(datos$grupo, verbose = T))
+```
+
+
+```{r}
+dataMezclada <- dataMezclada[,-c(15,16)]
+dataMezclada
+```
+
+```{r}
+porciento <- 70/100
+set.seed(123)
+
+trainRowsNumber<-sample(1:nrow(dataMezclada),porciento*nrow(dataMezclada))
+train<-dataMezclada[trainRowsNumber,]
+test<-dataMezclada[-trainRowsNumber,]
+```
+
+```{r}
+train
+```
+
+```{r}
+test
+```
+
+
+```{r}
+train<-na.omit(train)
+test<-na.omit(test)
+```
+
 #Redes
 
 #Random Forest
 
+```{r}
+library(randomForest)
+library(rpart)
+library(caret)
+library(tree)
+modeloRF1<-randomForest(train$estado_implicado~.,data=train)
+prediccionRF1<-predict(modeloRF1,newdata = test)
+testCompleto<-test
+testCompleto$predRF<-round(prediccionRF1)
+```
 
-#con random forest
+```{r}
+cfmRandomForest <- confusionMatrix(table(testCompleto$predRF, testCompleto$estado_implicado))
+cfmRandomForest
+```
+
+```{r}
+test
+```
+
+```{r}
+train
+```
 
 
-#modeloRF1<-randomForest(train$grupo~.,data=train)
-#prediccionRF1<-predict(modeloRF1,newdata = test)
-#testCompleto<-test
+## Regresión Logística
 
-#testCompleto$predRF<-round(prediccionRF1)
+```{r}
+porciento <- 70/100
+set.seed(123)
+dataMezclada2 <- dataMezclada
+dataMezclada2$uno <- 0
+dataMezclada2$dos <- 0
+dataMezclada2[which(dataMezclada2$estado_implicado == 1), ]$uno <- 1
+dataMezclada2[which(dataMezclada2$estado_implicado == 2), ]$dos <- 1
+dataMezclada2
+#dataMezclada2 <- cbind(dataMezclada2,dummy(dataMezclada2$estado_implicado,verbose = T))
 
-#testCompleto$predRF
-#testCompleto$grupo
-#cfmRandomForest <- confusionMatrix(table(testCompleto$predRF, testCompleto$grupo))
-#cfmRandomForest
+#trainRowsNumber<-sample(1:nrow(dataMezclada),porciento*nrow(dataMezclada))
+#train<-dataMezclada[trainRowsNumber,]
+#test<-dataMezclada[-trainRowsNumber,]
+```
 
-#Regresion logistica
+```{r}
+porciento <- 70/100
+set.seed(123)
 
-### Training
-#```{r}
-#num <- which(colnames(train) == "Bajo")
-#modelo <- glm(Bajo~., data = train[, c(1:5, num)], family = #binomial(), maxit = 100)
+trainRowsNumber<-sample(1:nrow(dataMezclada2),porciento*nrow(dataMezclada2))
+train<-dataMezclada2[trainRowsNumber,]
+test<-dataMezclada2[-trainRowsNumber,]
+```
 
-#modelo
+```{r}
+modeloRL<-glm(dos~., data = train[,c(1:19, 21)],family = binomial(link='logit'), maxit=100)
+pred<-predict(modeloRL,newdata = test[,c(1:19)], type = "response")
+prediccion<-ifelse(pred>=0.5,1,0)
+prediccion
+#confusionMatrix(test$uno,prediccion)
+```
 
-#summary(modelo)
-#```
 
-#```{r}
-#pred <- predict(modelo, newdata = test[, 1:5], type = #"response")
-#prediccion <- ifelse(pred >= 0.5, 1, 0)
-#confusionMatrix(as.factor(test$Bajo), as.factor(prediccion))
-#```
-
-#Ada boost
 #Naive Bayes
 
+```{r}
+porciento <- 70/100
+set.seed(123)
+dataMezclada2 <- dataMezclada
+dataMezclada2$uno <- 0
+dataMezclada2$dos <- 0
+dataMezclada2[which(dataMezclada2$estado_implicado == 1), ]$uno <- 1
+dataMezclada2[which(dataMezclada2$estado_implicado == 2), ]$dos <- 1
+dataMezclada2
+#dataMezclada2 <- cbind(dataMezclada2,dummy(dataMezclada2$estado_implicado,verbose = T))
 
-## Naive Bayes
+#trainRowsNumber<-sample(1:nrow(dataMezclada),porciento*nrow(dataMezclada))
+#train<-dataMezclada[trainRowsNumber,]
+#test<-dataMezclada[-trainRowsNumber,]
+```
 
-#nbTest = select(test, TotalBsmtSF, X1stFlrSF, GrLivArea, #GarageCars, GarageArea, Bajo)
-#nbTrain = select(train, TotalBsmtSF, X1stFlrSF, GrLivArea, #GarageCars, GarageArea, Bajo)
+```{r}
 
-#modelo <- naiveBayes(as.factor(nbTrain$Bajo)~., data=nbTrain)
-#predBayes <- predict(modelo, newdata = test[, 1:5])
-#confusionMatrix(as.factor(predBayes), as.factor(nbTest$Bajo))
+```
+
+
+```{r}
+porciento <- 70/100
+set.seed(123)
+
+trainRowsNumber<-sample(1:nrow(dataMezclada2),porciento*nrow(dataMezclada2))
+train<-dataMezclada2[trainRowsNumber,]
+test<-dataMezclada2[-trainRowsNumber,]
+```
+
+```{r}
+modeloNb<-naiveBayes(train$dos~.,data=train[,c(1:14, 15:19, 21)])
+predBayes<-predict(modeloNb, newdata = test[,c(1:14, 15:19)])
+predBayes
+#confusionMatrix(table(predBayes, test$estado_implicado ))
+```
+
+
