@@ -446,12 +446,8 @@ corrplot(matriz_cor)
 
 #Random Forest
 
-
-#con random forest
-
-
-#modeloRF1<-randomForest(train$grupo~.,data=train)
-#prediccionRF1<-predict(modeloRF1,newdata = test)
+#modeloRF<-randomForest(train$grupo~.,data=train) 
+#prediccionRF<-predict(modeloRF1,newdata = test)
 #testCompleto<-test
 
 #testCompleto$predRF<-round(prediccionRF1)
@@ -461,33 +457,4 @@ corrplot(matriz_cor)
 #cfmRandomForest <- confusionMatrix(table(testCompleto$predRF, testCompleto$grupo))
 #cfmRandomForest
 
-#Regresion logistica
 
-### Training
-#```{r}
-#num <- which(colnames(train) == "Bajo")
-#modelo <- glm(Bajo~., data = train[, c(1:5, num)], family = #binomial(), maxit = 100)
-
-#modelo
-
-#summary(modelo)
-#```
-
-#```{r}
-#pred <- predict(modelo, newdata = test[, 1:5], type = #"response")
-#prediccion <- ifelse(pred >= 0.5, 1, 0)
-#confusionMatrix(as.factor(test$Bajo), as.factor(prediccion))
-#```
-
-#Ada boost
-#Naive Bayes
-
-
-## Naive Bayes
-
-#nbTest = select(test, TotalBsmtSF, X1stFlrSF, GrLivArea, #GarageCars, GarageArea, Bajo)
-#nbTrain = select(train, TotalBsmtSF, X1stFlrSF, GrLivArea, #GarageCars, GarageArea, Bajo)
-
-#modelo <- naiveBayes(as.factor(nbTrain$Bajo)~., data=nbTrain)
-#predBayes <- predict(modelo, newdata = test[, 1:5])
-#confusionMatrix(as.factor(predBayes), as.factor(nbTest$Bajo))
