@@ -428,17 +428,32 @@ datosInsi
 
 
 ```{r}
-prueba <- merge(x = datos, y = datosInsi, by = c("mes","year","dia_ocu") )
-prueba
+dataMezclada <- merge(x = datos, y = datosInsi, by = c("mes","year","dia_ocu"))
+dataMezclada<-dataMezclada[,-c(9)]
+dataMezclada
 ```
 
 ```{r}
+#Convertir variables categoritas a numericas categoricas
+dataMezclada$mes_ocu <- as.numeric(factor(dataMezclada$mes_ocu))
+dataMezclada$dia_sem_ocu <- as.numeric(factor(dataMezclada$dia_sem_ocu))
+dataMezclada$dia_sem_ocu <- as.numeric(factor(dataMezclada$dia_sem_ocu))
+dataMezclada$depto_ocu <- as.numeric(factor(dataMezclada$depto_ocu))
+dataMezclada$mupio_ocu <- as.numeric(factor(dataMezclada$mupio_ocu))
+dataMezclada$sexo_fall_les <- as.numeric(factor(dataMezclada$sexo_fall_les))
+dataMezclada$tipo_vehi <- as.numeric(factor(dataMezclada$tipo_vehi))
+dataMezclada$color_vehi <- as.numeric(factor(dataMezclada$color_vehi))
+dataMezclada$causa_acc <- as.numeric(factor(dataMezclada$causa_acc))
+dataMezclada$estado_implicado <- as.numeric(factor(dataMezclada$estado_implicado))
 
+dataMezclada[2:3] <- lapply(dataMezclada[2:3], as.numeric)
+dataMezclada[10] <- lapply(dataMezclada[10], as.numeric)
+dataMezclada
 ```
 
 
 ```{r}
-matriz_cor <- cor(prueba)
+matriz_cor <- cor(dataMezclada)
 corrplot(matriz_cor)
 ```
 
