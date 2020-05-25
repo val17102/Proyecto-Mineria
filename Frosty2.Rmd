@@ -185,6 +185,11 @@ train<-na.omit(train)
 test<-na.omit(test)
 ```
 
+```{r}
+train[,c(-11)]
+```
+
+
 #Random Forest
 
 ```{r}
@@ -205,19 +210,7 @@ cfmRandomForest
 
 #Adaboost
 
-```{r}
-library(adabag)
-modelo <- boosting(train$estado_implicado~.,data=train)
-prediccionRF1<-predict(modeloRF1,newdata = test)
-```
-
-
 #Naive Bayes
-
-```{r}
-train
-test[,-11]
-```
 
 ```{r}
 library(naivebayes)
@@ -265,9 +258,20 @@ modeloRL<-glm(uno~., data = dataMezclada2[,c(1:16)],family = binomial(link='logi
 pred<-predict(modeloRL,newdata = test[,c(1:15)], type = "response")
 prediccion<-ifelse(pred>=0.5,1,0)
 #prediccion
-ctable(test$uno,prediccion))
+confusionMatrix(table(test$uno,prediccion))
+```
+
+```{r}
+
 ```
 
 
+```{r}
+#library(caret)
+#install.packages("JOUSBoost")
+library(JOUSBoost)
+#model_adaboost <- adaboost(train[,c(-11)], train[,11], tree_depth = 3, n_rounds = 100, verbose = FALSE,
+  control = NULL)
+```
 
 
