@@ -135,7 +135,9 @@ corrplot(matriz_cor)
 
 ```{r}
 dataMezclada <- dataMezclada[,-c(15,16)]
+dataMezclada[,-c(1,7,10)]
 dataMezclada
+dataMezclada <-dataMezclada[,-c(1,7,10)]
 ```
 
 ```{r}
@@ -198,6 +200,8 @@ set.seed(123)
 dataMezclada2 <- dataMezclada
 dataMezclada2$uno <- 0
 dataMezclada2$dos <- 0
+
+
 dataMezclada2[which(dataMezclada2$estado_implicado == 1), ]$uno <- 1
 dataMezclada2[which(dataMezclada2$estado_implicado == 2), ]$dos <- 1
 dataMezclada2
@@ -209,6 +213,11 @@ dataMezclada2
 ```
 
 ```{r}
+dataMezclada2
+```
+
+
+```{r}
 porciento <- 70/100
 set.seed(123)
 
@@ -218,11 +227,10 @@ test<-dataMezclada2[-trainRowsNumber,]
 ```
 
 ```{r}
-modeloRL<-glm(dos~., data = train[,c(1:19, 21)],family = binomial(link='logit'), maxit=100)
-pred<-predict(modeloRL,newdata = test[,c(1:19)], type = "response")
+modeloRL<-glm(uno~., data = train[,c(1:17)],family = binomial(link='logit'), maxit=100)
+pred<-predict(modeloRL,newdata = test[,c(1:16)], type = "response")
 prediccion<-ifelse(pred>=0.5,1,0)
-prediccion
-#confusionMatrix(test$uno,prediccion)
+confusionMatrix(test$dos,prediccion)
 ```
 
 
