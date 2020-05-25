@@ -56,45 +56,16 @@ names(datosInsi)[10] <- "presionAtmMedia"
 #Data correction
 ```{r}
 datosInsi$tempMax[is.na(datosInsi$tempMax)] <-25.66
-```
-
-#Data correction
-```{r}
 datosInsi$tempMin[is.na(datosInsi$tempMin)] <-15.56
-```
-#Data correction
-```{r}
 datosInsi$tempMed[is.na(datosInsi$tempMed)] <- 19.97
-```
-#Data correction
-```{r}
 datosInsi$lluviaMed[is.na(datosInsi$lluviaMed)] <-3.49
-```
-
-#Data correction
-```{r}
 datosInsi$nuboMedia[is.na(datosInsi$nuboMedia)] <-5.667
-```
-
-#Data correction
-```{r}
-datosInsi$humeRelMedia[is.na(datosInsi$humeRelMedia)] <-75.6
-```
-
-#Data correction
-```{r}
 datosInsi$presionAtmMedia[is.na(datosInsi$presionAtmMedia)] <-640.7
 ```
 
 ```{r}
-datosInsi
-```
-
-
-```{r}
 dataMezclada <- merge(x = datos, y = datosInsi, by = c("mes","year","dia_ocu"))
 dataMezclada<-dataMezclada[,-c(9)]
-dataMezcladaPrueba <- dataMezclada
 dataMezclada
 ```
 
@@ -110,49 +81,16 @@ dataMezclada$tipo_vehi <- as.numeric(factor(dataMezclada$tipo_vehi))
 dataMezclada$color_vehi <- as.numeric(factor(dataMezclada$color_vehi))
 dataMezclada$causa_acc <- as.numeric(factor(dataMezclada$causa_acc))
 dataMezclada$estado_implicado <- as.numeric(factor(dataMezclada$estado_implicado))
-
 dataMezclada[2:3] <- lapply(dataMezclada[2:3], as.numeric)
 dataMezclada[6] <- lapply(dataMezclada[6], as.numeric)
 dataMezclada[10] <- lapply(dataMezclada[10], as.numeric)
 dataMezclada
 ```
 
-
 ```{r}
 library(corrplot)
 matriz_cor <- cor(dataMezclada)
 corrplot(matriz_cor)
-```
-
-```{r}
-#dataMezcladaPrueba
-#dataMezcladaPrueba$dia_sem_ocu
-
-#contrasts(dataMezcladaPrueba$mes)
-#datos <- cbind(datos, dummy(datos$grupo, verbose = T))
-```
-
-```{r}
-unos <-dataMezclada[which(dataMezclada$estado_implicado == 1), ]
-nrow(unos)
-```
-
-```{r}
-balanceado <- rbind(dataMezclada, unos)
-balanceado <- rbind(balanceado, unos)
-balanceado <- rbind(balanceado, unos)
-balanceado <- rbind(balanceado, unos)
-balanceado <- rbind(balanceado, unos)
-balanceado <- rbind(balanceado, unos)
-```
-
-```{r}
-nrow (balanceado[which(balanceado$estado_implicado == 1), ])
-nrow (balanceado[which(balanceado$estado_implicado == 2), ])
-```
-
-```{r}
-dataMezclada <- balanceado
 ```
 
 ```{r}
@@ -172,13 +110,28 @@ test<-dataMezclada[-trainRowsNumber,]
 ```
 
 ```{r}
-train
+unos <-train[which(train$estado_implicado == 1), ]
+nrow(unos)
+nrow (train[which(train$estado_implicado == 2), ])
 ```
 
 ```{r}
-test
+balanceado <- rbind(train, unos)
+balanceado <- rbind(balanceado, unos)
+balanceado <- rbind(balanceado, unos)
+balanceado <- rbind(balanceado, unos)
+balanceado <- rbind(balanceado, unos)
+balanceado <- rbind(balanceado, unos)
 ```
 
+```{r}
+nrow (balanceado[which(balanceado$estado_implicado == 1), ])
+nrow (balanceado[which(balanceado$estado_implicado == 2), ])
+```
+
+```{r}
+train <- balanceado
+```
 
 ```{r}
 train<-na.omit(train)
@@ -191,12 +144,15 @@ train[,c(-11)]
 
 
 #Random Forest
-
 ```{r}
 library(randomForest)
 library(rpart)
 library(caret)
 library(tree)
+```
+
+
+```{r}
 modeloRF1<-randomForest(train$estado_implicado~.,data=train)
 prediccionRF1<-predict(modeloRF1,newdata = test)
 testCompleto<-test
@@ -208,13 +164,16 @@ cfmRandomForest <- confusionMatrix(table(testCompleto$predRF, testCompleto$estad
 cfmRandomForest
 ```
 
-#Adaboost
-
 #Naive Bayes
 
 ```{r}
+train2 <- rbind(train, train)
+```
+
+
+```{r}
 library(naivebayes)
-modeloNb<-naive_bayes(as.factor(train$estado_implicado)~.,usekernel=T,data=train)
+modeloNb<-naive_bayes(train2[,c(-11)], as.factor(train2[,11]))
 predBayes<-predict(modeloNb,  test[,-6])
 test$predic<-predBayes
 confusionMatrix(table(test$estado_implicado,test$predic))
@@ -253,25 +212,92 @@ train<-dataMezclada2[trainRowsNumber,]
 test<-dataMezclada2[-trainRowsNumber,]
 ```
 
+
 ```{r}
-modeloRL<-glm(uno~., data = dataMezclada2[,c(1:16)],family = binomial(link='logit'), maxit=10000)
+unos <-train[which(train$uno == 1), ]
+nrow(unos)
+nrow (train[which(train$uno == 0), ])
+```
+
+```{r}
+balanceado <- rbind(train, unos)
+balanceado <- rbind(balanceado, unos)
+balanceado <- rbind(balanceado, unos)
+balanceado <- rbind(balanceado, unos)
+balanceado <- rbind(balanceado, unos)
+balanceado <- rbind(balanceado, unos)
+```
+
+```{r}
+nrow (balanceado[which(balanceado$uno == 1), ])
+nrow (balanceado[which(balanceado$uno == 0), ])
+```
+
+```{r}
+train <- balanceado
+```
+
+
+```{r}
+modeloRL<-glm(uno~., data = train[,c(1:16)],family = binomial(link='logit'), maxit=10000)
 pred<-predict(modeloRL,newdata = test[,c(1:15)], type = "response")
 prediccion<-ifelse(pred>=0.5,1,0)
-#prediccion
 confusionMatrix(table(test$uno,prediccion))
 ```
 
-```{r}
+#Adaboost
 
+```{r}
+dataMezclada2[which(dataMezclada2$uno == 0), ]$uno <- -1
 ```
 
+```{r}
+porciento <- 70/100
+set.seed(123)
+
+trainRowsNumber<-sample(1:nrow(dataMezclada2),porciento*nrow(dataMezclada2))
+train<-dataMezclada2[trainRowsNumber,]
+test<-dataMezclada2[-trainRowsNumber,]
+```
+
+
+```{r}
+unos <-train[which(train$uno == 1), ]
+nrow(unos)
+nrow (train[which(train$uno == -1), ])
+```
+
+```{r}
+balanceado <- rbind(train, unos)
+balanceado <- rbind(balanceado, unos)
+balanceado <- rbind(balanceado, unos)
+balanceado <- rbind(balanceado, unos)
+balanceado <- rbind(balanceado, unos)
+balanceado <- rbind(balanceado, unos)
+```
+
+```{r}
+nrow (balanceado[which(balanceado$uno == 1), ])
+nrow (balanceado[which(balanceado$uno == -1), ])
+```
+
+```{r}
+train <- balanceado
+```
 
 ```{r}
 #library(caret)
 #install.packages("JOUSBoost")
 library(JOUSBoost)
-#model_adaboost <- adaboost(train[,c(-11)], train[,11], tree_depth = 3, n_rounds = 100, verbose = FALSE,
-  control = NULL)
+dataMezclada2
+model_adaboost <- adaboost(data.matrix(train[,c(-16, -17)]), train[,16], tree_depth = 3, n_rounds = 100, verbose = FALSE,control = NULL)
+predAda<-predict(model_adaboost,  test[,c(-16,-17)])
 ```
+```{r}
+test$pred<-predAda
+test
+confusionMatrix(table(test[,16],test[,18]))
+```
+
 
 
