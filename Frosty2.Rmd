@@ -219,16 +219,13 @@ train
 test[,-11]
 ```
 
-
 ```{r}
-library(e1071)
-modeloNb<-naiveBayes(train$estado_implicado~.,data=train)
-predBayes<-predict(modeloNb, newdata = test[,-11])
-predBayes
-confusionMatrix(table(test$estado_implicado,predBayes))
+library(naivebayes)
+modeloNb<-naive_bayes(as.factor(train$estado_implicado)~.,usekernel=T,data=train)
+predBayes<-predict(modeloNb,  test[,-6])
+test$predic<-predBayes
+confusionMatrix(table(test$estado_implicado,test$predic))
 ```
-
-
 
 ## Regresión Logística
 
@@ -268,7 +265,7 @@ modeloRL<-glm(uno~., data = dataMezclada2[,c(1:16)],family = binomial(link='logi
 pred<-predict(modeloRL,newdata = test[,c(1:15)], type = "response")
 prediccion<-ifelse(pred>=0.5,1,0)
 #prediccion
-confusionMatrix(table(test$uno,prediccion))
+ctable(test$uno,prediccion))
 ```
 
 
