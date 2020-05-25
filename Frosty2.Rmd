@@ -132,6 +132,28 @@ corrplot(matriz_cor)
 #datos <- cbind(datos, dummy(datos$grupo, verbose = T))
 ```
 
+```{r}
+unos <-dataMezclada[which(dataMezclada$estado_implicado == 1), ]
+nrow(unos)
+```
+
+```{r}
+balanceado <- rbind(dataMezclada, unos)
+balanceado <- rbind(balanceado, unos)
+balanceado <- rbind(balanceado, unos)
+balanceado <- rbind(balanceado, unos)
+balanceado <- rbind(balanceado, unos)
+balanceado <- rbind(balanceado, unos)
+```
+
+```{r}
+nrow (balanceado[which(balanceado$estado_implicado == 1), ])
+nrow (balanceado[which(balanceado$estado_implicado == 2), ])
+```
+
+```{r}
+dataMezclada <- balanceado
+```
 
 ```{r}
 dataMezclada <- dataMezclada[,-c(15,16)]
@@ -163,8 +185,6 @@ train<-na.omit(train)
 test<-na.omit(test)
 ```
 
-#Redes
-
 #Random Forest
 
 ```{r}
@@ -183,13 +203,31 @@ cfmRandomForest <- confusionMatrix(table(testCompleto$predRF, testCompleto$estad
 cfmRandomForest
 ```
 
+#Adaboost
+
 ```{r}
-test
+library(adabag)
+modelo <- boosting(train$estado_implicado~.,data=train)
+prediccionRF1<-predict(modeloRF1,newdata = test)
 ```
+
+
+#Naive Bayes
 
 ```{r}
 train
+test[,-11]
 ```
+
+
+```{r}
+library(e1071)
+modeloNb<-naiveBayes(train$estado_implicado~.,data=train)
+predBayes<-predict(modeloNb, newdata = test[,-11])
+predBayes
+confusionMatrix(table(test$estado_implicado,predBayes))
+```
+
 
 
 ## Regresión Logística
@@ -213,9 +251,8 @@ dataMezclada2
 ```
 
 ```{r}
-dataMezclada2
+dataMezclada2<-dataMezclada2[,-c(11)]
 ```
-
 
 ```{r}
 porciento <- 70/100
@@ -227,50 +264,13 @@ test<-dataMezclada2[-trainRowsNumber,]
 ```
 
 ```{r}
-modeloRL<-glm(uno~., data = train[,c(1:17)],family = binomial(link='logit'), maxit=100)
-pred<-predict(modeloRL,newdata = test[,c(1:16)], type = "response")
+modeloRL<-glm(uno~., data = dataMezclada2[,c(1:16)],family = binomial(link='logit'), maxit=10000)
+pred<-predict(modeloRL,newdata = test[,c(1:15)], type = "response")
 prediccion<-ifelse(pred>=0.5,1,0)
-confusionMatrix(test$dos,prediccion)
+#prediccion
+confusionMatrix(table(test$uno,prediccion))
 ```
 
 
-#Naive Bayes
-
-```{r}
-porciento <- 70/100
-set.seed(123)
-dataMezclada2 <- dataMezclada
-dataMezclada2$uno <- 0
-dataMezclada2$dos <- 0
-dataMezclada2[which(dataMezclada2$estado_implicado == 1), ]$uno <- 1
-dataMezclada2[which(dataMezclada2$estado_implicado == 2), ]$dos <- 1
-dataMezclada2
-#dataMezclada2 <- cbind(dataMezclada2,dummy(dataMezclada2$estado_implicado,verbose = T))
-
-#trainRowsNumber<-sample(1:nrow(dataMezclada),porciento*nrow(dataMezclada))
-#train<-dataMezclada[trainRowsNumber,]
-#test<-dataMezclada[-trainRowsNumber,]
-```
-
-```{r}
-
-```
-
-
-```{r}
-porciento <- 70/100
-set.seed(123)
-
-trainRowsNumber<-sample(1:nrow(dataMezclada2),porciento*nrow(dataMezclada2))
-train<-dataMezclada2[trainRowsNumber,]
-test<-dataMezclada2[-trainRowsNumber,]
-```
-
-```{r}
-modeloNb<-naiveBayes(train$dos~.,data=train[,c(1:14, 15:19, 21)])
-predBayes<-predict(modeloNb, newdata = test[,c(1:14, 15:19)])
-predBayes
-#confusionMatrix(table(predBayes, test$estado_implicado ))
-```
 
 
