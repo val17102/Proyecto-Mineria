@@ -55,6 +55,7 @@ names(datosInsi)[10] <- "presionAtmMedia"
 
 #Data correction
 ```{r}
+#Arreglo de Na, asignación de valores promedio
 datosInsi$tempMax[is.na(datosInsi$tempMax)] <-25.66
 datosInsi$tempMin[is.na(datosInsi$tempMin)] <-15.56
 datosInsi$tempMed[is.na(datosInsi$tempMed)] <- 19.97
@@ -88,12 +89,14 @@ dataMezclada
 ```
 
 ```{r}
+#Matriz de correlación de los datos
 library(corrplot)
 matriz_cor <- cor(dataMezclada)
 corrplot(matriz_cor)
 ```
 
 ```{r}
+#Eliminacipon de variables, mes duplicado, temp max y min, departamento y edad del fallecido
 dataMezclada <- dataMezclada[,-c(15,16)]
 dataMezclada[,-c(1,7,10)]
 dataMezclada
@@ -101,6 +104,7 @@ dataMezclada <-dataMezclada[,-c(1,7,10)]
 ```
 
 ```{r}
+#División de datos para prueba y entrenamiento
 porciento <- 70/100
 set.seed(123)
 
@@ -109,13 +113,16 @@ train<-dataMezclada[trainRowsNumber,]
 test<-dataMezclada[-trainRowsNumber,]
 ```
 
+
 ```{r}
+#Balanceo de datos
 unos <-train[which(train$estado_implicado == 1), ]
 nrow(unos)
 nrow (train[which(train$estado_implicado == 2), ])
 ```
 
 ```{r}
+#Balanceo de datos
 balanceado <- rbind(train, unos)
 balanceado <- rbind(balanceado, unos)
 balanceado <- rbind(balanceado, unos)
@@ -125,15 +132,18 @@ balanceado <- rbind(balanceado, unos)
 ```
 
 ```{r}
+#Balanceo de datos
 nrow (balanceado[which(balanceado$estado_implicado == 1), ])
 nrow (balanceado[which(balanceado$estado_implicado == 2), ])
 ```
 
 ```{r}
+#Balanceo de datos
 train <- balanceado
 ```
 
 ```{r}
+#Eliminar Na
 train<-na.omit(train)
 test<-na.omit(test)
 ```
@@ -162,7 +172,10 @@ testCompleto$predRF<-round(prediccionRF1)
 ```{r}
 cfmRandomForest <- confusionMatrix(table(testCompleto$predRF, testCompleto$estado_implicado))
 cfmRandomForest
+
+#En el caso de random forest podemos observar que se obtuvo una exactitud de 87.16%, 63 falsos positivos y 653 falsos negativos. El valor de capa es pequeños, por lo que existe un alto factor de aleatoriedad en el modelo . Y que el valor del No Information rate, sea más alto que la exactitud nos indica que  la selección de la clase mayoritaria de forma arbitraria, no daría una mayor exactitud qué la qué tenemos por parte del modelo. 
 ```
+
 
 #Naive Bayes
 
@@ -173,11 +186,13 @@ train2 <- rbind(train, train)
 
 ```{r}
 library(naivebayes)
-modeloNb<-naive_bayes(train2[,c(-11)], as.factor(train2[,11]))
+modeloNb<-naive_bayes(train[,c(-11)], as.factor(train[,11]))
 predBayes<-predict(modeloNb,  test[,-6])
 test$predic<-predBayes
 confusionMatrix(table(test$estado_implicado,test$predic))
+#En el caso de naive bayes podemos observar que se obtuvo una exactitud de 60.36%, 222 falsos positivos y 2278 falsos negativos. El valor de capa es pequeños, por lo que existe un alto factor de aleatoriedad en el modelo . Aunque tomando en cuenta el bajo valor de exactitud podríamos indicar que se encuentra acorde con el modelo. 
 ```
+
 
 ## Regresión Logística
 
@@ -214,12 +229,14 @@ test<-dataMezclada2[-trainRowsNumber,]
 
 
 ```{r}
+#Balanceo de datos
 unos <-train[which(train$uno == 1), ]
 nrow(unos)
 nrow (train[which(train$uno == 0), ])
 ```
 
 ```{r}
+#Balanceo de datos
 balanceado <- rbind(train, unos)
 balanceado <- rbind(balanceado, unos)
 balanceado <- rbind(balanceado, unos)
@@ -229,11 +246,13 @@ balanceado <- rbind(balanceado, unos)
 ```
 
 ```{r}
+#Balanceo de datos
 nrow (balanceado[which(balanceado$uno == 1), ])
 nrow (balanceado[which(balanceado$uno == 0), ])
 ```
 
 ```{r}
+#Balanceo de datos
 train <- balanceado
 ```
 
@@ -243,6 +262,8 @@ modeloRL<-glm(uno~., data = train[,c(1:16)],family = binomial(link='logit'), max
 pred<-predict(modeloRL,newdata = test[,c(1:15)], type = "response")
 prediccion<-ifelse(pred>=0.5,1,0)
 confusionMatrix(table(test$uno,prediccion))
+
+#En el caso de regresión logística podemos observar que se obtuvo una exactitud de 60.36%, 1965 falsos positivos y 245 falsos negativos. El valor de capa es pequeños, por lo que existe un alto factor de aleatoriedad en el modelo. Aunque tomando en cuenta el bajo valor de exactitud podríamos indicar que se encuentra acorde con el modelo. 
 ```
 
 #Adaboost
@@ -262,12 +283,14 @@ test<-dataMezclada2[-trainRowsNumber,]
 
 
 ```{r}
+#Balanceo de datos
 unos <-train[which(train$uno == 1), ]
 nrow(unos)
 nrow (train[which(train$uno == -1), ])
 ```
 
 ```{r}
+#Balanceo de datos
 balanceado <- rbind(train, unos)
 balanceado <- rbind(balanceado, unos)
 balanceado <- rbind(balanceado, unos)
@@ -277,11 +300,13 @@ balanceado <- rbind(balanceado, unos)
 ```
 
 ```{r}
+#Balanceo de datos
 nrow (balanceado[which(balanceado$uno == 1), ])
 nrow (balanceado[which(balanceado$uno == -1), ])
 ```
 
 ```{r}
+#Balanceo de datos
 train <- balanceado
 ```
 
@@ -297,6 +322,11 @@ predAda<-predict(model_adaboost,  test[,c(-16,-17)])
 test$pred<-predAda
 test
 confusionMatrix(table(test[,16],test[,18]))
+
+#En el caso de naive bayes podemos observar que se obtuvo una exactitud de 68.05%, 1541 falsos positivos y 240 falsos negativos. El valor de capa es pequeños, por lo que existe un alto factor de aleatoriedad en el modelo . Aunque tomando en cuenta el bajo valor de exactitud podríamos indicar que se encuentra acorde con el modelo. 
+
+#A pesar de que el algoritmo de Random Forest , cuenta en el valor más alto de exactitud, por lo explicado anteriormente debemos de descartar lo como el mejor modelo. Por su parte Adaboost, no solo tuvo la menor cantidad de falsos negativos, 240, cuenta con el segundo mejor índice de exactitud. Es importante destacar que el análisis, no toma en cuenta los falsos positivos. Esto gracias a qué se considera que el equivocarse en la fatalidad de un accidente simple, no es de mucha prioridad. En comparación con un algoritmo que podría equivocarse a la hora de predecir la posible muerte de alguien.  
+
 ```
 
 
